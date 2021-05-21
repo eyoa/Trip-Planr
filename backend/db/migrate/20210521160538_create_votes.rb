@@ -1,8 +1,8 @@
 class CreateVotes < ActiveRecord::Migration[6.1]
   def change
     create_table :votes do |t|
-      t.reference :activity
-      t.reference :trip
+      t.references :activity
+      t.references :trip
 
       t.timestamps
     end
