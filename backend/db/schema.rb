@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_21_155427) do
+ActiveRecord::Schema.define(version: 2021_05_21_160343) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,15 @@ ActiveRecord::Schema.define(version: 2021_05_21_155427) do
     t.index ["user_id"], name: "index_collaborators_on_user_id"
   end
 
+  create_table "suggests", force: :cascade do |t|
+    t.bigint "activity_id", null: false
+    t.bigint "trip_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["activity_id"], name: "index_suggests_on_activity_id"
+    t.index ["trip_id"], name: "index_suggests_on_trip_id"
+  end
+
   create_table "trips", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "name"
@@ -58,5 +67,7 @@ ActiveRecord::Schema.define(version: 2021_05_21_155427) do
 
   add_foreign_key "collaborators", "trips"
   add_foreign_key "collaborators", "users"
+  add_foreign_key "suggests", "activities"
+  add_foreign_key "suggests", "trips"
   add_foreign_key "trips", "users"
 end
