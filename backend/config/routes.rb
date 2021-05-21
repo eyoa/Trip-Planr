@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :days
   resources :votes
   resources :suggests
   resources :collaborators
