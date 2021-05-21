@@ -1,4 +1,4 @@
 class Suggest < ApplicationRecord
   belongs_to :activity
-  belongs_to :triip
+  belongs_to :trip
 end

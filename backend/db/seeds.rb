@@ -11,7 +11,7 @@ puts "Seeding Data ..."
 ## Users
 puts "Re-creating Users ..."
 User.destroy_all
-15.times do
+10.times do
   User.create!({
     username: Faker::Internet.username,
     email: Faker::Internet.email,
@@ -23,12 +23,20 @@ end
 ##Trips
 puts "Re-creating Trips ..."
 Trip.destroy_all
+
+Trip.create!({
+  name: Faker::Marketing.buzzwords,
+  start_date: Faker::Date.backward(days: 5),
+  end_date: Faker::Date.forward(days: 5),
+  user_id: 1
+})
+
 5.times do
   Trip.create!({
     name: Faker::Marketing.buzzwords,
     start_date: Faker::Date.backward(days: 5),
     end_date: Faker::Date.forward(days: 5),
-    user_id: rand(1..User.count)
+    user_id: rand(2..User.count)
   })
 end
 
@@ -45,5 +53,24 @@ Activity.destroy_all
     longitude: '13.4134995',
     latitude: '45.792650',
     url: Faker::Internet.url
+  })
+end
+
+
+##Suggests
+puts "Re-creating Suggests..."
+Suggest.destroy_all
+
+5.times do
+  Suggest.create!({
+    trip_id: 5,
+    activity_id: rand(1..Activity.count)
+  })
+end
+
+5.times do
+  Suggest.create!({
+    trip_id: 1,
+    activity_id: rand(1..Activity.count)
   })
 end
