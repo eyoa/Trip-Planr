@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :plan_entries
   resources :days
   resources :votes
   resources :suggests

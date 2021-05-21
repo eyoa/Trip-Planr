@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  day: one
+  order: MyString
+  start_time: MyString
+  end_time: MyString
+  activity: one
+
+two:
+  name: MyString
+  day: two
+  order: MyString
+  start_time: MyString
+  end_time: MyString
+  activity: two
