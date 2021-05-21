@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_21_184955) do
+ActiveRecord::Schema.define(version: 2021_05_21_205558) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,10 +19,10 @@ ActiveRecord::Schema.define(version: 2021_05_21_184955) do
     t.string "name"
     t.string "description"
     t.string "img_url"
-    t.string "rating"
+    t.integer "rating"
     t.string "category"
-    t.string "longitude"
-    t.string "latitude"
+    t.decimal "longitude", precision: 10, scale: 6
+    t.decimal "latitude", precision: 10, scale: 6
     t.string "url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -40,21 +40,21 @@ ActiveRecord::Schema.define(version: 2021_05_21_184955) do
   create_table "days", force: :cascade do |t|
     t.bigint "trip_id", null: false
     t.string "name"
-    t.string "order"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "order"
     t.index ["trip_id"], name: "index_days_on_trip_id"
   end
 
   create_table "plan_entries", force: :cascade do |t|
     t.string "name"
     t.bigint "day_id", null: false
-    t.string "order"
-    t.string "start_time"
-    t.string "end_time"
     t.bigint "activity_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "order"
+    t.datetime "start_time"
+    t.datetime "end_time"
     t.index ["activity_id"], name: "index_plan_entries_on_activity_id"
     t.index ["day_id"], name: "index_plan_entries_on_day_id"
   end
@@ -71,10 +71,10 @@ ActiveRecord::Schema.define(version: 2021_05_21_184955) do
   create_table "trips", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "name"
-    t.string "start_date"
-    t.string "end_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.date "end_date"
+    t.date "start_date"
     t.index ["user_id"], name: "index_trips_on_user_id"
   end
 
