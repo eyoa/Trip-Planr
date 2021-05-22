@@ -48,10 +48,10 @@ Activity.destroy_all
     name: Faker::Restaurant.name,
     description: Faker::Restaurant.description,
     img_url: Faker::Internet.url,
-    rating: '4.5',
+    rating: 4,
     category: Faker::Restaurant.type,
-    longitude: '13.4134995',
-    latitude: '45.792650',
+    longitude: 13.4134995,
+    latitude: 45.792650,
     url: Faker::Internet.url
   })
 end
