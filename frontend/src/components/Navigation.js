@@ -8,8 +8,9 @@ export const Navigation = () => {
       <Navbar.Collapse id='basic=navbar-nav'>
         <Nav className='mr-auto'>
           <Nav.Link href='#home'>Home</Nav.Link>
-          <Nav.Link href='#home'>Map</Nav.Link>
-          <Nav.Link href='#home'>Trip</Nav.Link>
+          <Nav.Link href='#'>Trip</Nav.Link>
+          <Nav.Link href='#'>Map</Nav.Link>
+          <Nav.Link href='#'>Login</Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
