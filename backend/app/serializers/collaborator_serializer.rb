@@ -1,4 +1,4 @@
 class CollaboratorSerializer
   include FastJsonapi::ObjectSerializer
-  attributes 
+  belongs_to :trip, :user
 end

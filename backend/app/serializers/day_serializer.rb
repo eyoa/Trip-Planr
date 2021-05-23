@@ -1,4 +1,6 @@
 class DaySerializer
   include FastJsonapi::ObjectSerializer
-  attributes 
+  attributes :name, :order
+  belongs_to :trips
+  has_many :plan_entries
 end

@@ -63,7 +63,7 @@ Suggest.destroy_all
 
 5.times do
   Suggest.create!({
-    trip_id: 5,
+    trip_id: rand(1..Trip.count),
     activity_id: rand(1..Activity.count)
   })
 end

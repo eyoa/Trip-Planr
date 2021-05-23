@@ -1,4 +1,5 @@
 class SuggestSerializer
   include FastJsonapi::ObjectSerializer
-  attributes 
+  belongs_to :activity, :trip
+  has_many :votes
 end

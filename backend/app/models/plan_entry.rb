@@ -1,4 +1,4 @@
 class PlanEntry < ApplicationRecord
   belongs_to :day
-  belongs_to :activity
+  has_many :activities
 end

@@ -1,5 +1,5 @@
 class CollaboratorsController < ApplicationController
-  def Index
+  def index
     collaborators = Collaborator.all
     render json: CollaboratorSerializer.new(collaborators)
   end

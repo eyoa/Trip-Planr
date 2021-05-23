@@ -1,4 +1,4 @@
 class VoteSerializer
   include FastJsonapi::ObjectSerializer
-  attributes 
+  belongs_to :suggest, :user
 end
