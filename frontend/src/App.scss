@@ -2,5 +2,5 @@
 
 .backdrop {
   background-color: beige;
-  margin-top: 3em;
+  margin-top: $nav-link-height + $nav-link-padding-y * 2;
 }
