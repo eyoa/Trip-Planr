@@ -1,0 +1,29 @@
+.activityCard {
+  width: 13rem;
+  border: 'secondary';
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+aside.rating {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 8px;
+  background-color: rgb(207, 153, 35);
+  border-bottom-right-radius: 1rem;
+  font-size: 1em;
+  font-weight: bold;
+  color: #eee;
+}
+
+aside.add {
+  position: absolute;
+  top: 6rem;
+  right: 0;
+  padding: 8px;
+  background-color: rgba(3, 3, 3, 0.3);
+  border-top-left-radius: 10px;
+  font-size: 1em;
+  font-weight: bold;
+  color: #eee;
+}

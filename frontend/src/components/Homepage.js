@@ -22,7 +22,7 @@ export const Homepage = () => {
                   <FormControl
                     size='lg'
                     className='search'
-                    placeholder='Search'
+                    placeholder='Where to?'
                     aria-label='Search'
                     aria-describedby='Search'
                   />

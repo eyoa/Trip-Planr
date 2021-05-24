@@ -5,6 +5,29 @@ import { Navigation } from './components/Navigation';
 import { Homepage } from './components/Homepage';
 import { Mapview } from './components/Mapview';
 
+const cityData = [
+  {
+    id: 1,
+    name: 'Montreal'
+  },
+  {
+    id: 2,
+    name: 'New York'
+  },
+  {
+    id: 3,
+    name: 'Croatia'
+  },
+  {
+    id: 4,
+    name: 'Hong Kong'
+  },
+  {
+    id: 5,
+    name: 'Toronto'
+  }
+];
+
 function App() {
   return (
     <main>
