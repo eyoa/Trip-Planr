@@ -2,6 +2,7 @@
   width: 13rem;
   border: 'secondary';
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  margin: 10px;
 }
 
 aside.rating {
@@ -20,10 +21,8 @@ aside.add {
   position: absolute;
   top: 6rem;
   right: 0;
-  padding: 8px;
-  background-color: rgba(3, 3, 3, 0.3);
-  border-top-left-radius: 10px;
-  font-size: 1em;
+  padding: 0.3rem;
+  font-size: 1.5em;
   font-weight: bold;
-  color: #eee;
+  color: rgba(61, 42, 235, 0.603);
 }

@@ -1,5 +1,8 @@
 @import '~bootstrap/scss/bootstrap';
 
+.app {
+  height: 100%;
+}
 .backdrop {
   background-color: beige;
   margin-top: $nav-link-height + $nav-link-padding-y * 2;

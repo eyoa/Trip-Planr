@@ -15,7 +15,7 @@ export const Homepage = () => {
       >
         <Container fluid='true'>
           <Row className='spacer'></Row>
-          <Row className='justify-content-md-center'>
+          <Row className='justify-content-center'>
             <Col sm='true'>
               <InputGroup>
                 <InputGroup className='mb-3'>
