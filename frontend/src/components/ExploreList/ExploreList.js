@@ -1,5 +1,7 @@
 import './ExploreList.scss';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { ActivityCard } from '../ActivityCard';
+import { Row, Col } from 'react-bootstrap';
 
 export const ExploreList = (props) => {
   const { activityData } = props;
@@ -24,7 +26,12 @@ export const ExploreList = (props) => {
 
   return (
     <nav className='explore-drawer'>
-      <section className='explore-list-container'>{exploreList}</section>;
+      <Row className='justify-content-left'>
+        <Col xs={1}></Col>
+        <Col>
+          <section className='explore-list-container'>{exploreList}</section>;
+        </Col>
+      </Row>
     </nav>
   );
 };
