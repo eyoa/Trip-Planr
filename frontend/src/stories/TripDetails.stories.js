@@ -78,6 +78,30 @@ export const populatedTrips = () => {
               end_time: '7:00 pm',
               url: 'http://example.org',
               activity_id: 4
+            },
+            {
+              name: 'Restaurant',
+              img_url: '/img/activityImg.jpg',
+              start_time: '6:00pm',
+              end_time: '7:00 pm',
+              url: 'http://example.org',
+              activity_id: 4
+            },
+            {
+              name: 'Restaurant',
+              img_url: '/img/activityImg.jpg',
+              start_time: '6:00pm',
+              end_time: '7:00 pm',
+              url: 'http://example.org',
+              activity_id: 4
+            },
+            {
+              name: 'Restaurant',
+              img_url: '/img/activityImg.jpg',
+              start_time: '6:00pm',
+              end_time: '7:00 pm',
+              url: 'http://example.org',
+              activity_id: 4
             }
           ]
         },

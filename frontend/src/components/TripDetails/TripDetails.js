@@ -34,11 +34,8 @@ export const TripDetails = (props) => {
           <Dropdown.Menu>{trips}</Dropdown.Menu>
         </Dropdown>
       </Row>
-      <Row className='justify-content-center day-select'>
+      <Row className='trip-details-container'>
         <DayTab days={tripData.numDays} />
-      </Row>
-      <Row className='justify-content-center'>
-        <section className='trip-details-container'></section>
       </Row>
     </nav>
   );

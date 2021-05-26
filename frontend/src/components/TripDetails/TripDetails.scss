@@ -6,14 +6,12 @@
   top: 3.5rem;
   right: 0;
   width: 70%;
-  max-width: 320px;
+  max-width: 420px;
   z-index: 200;
 }
 
-.day-select {
-  margin-top: 1.5rem;
-}
 .trip-details-container {
+  margin-top: 1.5rem;
   height: 90vh;
   display: flex;
   flex-direction: column;
@@ -25,6 +23,6 @@
   width: 10px;
 }
 .trip-details-container::-webkit-scrollbar-thumb {
-  background: linear-gradient(#9ac3df, white);
+  background: linear-gradient(#2b9de9, white);
   border-radius: 5px;
 }

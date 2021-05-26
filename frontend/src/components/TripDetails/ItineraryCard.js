@@ -1,4 +1,5 @@
 import './ItineraryCard.scss';
+import { Clock } from 'react-bootstrap-icons';
 
 export const ItineraryCard = (props) => {
   const { name, start_time, end_time, url, img_url } = props;
@@ -15,24 +16,15 @@ export const ItineraryCard = (props) => {
             </h1>
             <div class='postcard__subtitle small'>
               <time datetime='2020-05-25 12:00:00'>
-                <i class='fas fa-calendar-alt mr-2'></i>
+                <Clock />
                 {start_time} - {end_time}
               </time>
             </div>
-            <div class='postcard__bar'></div>
             <div class='postcard__preview-txt'>Some notes</div>
             <ul class='postcard__tagbox'>
-              <li class='tag__item'>
-                <i class='fas fa-tag mr-2'></i>Drive
-              </li>
-              <li class='tag__item'>
-                <i class='fas fa-clock mr-2'></i>35 mins.
-              </li>
-              <li class='tag__item play blue'>
-                <a href='#'>
-                  <i class='fas fa-play mr-2'></i>category?
-                </a>
-              </li>
+              <li class='tag__item'>Drive</li>
+              <li class='tag__item'>35 mins.</li>
+              <li class='tag__item play blue'>category?</li>
             </ul>
           </div>
         </article>
