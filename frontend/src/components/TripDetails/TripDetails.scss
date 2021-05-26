@@ -4,17 +4,21 @@
   box-shadow: 5px 0px 2px rbga(0, 0, 0, 0.5);
   position: fixed;
   top: 3.5rem;
-  right: 0;
+  right: 0px;
   width: 70%;
   max-width: 420px;
   z-index: 200;
 }
-
+.row {
+  margin: 0;
+  padding: 0.5rem;
+}
 .trip-details-container {
   margin-top: 1.5rem;
+  width: 90%;
   height: 90vh;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   overflow-y: scroll;
 }
 

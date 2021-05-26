@@ -132,9 +132,12 @@ export const populatedTrips = () => {
           order: 1,
           entries: [
             {
-              activity_id: 5,
-              start_time: '11:00am',
-              end_time: '3:00pm'
+              name: 'ROM',
+              img_url: '/img/rom.jpeg',
+              start_time: '11:00 am',
+              end_time: '3:00 pm',
+              url: 'http://example.org',
+              activity_id: 1
             }
           ]
         }
