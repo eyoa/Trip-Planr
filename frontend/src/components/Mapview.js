@@ -1,13 +1,13 @@
 import './Mapview.scss';
-import bgImg from './images/placeholder_map.png';
+import mapImg from './images/placeholder_map.png';
 
 export const Mapview = () => {
   return (
     <div
-      className='landing-wrapper'
+      className='map-placeholder'
       style={
         ({
-          backgroundImage: `url(${bgImg})`
+          backgroundImage: `url(${mapImg})`
         },
         { height: '100%' })
       }

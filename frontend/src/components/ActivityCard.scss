@@ -1,8 +1,12 @@
-.activityCard {
+.activity-card {
   width: 13rem;
   border: 'secondary';
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   margin: 10px;
+}
+
+.card-img {
+  height: 160px;
 }
 
 aside.rating {
@@ -19,10 +23,16 @@ aside.rating {
 
 aside.add {
   position: absolute;
-  top: 6rem;
+  top: 7.5rem;
   right: 0;
   padding: 0.3rem;
   font-size: 1.5em;
   font-weight: bold;
-  color: rgba(61, 42, 235, 0.603);
+  color: rgba(255, 255, 255, 0.603);
+}
+
+aside.add:hover,
+aside.add:focus {
+  color: orange;
+  transform: translateY(-0.25em);
 }

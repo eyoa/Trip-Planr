@@ -26,8 +26,9 @@ export const ExploreList = (props) => {
 
   return (
     <nav className='explore-drawer'>
+      <Row className='justify-content-center searchbar'>Searchbar?</Row>
       <Row className='justify-content-left'>
-        <Col xs={1}></Col>
+        <Col xs={2}></Col>
         <Col>
           <section className='explore-list-container'>{exploreList}</section>;
         </Col>

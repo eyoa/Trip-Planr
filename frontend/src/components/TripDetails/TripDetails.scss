@@ -1,30 +1,30 @@
-.explore-drawer {
+.trip-drawer {
   height: 100%;
   background-color: white;
-  box-shadow: 2px 0px 5px rbga(0, 0, 0, 0.5);
+  box-shadow: 5px 0px 2px rbga(0, 0, 0, 0.5);
   position: fixed;
   top: 3.5rem;
-  left: 0;
+  right: 0;
   width: 70%;
   max-width: 320px;
   z-index: 200;
 }
 
-.searchbar {
+.day-select {
   margin-top: 1.5rem;
 }
-.explore-list-container {
+.trip-details-container {
   height: 90vh;
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
 }
 
-.explore-list-container::-webkit-scrollbar {
+.trip-details-container::-webkit-scrollbar {
   display: block;
   width: 10px;
 }
-.explore-list-container::-webkit-scrollbar-thumb {
+.trip-details-container::-webkit-scrollbar-thumb {
   background: linear-gradient(#9ac3df, white);
   border-radius: 5px;
 }

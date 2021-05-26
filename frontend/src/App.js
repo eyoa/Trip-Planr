@@ -5,8 +5,11 @@ import { useState } from 'react';
 import { Navigation } from './components/Navigation';
 import { ExploreListToggle } from './components/ExploreList/ExploreListToggle';
 import { ExploreList } from './components/ExploreList/ExploreList';
+import { TripDetailsToggle } from './components/TripDetails/TripDetailsToggle';
+import { TripDetails } from './components/TripDetails/TripDetails';
 import { Homepage } from './components/Homepage';
 import { Mapview } from './components/Mapview';
+import { TripList } from './components/TripList';
 
 //Test Data
 const cityData = [
@@ -37,16 +40,7 @@ const exploreList = [
     name: 'ROM',
     description:
       "Stories description text to build on the card title and make up the bulk of the card's content.",
-    img_url: '/img/activityImg.jpg',
-    rating: 4,
-    category: 'Test',
-    url: 'http://example.org'
-  },
-  {
-    name: 'ROM',
-    description:
-      "Stories description text to build on the card title and make up the bulk of the card's content.",
-    img_url: '/img/activityImg.jpg',
+    img_url: '/img/rom.jpeg',
     rating: 4,
     category: 'Test',
     url: 'http://example.org'
@@ -64,7 +58,7 @@ const exploreList = [
     name: 'ROM3',
     description:
       "Stories description text to build on the card title and make up the bulk of the card's content.",
-    img_url: '/img/activityImg.jpg',
+    img_url: '/img/rom.jpeg',
     rating: 4,
     category: 'Test',
     url: 'http://example.org'
@@ -77,20 +71,39 @@ const exploreList = [
     rating: 4,
     category: 'Test',
     url: 'http://example.org'
+  },
+  {
+    name: 'ROM5',
+    description:
+      "Stories description text to build on the card title and make up the bulk of the card's content.",
+    img_url: '/img/rom.jpeg',
+    rating: 4,
+    category: 'Test',
+    url: 'http://example.org'
   }
 ];
 
 function App() {
   const [exploreOpen, setExploreOpen] = useState(false);
+  const [tripOpen, setTripOpen] = useState(false);
 
   const exploreListToggleClickHandler = () => {
     setExploreOpen(!exploreOpen);
   };
 
+  const tripToggleClickHandler = () => {
+    setTripOpen(!tripOpen);
+  };
+
   let exploreDrawer;
+  let tripDrawer;
 
   if (exploreOpen) {
     exploreDrawer = <ExploreList activityData={exploreList} />;
+  }
+
+  if (tripOpen) {
+    tripDrawer = <TripDetails tripData={'empty'} />;
   }
 
   return (
@@ -99,10 +112,14 @@ function App() {
         <Navigation />
         <ExploreListToggle click={exploreListToggleClickHandler} />
         {exploreDrawer}
+        <TripDetailsToggle click={tripToggleClickHandler} />
+        {tripDrawer}
+
         <Switch>
           <section className='backdrop'>
             <Route path='/' exact component={Homepage}></Route>
             <Route path='/Mapview' exact component={Mapview}></Route>
+            <Route path='/Triplist' exact component={TripList}></Route>
           </section>
         </Switch>
       </Router>

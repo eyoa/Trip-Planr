@@ -1,7 +1,7 @@
 import React from 'react';
 import { ActivityCard } from '../components/ActivityCard';
 
-export default { title: 'Single Activity Card' };
+export default { title: 'Activity Card' };
 
 export const emptyActivity = () => <ActivityCard />;
 

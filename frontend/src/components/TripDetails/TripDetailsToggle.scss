@@ -1,0 +1,18 @@
+.trip-toggle-button {
+  height: 24px;
+  width: 36px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  position: fixed;
+  top: 3.5rem;
+  right: 0;
+  z-index: 999;
+}
+.toggle-button:focus {
+  outline: none;
+}
+
+.categories {
+  width: 50px;
+}

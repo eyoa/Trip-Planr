@@ -9,8 +9,13 @@ export const ActivityCard = (props) => {
     <>
       {name && description && (
         <Accordion>
-          <Card className='activityCard'>
-            <Card.Img variant='top' src={img_url} alt='image' />
+          <Card className='activity-card'>
+            <Card.Img
+              variant='top'
+              src={img_url}
+              alt='image'
+              className='card-img'
+            />
             <Card.ImgOverlay>
               <aside className='rating'>{rating}</aside>
               <aside className='add'>

@@ -11,7 +11,9 @@ export const Navigation = () => {
           <Nav.Link as={Link} to='/'>
             Home
           </Nav.Link>
-          <Nav.Link>Trip</Nav.Link>
+          <Nav.Link as={Link} to='/Triplist'>
+            Trip
+          </Nav.Link>
           <Nav.Link as={Link} to='/Mapview'>
             Map
           </Nav.Link>
