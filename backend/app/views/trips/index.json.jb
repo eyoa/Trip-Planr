@@ -1,0 +1,5 @@
+@trips.map {|trips| {
+  id: trips.id,
+  name: trips.name,
+  user_id: trips.user_id
+}}

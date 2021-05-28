@@ -1,0 +1,21 @@
+json = {
+  name: @trip.name,
+  user_id: @trip.user.id,
+  start_date: @trip.start_date,
+  end_date: @trip.end_date,
+  collaborators: @trip.collaborators
+  
+}
+
+json[:days] = @trip.days.map {|day| {
+  name: day.name,
+  order: day.order,
+  entries: (day.entries.map{|entry|{
+    order: entry.order,
+    activities: (Activity.find_by_id(entry.activity_id))
+    
+  }})
+}}
+
+json
+

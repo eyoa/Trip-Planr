@@ -1,7 +1,8 @@
 import './App.scss';
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 import { Navigation } from './components/Navigation';
 import { ExploreListToggle } from './components/ExploreList/ExploreListToggle';
 import { ExploreList } from './components/ExploreList/ExploreList';
@@ -83,103 +84,16 @@ const exploreList = [
   }
 ];
 
-const trips = [
-  {
-    name: 'Toronto meetup',
-    user_id: 2,
-    start_date: '',
-    end_date: '',
-    collaborators: [1, 5],
-    days: [
-      {
-        name: 'Day1',
-        order: 1,
-        entries: [
-          {
-            name: 'ROM',
-            img_url: '/img/rom.jpeg',
-            start_time: '11:00 am',
-            end_time: '3:00 pm',
-            url: 'http://example.org',
-            activity_id: 1
-          },
-          {
-            name: 'Restaurant',
-            img_url: '/img/activityImg.jpg',
-            start_time: '6:00pm',
-            end_time: '7:00 pm',
-            url: 'http://example.org',
-            activity_id: 4
-          },
-          {
-            name: 'Restaurant',
-            img_url: '/img/activityImg.jpg',
-            start_time: '6:00pm',
-            end_time: '7:00 pm',
-            url: 'http://example.org',
-            activity_id: 4
-          },
-          {
-            name: 'Restaurant',
-            img_url: '/img/activityImg.jpg',
-            start_time: '6:00pm',
-            end_time: '7:00 pm',
-            url: 'http://example.org',
-            activity_id: 4
-          },
-          {
-            name: 'Restaurant',
-            img_url: '/img/activityImg.jpg',
-            start_time: '6:00pm',
-            end_time: '7:00 pm',
-            url: 'http://example.org',
-            activity_id: 4
-          }
-        ]
-      },
-      {
-        name: 'Day2',
-        order: 1,
-        entries: [
-          {
-            name: 'Another Restaurant',
-            img_url: '/img/activityImg.jpg',
-            start_time: '11:00am',
-            end_time: '3:00 pm',
-            url: 'http://example.org'
-          }
-        ]
-      }
-    ]
-  },
-  {
-    name: 'Toronto Cousins',
-    user_id: 2,
-    start_date: '',
-    end_date: '',
-    collaborators: [],
-    days: [
-      {
-        name: 'Day1',
-        order: 1,
-        entries: [
-          {
-            name: 'ROM',
-            img_url: '/img/rom.jpeg',
-            start_time: '11:00 am',
-            end_time: '3:00 pm',
-            url: 'http://example.org',
-            activity_id: 1
-          }
-        ]
-      }
-    ]
-  }
-];
-
 function App() {
   const [exploreOpen, setExploreOpen] = useState(false);
   const [tripOpen, setTripOpen] = useState(false);
+  const [dbData, setDbData] = useState([]);
+
+  useEffect(() => {
+    axios.get('/trips/1').then((res) => setDbData(res.data));
+  }, []);
+
+  console.log(dbData);
 
   const exploreListToggleClickHandler = () => {
     setExploreOpen(!exploreOpen);
@@ -197,7 +111,7 @@ function App() {
   }
 
   if (tripOpen) {
-    tripDrawer = <TripDetails tripDetails={trips} />;
+    tripDrawer = <TripDetails tripDetails={dbData} />;
   }
 
   return (

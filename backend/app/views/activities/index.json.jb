@@ -1,0 +1,5 @@
+@activities.map {|activities| {
+  id: activities.id,
+  name: activities.name,
+  user_id: activities.user_id
+}}

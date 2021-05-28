@@ -24,7 +24,14 @@ end
 puts "Re-creating Trips ..."
 Trip.destroy_all
 
-Trip.create!({
+trip1 = Trip.create!({
+  name: Faker::Marketing.buzzwords,
+  start_date: Faker::Date.backward(days: 5),
+  end_date: Faker::Date.forward(days: 5),
+  user_id: 1
+})
+
+trip2 = Trip.create!({
   name: Faker::Marketing.buzzwords,
   start_date: Faker::Date.backward(days: 5),
   end_date: Faker::Date.forward(days: 5),
@@ -47,8 +54,8 @@ Activity.destroy_all
   Activity.create!({
     name: Faker::Restaurant.name,
     description: Faker::Restaurant.description,
-    img_url: Faker::Internet.url,
-    rating: 4,
+    img_url: '/img/rom.jpeg',
+    rating: rand(1..5),
     category: Faker::Restaurant.type,
     longitude: 13.4134995,
     latitude: 45.792650,
@@ -58,19 +65,109 @@ end
 
 
 ##Suggests
-puts "Re-creating Suggests..."
-Suggest.destroy_all
+# puts "Re-creating Suggests..."
+# Suggest.destroy_all
 
-5.times do
-  Suggest.create!({
-    trip_id: rand(1..Trip.count),
-    activity_id: rand(1..Activity.count)
-  })
-end
+# 5.times do
+#   Suggest.create!({
+#     trip_id: rand(1..Trip.count),
+#     activity_id: rand(1..Activity.count)
+#   })
+# end
 
-5.times do
-  Suggest.create!({
-    trip_id: 1,
-    activity_id: rand(1..Activity.count)
-  })
-end
+# 5.times do
+#   Suggest.create!({
+#     trip_id: 1,
+#     activity_id: rand(1..Activity.count)
+#   })
+# end
+
+##days
+puts "Re-creating Days..."
+
+Day.destroy_all
+
+t1d1 = trip1.days.create!({
+  name: 'Day 1',
+  order: 1
+})
+
+t1d2 = trip1.days.create!({
+  name: 'Day 2',
+  order: 2
+})
+
+t1d3 = trip1.days.create!({
+  name: 'Day 3',
+  order: 3
+})
+
+t2d1 = trip2.days.create!({
+  name: 'Day 1',
+  order: 1
+})
+t2d2 = trip2.days.create!({
+  name: 'Day 2',
+  order: 2
+})
+
+
+##entries
+puts "Re-creating Entries..."
+Entry.destroy_all
+t1d1.entries.create!({
+  order: 1,
+  activity_id: rand(1..Activity.count),
+  start_time: Faker::Time.forward(days: 2,  period: :morning, format: :short),
+  end_time: Faker::Time.forward(days: 2,  period: :afternoon, format: :short)
+})
+
+t1d2.entries.create!({
+  order: 1,
+  activity_id: rand(1..Activity.count),
+  start_time: Faker::Time.forward(days: 2,  period: :morning, format: :short),
+  end_time: Faker::Time.forward(days: 2,  period: :afternoon, format: :short)
+})
+
+t1d1.entries.create!({
+  order: 1,
+  activity_id: rand(1..Activity.count),
+  start_time: Faker::Time.forward(days: 2,  period: :morning, format: :short),
+  end_time: Faker::Time.forward(days: 2,  period: :afternoon, format: :short)
+})
+
+t1d1.entries.create!({
+  order: 2,
+  activity_id: rand(1..Activity.count),
+  start_time: Faker::Time.forward(days: 2,  period: :morning, format: :short),
+  end_time: Faker::Time.forward(days: 2,  period: :afternoon, format: :short)
+})
+
+t1d3.entries.create!({
+  order: 3,
+  day_id: 1,
+  activity_id: rand(1..Activity.count),
+  start_time: Faker::Time.forward(days: 2,  period: :morning, format: :short),
+  end_time: Faker::Time.forward(days: 2,  period: :afternoon, format: :short)
+})
+
+t2d1.entries.create!({
+  order: 3,
+  activity_id: rand(1..Activity.count),
+  start_time: Faker::Time.forward(days: 2,  period: :morning, format: :short),
+  end_time: Faker::Time.forward(days: 2,  period: :afternoon, format: :short)
+})
+
+t2d2.entries.create!({
+  order: 4,
+  activity_id: rand(1..Activity.count),
+  start_time: Faker::Time.forward(days: 2,  period: :morning, format: :short),
+  end_time: Faker::Time.forward(days: 2,  period: :afternoon, format: :short)
+})
+
+t2d2.entries.create!({
+  order: 5,
+  activity_id: rand(1..Activity.count),
+  start_time: Faker::Time.forward(days: 2,  period: :morning, format: :short),
+  end_time: Faker::Time.forward(days: 2,  period: :afternoon, format: :short)
+})

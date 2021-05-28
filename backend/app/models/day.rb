@@ -1,4 +1,4 @@
 class Day < ApplicationRecord
-  belongs_to :trips
-  has_many :plan_entries
+  belongs_to :trip
+  has_many :entries
 end

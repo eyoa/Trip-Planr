@@ -1,6 +1,6 @@
 class VotesController < ApplicationController
   def index
     votes = Vote.all
-    render json: VoteSerializer.new(votes)
+    render json: votes.to_json
   end
 end

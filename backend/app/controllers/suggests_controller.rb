@@ -1,7 +1,7 @@
 class SuggestsController < ApplicationController
   def index
     suggests = Suggest.all
-    render json: SuggestSerializer.new(suggests)
+    render json: suggests.to_json
   end
 
 end

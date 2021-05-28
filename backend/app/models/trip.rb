@@ -3,4 +3,5 @@ class Trip < ApplicationRecord
   has_many :collaborators, :dependent => :destroy
   has_many :days, :dependent => :destroy
   has_many :suggests, :dependent => :destroy
+  has_many :entries, :through => :days
 end
