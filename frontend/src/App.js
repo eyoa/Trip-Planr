@@ -1,7 +1,12 @@
 import './App.scss';
 
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Switch
+} from 'react-router-dom';
+import { useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
 import { Navigation } from './components/Navigation';
 import { ExploreListToggle } from './components/ExploreList/ExploreListToggle';
@@ -87,13 +92,19 @@ const exploreList = [
 function App() {
   const [exploreOpen, setExploreOpen] = useState(false);
   const [tripOpen, setTripOpen] = useState(false);
-  const [dbData, setDbData] = useState([]);
+  const [tripList, setTripList] = useState([]);
+  // const [tripDetails, setTripDetails] = useState({});
 
   useEffect(() => {
-    axios.get('/trips/1').then((res) => setDbData(res.data));
+    return axios.get(`/trips`).then((res) => {
+      setTripList(res.data);
+    });
   }, []);
-
-  console.log(dbData);
+  console.log(tripList);
+  // useEffect(() => {
+  //   const details = tripDetailsCallback();
+  //   setTripDetails(details);
+  // }, [tripDetails, tripDetailsCallback]);
 
   const exploreListToggleClickHandler = () => {
     setExploreOpen(!exploreOpen);
@@ -103,6 +114,28 @@ function App() {
     setTripOpen(!tripOpen);
   };
 
+  // function getTripList() {
+  //   const data = '';
+  //   return axios.get(`/trips`).then((res) => {
+  //     if (res.status === 204) {
+  //       const (data) => res.data;
+  //     }
+  //   });
+  // }
+
+  // function getTripDetails(id) {
+  //   return axios.get(`/trips/${id}`).then((res) => {
+  //     if (res.status === 204) {
+  //       const details = res.data
+  //       setTripDetails(res.data);
+  //     }
+  //   });
+  // }
+
+  const tripDetailsCallback = useCallback(function (data) {
+    return data;
+  });
+
   let exploreDrawer;
   let tripDrawer;
 
@@ -111,7 +144,13 @@ function App() {
   }
 
   if (tripOpen) {
-    tripDrawer = <TripDetails tripDetails={dbData} />;
+    tripDrawer = (
+      <TripDetails
+        tripList={tripList}
+        // getTripDetails={getTripDetails}
+        // tripDetails={tripDetails}
+      />
+    );
   }
 
   return (

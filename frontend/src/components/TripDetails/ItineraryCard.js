@@ -24,7 +24,7 @@ export const ItineraryCard = (props) => {
             <ul class='postcard__tagbox'>
               <li class='tag__item'>Drive</li>
               <li class='tag__item'>35 mins.</li>
-              <li class='tag__item play blue'>category?</li>
+              <li class='tag__item play blue'>{props.category}</li>
             </ul>
           </div>
         </article>

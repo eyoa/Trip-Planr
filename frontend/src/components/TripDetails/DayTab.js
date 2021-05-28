@@ -13,14 +13,15 @@ export const DayTab = (props) => {
       console.log(day.entries);
       const entires = day.entries ? (
         day.entries.map((entry) => {
-          console.log(entry);
+          console.log(`entry is ${entry}`);
           return (
             <div>
               <ItineraryCard
-                name={entry.name}
+                name={entry.activities.name}
                 start_time={entry.start_time}
                 end_time={entry.end_time}
-                img_url={entry.img_url}
+                img_url={entry.activities.img_url}
+                category={entry.activities.category}
               />
             </div>
           );

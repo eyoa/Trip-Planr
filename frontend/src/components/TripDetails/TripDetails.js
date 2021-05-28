@@ -1,27 +1,33 @@
 import './TripDetails.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useState } from 'react';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 import { Row, Dropdown } from 'react-bootstrap';
 import { DayTab } from './DayTab';
 
 export const TripDetails = (props) => {
-  const { tripDetails } = props;
-  const [tripData, setTripData] = useState({ tripEntries: '', numDays: 0 });
-  // const [tripEntries, setTripEntries] = useState('');
-  // const [numDays, setNumDays] = useState('');
+  const { tripList } = props;
+  const [tripData, setTripData] = useState(null);
+  const [selectTrip, setSelectTrip] = useState(null);
 
-  const trips = tripDetails
-    ? tripDetails.map((tripDetails, index) => {
+  const trips = tripList
+    ? tripList.map((tripList) => {
         return (
-          <Dropdown.Item eventKey={index}>{tripDetails.name}</Dropdown.Item>
+          <Dropdown.Item eventKey={tripList.id}>{tripList.name}</Dropdown.Item>
         );
       })
     : 'No Trips';
 
+  useEffect(() => {
+    if (selectTrip !== null) {
+      axios.get(`/trips/${selectTrip}`).then((res) => {
+        setTripData(res.data);
+      });
+    }
+  }, [selectTrip]);
+
   const tripSelectHandler = (eventKey) => {
-    const tripEntries = tripDetails[eventKey].days;
-    const numDays = tripDetails[eventKey].days;
-    setTripData({ tripEntries, numDays });
+    setSelectTrip(eventKey);
   };
 
   return (
@@ -35,7 +41,7 @@ export const TripDetails = (props) => {
         </Dropdown>
       </Row>
       <Row className='justify-content=center trip-details-container'>
-        <DayTab days={tripData.numDays} />
+        {tripData ? <DayTab days={tripData.days} /> : <></>}
       </Row>
     </nav>
   );
