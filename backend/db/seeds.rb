@@ -116,7 +116,14 @@ t2d2 = trip2.days.create!({
 puts "Re-creating Entries..."
 Entry.destroy_all
 t1d1.entries.create!({
-  order: 1,
+  order: 3,
+  activity_id: rand(1..Activity.count),
+  start_time: Faker::Time.forward(days: 2,  period: :morning, format: :short),
+  end_time: Faker::Time.forward(days: 2,  period: :afternoon, format: :short)
+})
+
+t1d2.entries.create!({
+  order: 2,
   activity_id: rand(1..Activity.count),
   start_time: Faker::Time.forward(days: 2,  period: :morning, format: :short),
   end_time: Faker::Time.forward(days: 2,  period: :afternoon, format: :short)
@@ -144,7 +151,7 @@ t1d1.entries.create!({
 })
 
 t1d3.entries.create!({
-  order: 3,
+  order: 1,
   day_id: 1,
   activity_id: rand(1..Activity.count),
   start_time: Faker::Time.forward(days: 2,  period: :morning, format: :short),
@@ -152,21 +159,21 @@ t1d3.entries.create!({
 })
 
 t2d1.entries.create!({
-  order: 3,
+  order: 1,
   activity_id: rand(1..Activity.count),
   start_time: Faker::Time.forward(days: 2,  period: :morning, format: :short),
   end_time: Faker::Time.forward(days: 2,  period: :afternoon, format: :short)
 })
 
 t2d2.entries.create!({
-  order: 4,
+  order: 2,
   activity_id: rand(1..Activity.count),
   start_time: Faker::Time.forward(days: 2,  period: :morning, format: :short),
   end_time: Faker::Time.forward(days: 2,  period: :afternoon, format: :short)
 })
 
 t2d2.entries.create!({
-  order: 5,
+  order: 1,
   activity_id: rand(1..Activity.count),
   start_time: Faker::Time.forward(days: 2,  period: :morning, format: :short),
   end_time: Faker::Time.forward(days: 2,  period: :afternoon, format: :short)
