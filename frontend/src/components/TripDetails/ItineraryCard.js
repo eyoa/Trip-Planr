@@ -1,6 +1,5 @@
 import './ItineraryCard.scss';
 import { Clock } from 'react-bootstrap-icons';
-import Moment from 'react-moment';
 import moment from 'moment';
 
 export const ItineraryCard = (props) => {

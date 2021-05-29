@@ -15,7 +15,7 @@ import { TripDetailsToggle } from './components/TripDetails/TripDetailsToggle';
 import { TripDetails } from './components/TripDetails/TripDetails';
 import { Homepage } from './components/Homepage';
 import { Mapview } from './components/Mapview';
-import { TripList } from './components/TripList';
+import { IdeasBoard } from './components/IdeasBoard/IdeasBoard';
 
 //Test Data
 const cityData = [
@@ -93,7 +93,7 @@ function App() {
   const [exploreOpen, setExploreOpen] = useState(false);
   const [tripOpen, setTripOpen] = useState(false);
   const [tripList, setTripList] = useState([]);
-  // const [tripDetails, setTripDetails] = useState({});
+  const [ideasList, setIdeasList] = useState([]);
 
   useEffect(() => {
     return axios.get(`/trips`).then((res) => {
@@ -101,10 +101,6 @@ function App() {
     });
   }, []);
   console.log(tripList);
-  // useEffect(() => {
-  //   const details = tripDetailsCallback();
-  //   setTripDetails(details);
-  // }, [tripDetails, tripDetailsCallback]);
 
   const exploreListToggleClickHandler = () => {
     setExploreOpen(!exploreOpen);
@@ -114,28 +110,6 @@ function App() {
     setTripOpen(!tripOpen);
   };
 
-  // function getTripList() {
-  //   const data = '';
-  //   return axios.get(`/trips`).then((res) => {
-  //     if (res.status === 204) {
-  //       const (data) => res.data;
-  //     }
-  //   });
-  // }
-
-  // function getTripDetails(id) {
-  //   return axios.get(`/trips/${id}`).then((res) => {
-  //     if (res.status === 204) {
-  //       const details = res.data
-  //       setTripDetails(res.data);
-  //     }
-  //   });
-  // }
-
-  const tripDetailsCallback = useCallback(function (data) {
-    return data;
-  });
-
   let exploreDrawer;
   let tripDrawer;
 
@@ -144,13 +118,7 @@ function App() {
   }
 
   if (tripOpen) {
-    tripDrawer = (
-      <TripDetails
-        tripList={tripList}
-        // getTripDetails={getTripDetails}
-        // tripDetails={tripDetails}
-      />
-    );
+    tripDrawer = <TripDetails tripList={tripList} />;
   }
 
   return (
@@ -166,7 +134,7 @@ function App() {
           <section className='backdrop'>
             <Route path='/' exact component={Homepage}></Route>
             <Route path='/Mapview' exact component={Mapview}></Route>
-            <Route path='/Triplist' exact component={TripList}></Route>
+            <Route path='/IdeasBoard' exact component={IdeasBoard}></Route>
           </section>
         </Switch>
       </Router>
