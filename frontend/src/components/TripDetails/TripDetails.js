@@ -7,9 +7,7 @@ import { DayTab } from './DayTab';
 import { Fragment } from 'react';
 
 export const TripDetails = (props) => {
-  const { tripList } = props;
-  const [tripData, setTripData] = useState(null);
-  const [selectTrip, setSelectTrip] = useState(null);
+  const { tripList, tripSelectHandler, tripData } = props;
 
   const trips = tripList
     ? tripList.map((tripList) => {
@@ -22,18 +20,6 @@ export const TripDetails = (props) => {
         );
       })
     : 'No Trips';
-
-  useEffect(() => {
-    if (selectTrip !== null) {
-      axios.get(`/trips/${selectTrip}`).then((res) => {
-        setTripData(res.data);
-      });
-    }
-  }, [selectTrip]);
-
-  const tripSelectHandler = (eventKey) => {
-    setSelectTrip(eventKey);
-  };
 
   return (
     <nav className='trip-drawer'>

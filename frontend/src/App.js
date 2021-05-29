@@ -1,12 +1,7 @@
 import './App.scss';
 
-import {
-  BrowserRouter as Router,
-  Redirect,
-  Route,
-  Switch
-} from 'react-router-dom';
-import { useCallback, useEffect, useState } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Navigation } from './components/Navigation';
 import { ExploreListToggle } from './components/ExploreList/ExploreListToggle';
@@ -94,13 +89,32 @@ function App() {
   const [tripOpen, setTripOpen] = useState(false);
   const [tripList, setTripList] = useState([]);
   const [ideasList, setIdeasList] = useState([]);
+  const [selectTrip, setSelectTrip] = useState(null);
+  const [tripData, setTripData] = useState(null);
 
   useEffect(() => {
     return axios.get(`/trips`).then((res) => {
       setTripList(res.data);
     });
   }, []);
+
   console.log(tripList);
+
+  useEffect(() => {
+    if (selectTrip !== null) {
+      axios.get(`/trips/${selectTrip}`).then((res) => {
+        setTripData(res.data);
+      });
+    }
+  }, [selectTrip]);
+
+  const tripSelectHandler = (eventKey) => {
+    setSelectTrip(eventKey);
+  };
+
+  const addCustomIdea = (newIdeaData) => {
+    console.log(newIdeaData);
+  };
 
   const exploreListToggleClickHandler = () => {
     setExploreOpen(!exploreOpen);
@@ -118,7 +132,14 @@ function App() {
   }
 
   if (tripOpen) {
-    tripDrawer = <TripDetails tripList={tripList} />;
+    tripDrawer = (
+      <TripDetails
+        tripList={tripList}
+        selectTrip={selectTrip}
+        tripData={tripData}
+        tripSelectHandler={tripSelectHandler}
+      />
+    );
   }
 
   return (
@@ -134,7 +155,16 @@ function App() {
           <section className='backdrop'>
             <Route path='/' exact component={Homepage}></Route>
             <Route path='/Mapview' exact component={Mapview}></Route>
-            <Route path='/IdeasBoard' exact component={IdeasBoard}></Route>
+            <Route
+              path='/IdeasBoard'
+              render={() => (
+                <IdeasBoard
+                  ideasList={ideasList}
+                  addCustomIdea={addCustomIdea}
+                  trip_id={selectTrip}
+                />
+              )}
+            ></Route>
           </section>
         </Switch>
       </Router>

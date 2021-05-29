@@ -1,10 +1,11 @@
 import './IdeasBoard.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { IdeaCard } from '../IdeasBoard/IdeaCard';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Button } from 'react-bootstrap';
+import { CustomIdeaForm } from './CustomIdeaForm';
 
 export const IdeasBoard = (props) => {
-  const { ideasList, trip_id, numCollaborators } = props;
+  const { ideasList, trip_id, numCollaborators, addCustomIdea } = props;
 
   console.log(ideasList);
 
@@ -33,6 +34,12 @@ export const IdeasBoard = (props) => {
           <Col md={{ span: 5, offset: -1 }}>
             <h1>Ideas Board</h1>
           </Col>
+        </Row>
+        <Row className='justify-content-end'>
+          <Button>Add Custom Idea</Button>
+        </Row>
+        <Row className='justify-content-md-center'>
+          <CustomIdeaForm addCustomIdea={addCustomIdea} />
         </Row>
         <Row className='justify-content-md-center'>
           <Col className='ideas-container'>{ideas}</Col>
