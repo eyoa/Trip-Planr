@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Row, Dropdown } from 'react-bootstrap';
 import { DayTab } from './DayTab';
+import { Fragment } from 'react';
 
 export const TripDetails = (props) => {
   const { tripList } = props;
@@ -13,7 +14,11 @@ export const TripDetails = (props) => {
   const trips = tripList
     ? tripList.map((tripList) => {
         return (
-          <Dropdown.Item eventKey={tripList.id}>{tripList.name}</Dropdown.Item>
+          <Fragment>
+            <Dropdown.Item eventKey={tripList.id}>
+              {tripList.name}
+            </Dropdown.Item>
+          </Fragment>
         );
       })
     : 'No Trips';

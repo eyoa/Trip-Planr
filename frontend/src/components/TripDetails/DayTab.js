@@ -8,12 +8,22 @@ export const DayTab = (props) => {
 
   console.log(days);
 
+  const sortByOrder = (array) => {
+    console.log(`sort by order received ${array}`);
+    const result = [];
+    for (const item of array) {
+      console.log(`item is ${item.activities.name}`);
+      console.log(`item order is ${item.order}`);
+
+      result[item.order - 1] = item;
+    }
+    return result;
+  };
+
   const daysTabs = days ? (
     days.map((day, index) => {
-      console.log(day.entries);
       const entires = day.entries ? (
-        day.entries.map((entry) => {
-          console.log(`entry is ${entry}`);
+        sortByOrder(day.entries).map((entry) => {
           return (
             <div>
               <ItineraryCard
