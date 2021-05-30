@@ -11,6 +11,7 @@ import { TripDetails } from './components/TripDetails/TripDetails';
 import { Homepage } from './components/Homepage';
 import { Mapview } from './components/Mapview';
 import { IdeasBoard } from './components/IdeasBoard/IdeasBoard';
+import { TripList } from './components/TripList';
 
 //Test Data
 const cityData = [
@@ -92,14 +93,21 @@ function App() {
   const [selectTrip, setSelectTrip] = useState(null);
   const [tripData, setTripData] = useState(null);
 
+  // Initial data/state
   useEffect(() => {
     return axios.get(`/trips`).then((res) => {
       setTripList(res.data);
     });
   }, []);
 
-  console.log(tripList);
+  // //update the trip List
+  // useEffect(() => {
+  //   return axios.get(`/trips`).then((res) => {
+  //     setTripList(res.data);
+  //   });
+  // }, [tripList]);
 
+  //update when selecting itinerary
   useEffect(() => {
     if (selectTrip !== null) {
       axios.get(`/trips/${selectTrip}`).then((res) => {
@@ -122,6 +130,19 @@ function App() {
 
   const tripToggleClickHandler = () => {
     setTripOpen(!tripOpen);
+  };
+
+  const addNewTrip = (start_date, end_date, newTripName, user_id) => {
+    const obj = {
+      name: newTripName,
+      user_id: user_id,
+      start_date: start_date,
+      end_date: end_date
+    };
+
+    axios.post(`/trips`, { params: obj }).then((res) => {
+      console.log(res.data);
+    });
   };
 
   let exploreDrawer;
@@ -155,6 +176,12 @@ function App() {
           <section className='backdrop'>
             <Route path='/' exact component={Homepage}></Route>
             <Route path='/Mapview' exact component={Mapview}></Route>
+            <Route
+              path='/TripList'
+              render={() => (
+                <TripList tripList={tripList} addNewTrip={addNewTrip} />
+              )}
+            />
             <Route
               path='/IdeasBoard'
               render={() => (

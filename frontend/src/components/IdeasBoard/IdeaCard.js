@@ -16,18 +16,18 @@ export const IdeaCard = (props) => {
     <>
       {name && description && (
         <card
-          className='card'
+          className='idea-card'
           style={{
             backgroundImage: `url(${img_url})`,
             backgroundSize: 'cover'
           }}
         >
           <div className='content'>
-            <h2 className='title'>{name}</h2>
+            <h2 className='idea-name'>{name}</h2>
             <p>
               <copy>{description}</copy>
             </p>
-            <button className='btn'>Add to Trip</button>
+            <button className='add-trip-btn'>Add to Trip</button>
           </div>
           <aside className='votes'>{votes}</aside>
         </card>

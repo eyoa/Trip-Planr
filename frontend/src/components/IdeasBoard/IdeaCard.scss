@@ -12,7 +12,7 @@ $bp-lg: 800px;
   box-sizing: border-box;
 }
 
-.card {
+.idea-card {
   display: flex;
   align-items: flex-end;
   overflow: hidden;
@@ -106,7 +106,7 @@ aside.votes {
   }
 }
 
-.title {
+.idea-name {
   font-size: 1.3rem;
   font-weight: bold;
   line-height: 1.2;
@@ -142,7 +142,7 @@ aside.votes {
 }
 
 @media (hover: hover) and (min-width: $bp-md) {
-  .card:after {
+  .idea-card :after {
     transform: translateY(0);
   }
 
@@ -157,8 +157,8 @@ aside.votes {
     }
   }
 
-  .card:hover,
-  .card:focus-within {
+  .idea-card :hover,
+  .idea-card :focus-within {
     align-items: center;
 
     &:before {
@@ -179,7 +179,7 @@ aside.votes {
     }
   }
 
-  .card:focus-within {
+  .idea-card :focus-within {
     &:before,
     &:after,
     .content,

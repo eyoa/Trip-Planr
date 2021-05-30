@@ -122,19 +122,8 @@ class TripsController < ApplicationController
 
   private
 
-  # def withDays
-  #   @withDays ||= Trips.where(id: params[:id]).days.map {|day| {
-  #     name: day.name,
-  #     order: day.order,
-  #     entries: day.entriesMore
-  #   }}
-  # end
-  # helper_method :withDays
-
-
-
   def trip_params
-    params.require(:trip).permit(:name, :user_id, :start_date, :end_date)
+    params.permit(:name, :user_id, :start_date, :end_date)
   end
 
 
