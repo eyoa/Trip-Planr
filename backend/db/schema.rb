@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_27_152857) do
+ActiveRecord::Schema.define(version: 2021_05_30_030544) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,13 +59,13 @@ ActiveRecord::Schema.define(version: 2021_05_27_152857) do
     t.index ["day_id"], name: "index_entries_on_day_id"
   end
 
-  create_table "suggests", force: :cascade do |t|
+  create_table "ideas", force: :cascade do |t|
     t.bigint "activity_id", null: false
     t.bigint "trip_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["activity_id"], name: "index_suggests_on_activity_id"
-    t.index ["trip_id"], name: "index_suggests_on_trip_id"
+    t.index ["activity_id"], name: "index_ideas_on_activity_id"
+    t.index ["trip_id"], name: "index_ideas_on_trip_id"
   end
 
   create_table "trips", force: :cascade do |t|
@@ -101,7 +101,7 @@ ActiveRecord::Schema.define(version: 2021_05_27_152857) do
   add_foreign_key "days", "trips"
   add_foreign_key "entries", "activities"
   add_foreign_key "entries", "days"
-  add_foreign_key "suggests", "activities"
-  add_foreign_key "suggests", "trips"
+  add_foreign_key "ideas", "activities"
+  add_foreign_key "ideas", "trips"
   add_foreign_key "trips", "users"
 end
