@@ -6,7 +6,7 @@ Rails.application.routes.draw do
       resources :entries, except: [:index, :show]
     end
     resources :collaborators, only: [:create, :destroy]
-    resources :suggests, only: [:index, :show, :create, :destroy] do
+    resources :ideas, only: [:index, :show, :create, :destroy] do
       resources :votes, only: [:update]
     end
   end
