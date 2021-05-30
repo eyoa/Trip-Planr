@@ -1,5 +1,11 @@
 @activities.map {|activities| {
-  id: activities.id,
+  id: activities.id
   name: activities.name,
-  user_id: activities.user_id
+  description: activities.description,
+  img_url: activities.img_url,
+  rating: activities.rating,
+  category: activities.category,
+  longitude: activities.longitude,
+  latitude: activities.latitude,
+  url: activities.url
 }}

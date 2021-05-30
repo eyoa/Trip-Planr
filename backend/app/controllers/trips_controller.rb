@@ -1,137 +1,47 @@
 class TripsController < ApplicationController
   
-  # GET /trips
+  # list of trips
   def index
     @trips = Trip.all
-    render 'trips/index.json.jb'
+    render json: @trips.to_json
+    # render 'trips/index.json.jb'
   end
 
-  # GET /trips/1
+  # Itinerary - specific trip with days, entries and activity information
   def show
-    
     @trip = Trip.find params[:id]
-
     render 'trips/show.json.jb'
+ end
 
-    @mock = [
-      {
-        name: 'Toronto meetup',
-        user_id: 2,
-        start_date: '',
-        end_date: '',
-        collaborators: [1, 5],
-        days: [
-          {
-            name: 'Day1',
-            order: 1,
-            entries: [
-              {
-                name: 'ROM',
-                img_url: '/img/rom.jpeg',
-                start_time: '11:00 am',
-                end_time: '3:00 pm',
-                url: 'http://example.org',
-                activity_id: 1
-              },
-              {
-                name: 'Restaurant',
-                img_url: '/img/activityImg.jpg',
-                start_time: '6:00pm',
-                end_time: '7:00 pm',
-                url: 'http://example.org',
-                activity_id: 4
-              },
-              {
-                name: 'Restaurant',
-                img_url: '/img/activityImg.jpg',
-                start_time: '6:00pm',
-                end_time: '7:00 pm',
-                url: 'http://example.org',
-                activity_id: 4
-              },
-              {
-                name: 'Restaurant',
-                img_url: '/img/activityImg.jpg',
-                start_time: '6:00pm',
-                end_time: '7:00 pm',
-                url: 'http://example.org',
-                activity_id: 4
-              },
-              {
-                name: 'Restaurant',
-                img_url: '/img/activityImg.jpg',
-                start_time: '6:00pm',
-                end_time: '7:00 pm',
-                url: 'http://example.org',
-                activity_id: 4
-              }
-            ]
-          },
-          {
-            name: 'Day2',
-            order: 1,
-            entries: [
-              {
-                name: 'Another Restaurant',
-                img_url: '/img/activityImg.jpg',
-                start_time: '11:00am',
-                end_time: '3:00 pm',
-                url: 'http://example.org'
-              }
-            ]
-          }
-        ]
-      },
-      {
-        name: 'Toronto Cousins',
-        user_id: 2,
-        start_date: '',
-        end_date: '',
-        collaborators: [],
-        days: [
-          {
-            name: 'Day1',
-            order: 1,
-            entries: [
-              {
-                name: 'ROM',
-                img_url: '/img/rom.jpeg',
-                start_time: '11:00 am',
-                end_time: '3:00 pm',
-                url: 'http://example.org',
-                activity_id: 1
-              }
-            ]
-          }
-        ]
-      }
-    ]
-
-    # render json: mock.to_json
-  end
-
-  # POST /trips
+  # creating a new trip 
   def create
     @trip = Trip.new(trip_params)
     if @trip.save
-      puts "new trip made"
+      render json: @trip.to_json, status: :created
     else
-      puts "didn't work reload?"
+      render json: { status: 'error', code: 3000, message: 'Trip not created.' }
     end
   end
 
+  def update
+    @trip = Trip.find params[:id]
+    if @trip.update(trip_params)
+      render json: @trip.to_json, status: :ok
+    else
+      render json: { status: 'error', code: 3000, message: 'Could not update trip.' }
+    end
+  end
+
+  def destroy
+    if Trip.find params[:id].destroy
+      render json: {}, status: :ok
+    else
+      render json: { status: 'error', code: 3000, message: 'Could not remove trip.' }
+    end
+  end
+
+
   private
-
-  # def withDays
-  #   @withDays ||= Trips.where(id: params[:id]).days.map {|day| {
-  #     name: day.name,
-  #     order: day.order,
-  #     entries: day.entriesMore
-  #   }}
-  # end
-  # helper_method :withDays
-
-
 
   def trip_params
     params.require(:trip).permit(:name, :user_id, :start_date, :end_date)

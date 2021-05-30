@@ -4,11 +4,4 @@ class ActivitiesController < ApplicationController
     render 'activities/index.json.jb'
 
   end
-
-  def show
-    @activity = Activity.find params[:id]
-    render 'activities/show.json.jb'
-
-  end
-
 end

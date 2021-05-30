@@ -7,9 +7,9 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      puts "new user made"
+      render json: @user.to_json, status: :ok
     else
-      puts "didn't work reload?"
+      render json: { status: 'error', code: 3000, message: 'Could not make new user.' }
     end
   end
 

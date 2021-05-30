@@ -6,8 +6,8 @@ Rails.application.routes.draw do
       resources :entries, except: [:index, :show]
     end
     resources :collaborators, only: [:create, :destroy]
-    resources :ideas, only: [:index, :show, :create, :destroy] do
-      resources :votes, only: [:update]
+    resources :ideas, only: [:index, :create, :destroy] do
+      resources :votes, only: [:create, :destroy]
     end
   end
   
