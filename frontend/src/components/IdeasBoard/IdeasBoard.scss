@@ -1,0 +1,16 @@
+.ideas-container {
+  display: flex;
+  padding: 1rem;
+  flex-wrap: wrap;
+  overflow-y: scroll;
+  max-width: 1024px;
+  margin: 0 auto;
+}
+.ideas-container::-webkit-scrollbar {
+  display: block;
+  width: 10px;
+}
+.ideas-container::-webkit-scrollbar-thumb {
+  background: linear-gradient(#9ac3df, white);
+  border-radius: 5px;
+}

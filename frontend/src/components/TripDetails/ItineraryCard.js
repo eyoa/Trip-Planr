@@ -1,8 +1,14 @@
 import './ItineraryCard.scss';
 import { Clock } from 'react-bootstrap-icons';
+import moment from 'moment';
 
 export const ItineraryCard = (props) => {
   const { name, start_time, end_time, url, img_url } = props;
+
+  const formatTime = (time) => {
+    return moment(time).format('hh:mm a');
+  };
+
   return (
     <>
       {name && (
@@ -15,9 +21,9 @@ export const ItineraryCard = (props) => {
               <a href='#'>{name}</a>
             </h1>
             <div class='postcard__subtitle small'>
-              <time datetime='2020-05-25 12:00:00'>
-                <Clock />
-                {start_time} - {end_time}
+              <time datetime='2011-11-18T14:54:39.929Z'>
+                <Clock /> <span> </span>
+                {formatTime(start_time)} - {formatTime(end_time)}
               </time>
             </div>
             <div class='postcard__preview-txt'>Some notes</div>

@@ -6,37 +6,35 @@ import { Search as SearchIcon } from 'react-bootstrap-icons';
 
 export const Homepage = () => {
   return (
-    <Fragment>
-      <div
-        className='landing-wrapper'
-        style={{
-          backgroundImage: `url(${bgImg})`
-        }}
-      >
-        <Container fluid='true'>
-          <Row className='spacer'></Row>
-          <Row className='justify-content-center'>
-            <Col sm='true'>
-              <InputGroup>
-                <InputGroup className='mb-3'>
-                  <FormControl
-                    size='lg'
-                    className='search'
-                    placeholder='Where to?'
-                    aria-label='Search'
-                    aria-describedby='Search'
-                  />
-                  <InputGroup.Append>
-                    <InputGroup.Text id='basic-addon2' className='search'>
-                      <SearchIcon />
-                    </InputGroup.Text>
-                  </InputGroup.Append>
-                </InputGroup>
+    <div
+      className='landing-wrapper'
+      style={{
+        backgroundImage: `url(${bgImg})`
+      }}
+    >
+      <Container fluid='true'>
+        <Row className='spacer'></Row>
+        <Row className='justify-content-center'>
+          <Col sm='true'>
+            <InputGroup>
+              <InputGroup className='mb-3'>
+                <FormControl
+                  size='lg'
+                  className='search'
+                  placeholder='Where to?'
+                  aria-label='Search'
+                  aria-describedby='Search'
+                />
+                <InputGroup.Append>
+                  <InputGroup.Text id='basic-addon2' className='search'>
+                    <SearchIcon />
+                  </InputGroup.Text>
+                </InputGroup.Append>
               </InputGroup>
-            </Col>
-          </Row>
-        </Container>
-      </div>
-    </Fragment>
+            </InputGroup>
+          </Col>
+        </Row>
+      </Container>
+    </div>
   );
 };

@@ -11,11 +11,11 @@ export const Navigation = () => {
           <Nav.Link as={Link} to='/'>
             Home
           </Nav.Link>
-          <Nav.Link as={Link} to='/Triplist'>
-            Trip
+          <Nav.Link as={Link} to='/IdeasBoard'>
+            Ideas
           </Nav.Link>
-          <Nav.Link as={Link} to='/Mapview'>
-            Map
+          <Nav.Link as={Link} to='/TripList'>
+            My trips
           </Nav.Link>
           <Nav.Link>Login</Nav.Link>
         </Nav>
