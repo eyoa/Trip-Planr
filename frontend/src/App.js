@@ -14,28 +14,6 @@ import { IdeasBoard } from './components/IdeasBoard/IdeasBoard';
 import { TripList } from './components/TripList';
 
 //Test Data
-const cityData = [
-  {
-    id: 1,
-    name: 'Montreal'
-  },
-  {
-    id: 2,
-    name: 'New York'
-  },
-  {
-    id: 3,
-    name: 'Croatia'
-  },
-  {
-    id: 4,
-    name: 'Hong Kong'
-  },
-  {
-    id: 5,
-    name: 'Toronto'
-  }
-];
 
 const exploreList = [
   {
@@ -140,11 +118,17 @@ function App() {
       end_date
     };
 
-    console.log(obj);
-
     axios.post(`/trips`, null, { params: obj }).then((res) => {
-      console.log(res.data);
+      setTripList([...tripList, res.data]);
     });
+  };
+
+  const removeTrip = (event) => {
+    const id = event.target.value;
+    // axios.delete(`/trips/${id}`).then((res) => {
+    //   console.log(res);
+    //   // setTripList([...tripList, res.data]);
+    // });
   };
 
   let exploreDrawer;
@@ -181,7 +165,11 @@ function App() {
             <Route
               path='/TripList'
               render={() => (
-                <TripList tripList={tripList} addNewTrip={addNewTrip} />
+                <TripList
+                  tripList={tripList}
+                  addNewTrip={addNewTrip}
+                  removeTrip={removeTrip}
+                />
               )}
             />
             <Route

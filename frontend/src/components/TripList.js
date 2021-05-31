@@ -5,13 +5,14 @@ import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './TripList.scss';
+import axios from 'axios';
 
 export const TripList = (props) => {
   // HardCode User_id
   const user_id = 1;
 
   // rest of it
-  const { tripList, addNewTrip } = props;
+  const { tripList, addNewTrip, removeTrip } = props;
   const [openForm, setOpenForm] = useState(false);
   const [newTripName, setNewTripName] = useState('');
   const [newTripInfo, setNewTripInfo] = useState([
@@ -25,11 +26,6 @@ export const TripList = (props) => {
   function formInputHandler(event) {
     setNewTripName(event.target.value);
   }
-
-  const removeTrip = (event) => {
-    console.log(event.target.value);
-    //axios to remove trip? pass to/from App to useEffect update
-  };
 
   const trips = tripList
     ? tripList.map((tripList) => {

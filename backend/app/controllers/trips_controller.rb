@@ -11,7 +11,7 @@ class TripsController < ApplicationController
   def show
     @trip = Trip.find params[:id]
     render 'trips/show.json.jb'
- end
+  end
 
   # creating a new trip 
   def create
@@ -44,7 +44,7 @@ class TripsController < ApplicationController
   private
 
   def trip_params
-    params.require(:trip).permit(:name, :user_id, :start_date, :end_date)
+    params.permit(:trip, :name, :user_id, :start_date, :end_date)
   end
 
 
