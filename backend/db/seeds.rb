@@ -64,23 +64,23 @@ Activity.destroy_all
 end
 
 
-##Suggests
-# puts "Re-creating Suggests..."
-# Suggest.destroy_all
+#Ideas
+puts "Re-creating ideas..."
+Idea.destroy_all
 
-# 5.times do
-#   Suggest.create!({
-#     trip_id: rand(1..Trip.count),
-#     activity_id: rand(1..Activity.count)
-#   })
-# end
+5.times do
+  Idea.create!({
+    trip_id: rand(1..Trip.count),
+    activity_id: rand(1..Activity.count)
+  })
+end
 
-# 5.times do
-#   Suggest.create!({
-#     trip_id: 1,
-#     activity_id: rand(1..Activity.count)
-#   })
-# end
+5.times do
+  Idea.create!({
+    trip_id: 1,
+    activity_id: rand(1..Activity.count)
+  })
+end
 
 ##days
 puts "Re-creating Days..."
