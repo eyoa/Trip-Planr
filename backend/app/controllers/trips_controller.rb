@@ -33,8 +33,10 @@ class TripsController < ApplicationController
   end
 
   def destroy
-    if Trip.find params[:id].destroy
-      render json: {}, status: :ok
+
+    if Trip.delete_by(id: params[:id])
+      @trips = Trip.all
+      render json: @trips.to_json, status: :ok
     else
       render json: { status: 'error', code: 3000, message: 'Could not remove trip.' }
     end
@@ -46,6 +48,5 @@ class TripsController < ApplicationController
   def trip_params
     params.permit(:trip, :name, :user_id, :start_date, :end_date)
   end
-
 
 end

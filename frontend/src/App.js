@@ -125,10 +125,9 @@ function App() {
 
   const removeTrip = (event) => {
     const id = event.target.value;
-    // axios.delete(`/trips/${id}`).then((res) => {
-    //   console.log(res);
-    //   // setTripList([...tripList, res.data]);
-    // });
+    axios.delete(`/trips/${id}`).then((res) => {
+      setTripList(res.data);
+    });
   };
 
   let exploreDrawer;
