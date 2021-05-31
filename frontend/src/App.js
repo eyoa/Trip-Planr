@@ -14,83 +14,41 @@ import { IdeasBoard } from './components/IdeasBoard/IdeasBoard';
 import { TripList } from './components/TripList';
 import { eachDayOfInterval, format } from 'date-fns/esm';
 
-//Test Data
-
-const exploreList = [
-  {
-    name: 'ROM',
-    description:
-      "Stories description text to build on the card title and make up the bulk of the card's content.",
-    img_url: '/img/rom.jpeg',
-    rating: 4,
-    category: 'Test',
-    url: 'http://example.org'
-  },
-  {
-    name: 'ROM2',
-    description:
-      "Stories description text to build on the card title and make up the bulk of the card's content.",
-    img_url: '/img/activityImg.jpg',
-    rating: 4,
-    category: 'Test',
-    url: 'http://example.org'
-  },
-  {
-    name: 'ROM3',
-    description:
-      "Stories description text to build on the card title and make up the bulk of the card's content.",
-    img_url: '/img/rom.jpeg',
-    rating: 4,
-    category: 'Test',
-    url: 'http://example.org'
-  },
-  {
-    name: 'ROM4',
-    description:
-      "Stories description text to build on the card title and make up the bulk of the card's content.",
-    img_url: '/img/activityImg.jpg',
-    rating: 4,
-    category: 'Test',
-    url: 'http://example.org'
-  },
-  {
-    name: 'ROM5',
-    description:
-      "Stories description text to build on the card title and make up the bulk of the card's content.",
-    img_url: '/img/rom.jpeg',
-    rating: 4,
-    category: 'Test',
-    url: 'http://example.org'
-  }
-];
-
 function App() {
   const [exploreOpen, setExploreOpen] = useState(false);
   const [tripOpen, setTripOpen] = useState(false);
   const [tripList, setTripList] = useState([]);
-  const [ideasList, setIdeasList] = useState([]);
+  const [exploreList, setExploreList] = useState([]);
   const [selectTrip, setSelectTrip] = useState(null);
-  const [tripData, setTripData] = useState(null);
+  const [tripData, setTripData] = useState({
+    itinerary: null,
+    ideasList: null
+  });
 
   // Initial data/state
   useEffect(() => {
-    return axios.get(`/trips`).then((res) => {
+    axios.get(`/trips`).then((res) => {
       setTripList(res.data);
     });
   }, []);
 
-  // //update the trip List
-  // useEffect(() => {
-  //   return axios.get(`/trips`).then((res) => {
-  //     setTripList(res.data);
-  //   });
-  // }, [tripList]);
+  useEffect(() => {
+    axios.get(`/activities`).then((res) => {
+      setExploreList(res.data);
+    });
+  }, []);
 
-  //update when selecting itinerary
+  //update when selecting trip
   useEffect(() => {
     if (selectTrip !== null) {
-      axios.get(`/trips/${selectTrip}`).then((res) => {
-        setTripData(res.data);
+      Promise.all([
+        axios.get(`/trips/${selectTrip}`),
+        axios.get(`/trips/${selectTrip}/ideas`)
+      ]).then(([itinerary, ideasList]) => {
+        setTripData({
+          itinerary: itinerary.data,
+          ideasList: ideasList.data
+        });
       });
     }
   }, [selectTrip]);
@@ -123,7 +81,6 @@ function App() {
         order: index,
         trip_id
       };
-      // const formatted = format(day, 'MMM do (eee)');
       return dayObj;
     });
     console.log(daysArr);
@@ -141,13 +98,6 @@ function App() {
     axios.post(`/trips`, null, { params: obj }).then((res) => {
       const newtrip = res.data;
       const daysArr = numDaysHelper(start_date, end_date, newtrip.id);
-
-      // const URLs = daysArr.map((day) => {
-
-      //   return `/trips/${day.trip_id}/days`, null, { params: day }";
-      // });
-
-      // console.log(`URLs is ${URLs}`);
 
       const requests = daysArr.map((day) =>
         axios
@@ -186,7 +136,7 @@ function App() {
       <TripDetails
         tripList={tripList}
         selectTrip={selectTrip}
-        tripData={tripData}
+        tripData={tripData.itinerary}
         tripSelectHandler={tripSelectHandler}
       />
     );
@@ -219,7 +169,7 @@ function App() {
               path='/IdeasBoard'
               render={() => (
                 <IdeasBoard
-                  ideasList={ideasList}
+                  ideasList={tripData.ideasList}
                   addCustomIdea={addCustomIdea}
                   trip_id={selectTrip}
                 />

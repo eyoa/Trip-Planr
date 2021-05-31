@@ -1,7 +1,6 @@
 class ActivitiesController < ApplicationController
   def index
     @activities = Activity.all
-    render 'activities/index.json.jb'
-
+    render json: @activities.to_json
   end
 end
