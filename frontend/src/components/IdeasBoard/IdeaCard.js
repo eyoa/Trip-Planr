@@ -1,6 +1,5 @@
 import './IdeaCard.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Accordion, Button, Card } from 'react-bootstrap';
 
 export const IdeaCard = (props) => {
   const {

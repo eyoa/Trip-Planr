@@ -47,7 +47,7 @@ function App() {
       ]).then(([itinerary, ideasList]) => {
         setTripData({
           itinerary: itinerary.data,
-          ideasList: ideasList.data
+          ideasList: ideasHelper(ideasList.data)
         });
       });
     }
@@ -85,6 +85,22 @@ function App() {
     });
     console.log(daysArr);
     return daysArr;
+  };
+
+  const ideasHelper = (ideaArr) => {
+    console.log(`ideaArr check inside is ${ideaArr[0].activity_id}`);
+    const result = ideaArr.map((idea) => {
+      idea['activity'] = exploreList.find(
+        (actvity) => actvity.id === idea.activity_id
+      );
+      //mock vote number for now
+      idea.votes = 3;
+      console.log(`========= idea is ${idea}`);
+      return idea;
+    });
+
+    console.log(`========= ideas helper result is ${result[0]}`);
+    return result;
   };
 
   const addNewTrip = (start_date, end_date, name, user_id) => {
