@@ -12,6 +12,7 @@ import { Homepage } from './components/Homepage';
 import { Mapview } from './components/Mapview';
 import { IdeasBoard } from './components/IdeasBoard/IdeasBoard';
 import { TripList } from './components/TripList';
+import { eachDayOfInterval, format } from 'date-fns/esm';
 
 //Test Data
 
@@ -110,6 +111,19 @@ function App() {
     setTripOpen(!tripOpen);
   };
 
+  const numDaysHelper = (start_date, end_date) => {
+    const numDays = eachDayOfInterval({
+      start: start_date,
+      end: end_date
+    });
+
+    const daysArr = numDays.map((day) => {
+      const formatted = format(day, 'MMM do (eee)');
+      return formatted;
+    });
+    return daysArr;
+  };
+
   const addNewTrip = (start_date, end_date, name, user_id) => {
     const obj = {
       name,
@@ -119,7 +133,9 @@ function App() {
     };
 
     axios.post(`/trips`, null, { params: obj }).then((res) => {
-      setTripList([...tripList, res.data]);
+      const daysArr = numDaysHelper(start_date, end_date);
+      axios.post();
+      // setTripList([...tripList, res.data]);
     });
   };
 

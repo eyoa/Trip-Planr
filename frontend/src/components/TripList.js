@@ -5,7 +5,6 @@ import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './TripList.scss';
-import axios from 'axios';
 
 export const TripList = (props) => {
   // HardCode User_id
@@ -77,6 +76,7 @@ export const TripList = (props) => {
             onChange={(item) => setNewTripInfo([item.selection])}
             moveRangeOnFirstSelection={false}
             ranges={newTripInfo}
+            minDate={new Date()}
           />
         </Form.Group>
         <Button type='submit'>Submit</Button>
