@@ -29,7 +29,7 @@ class EntriesController < ApplicationController
   private
 
   def entries_params
-    params.require(:entry, :order, :activity_id, :day_id).permit(:start_time, :end_time)
+    params.require(:order, :activity_id, :day_id).permit(:entry, :start_time, :end_time)
   end
   
 end
