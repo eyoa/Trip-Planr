@@ -111,16 +111,22 @@ function App() {
     setTripOpen(!tripOpen);
   };
 
-  const numDaysHelper = (start_date, end_date) => {
+  const numDaysHelper = (start_date, end_date, trip_id) => {
     const numDays = eachDayOfInterval({
       start: start_date,
       end: end_date
     });
 
-    const daysArr = numDays.map((day) => {
-      const formatted = format(day, 'MMM do (eee)');
-      return formatted;
+    const daysArr = numDays.map((day, index) => {
+      const dayObj = {
+        name: format(day, 'MMM do (eee)'),
+        order: index,
+        trip_id
+      };
+      // const formatted = format(day, 'MMM do (eee)');
+      return dayObj;
     });
+    console.log(daysArr);
     return daysArr;
   };
 
@@ -133,9 +139,31 @@ function App() {
     };
 
     axios.post(`/trips`, null, { params: obj }).then((res) => {
-      const daysArr = numDaysHelper(start_date, end_date);
-      axios.post();
-      // setTripList([...tripList, res.data]);
+      const newtrip = res.data;
+      const daysArr = numDaysHelper(start_date, end_date, newtrip.id);
+
+      // const URLs = daysArr.map((day) => {
+
+      //   return `/trips/${day.trip_id}/days`, null, { params: day }";
+      // });
+
+      // console.log(`URLs is ${URLs}`);
+
+      const requests = daysArr.map((day) =>
+        axios
+          .post(`/trips/${day.trip_id}/days`, null, { params: day })
+          .catch((err) => console.log(err))
+      );
+
+      console.log(requests);
+
+      Promise.all([requests])
+        .then((res) => {
+          console.log(`Days added and ${res[0].data}`);
+          setTripList([...tripList, this.newTrip]);
+        })
+
+        .catch((errors) => console.log(errors));
     });
   };
 

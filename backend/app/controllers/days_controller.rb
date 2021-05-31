@@ -41,7 +41,7 @@ class DaysController < ApplicationController
   private
   
   def days_params
-    params.require(:day).permit(:trip_id, :order, :name, :id)
+    params.permit(:day, :trip_id, :order, :name, :id)
   end
 
 end
