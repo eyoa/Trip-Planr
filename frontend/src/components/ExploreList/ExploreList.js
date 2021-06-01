@@ -1,28 +1,32 @@
 import './ExploreList.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { ActivityCard } from '../ActivityCard';
+import { ActivityCard } from './ActivityCard';
 import { Row, Col } from 'react-bootstrap';
 
 export const ExploreList = (props) => {
-  const { activityData } = props;
+  const { activityData, suggestActivity, addEntryToTrip } = props;
 
   const exploreList = activityData
-    ? activityData.map((activityData, index) => {
+    ? activityData.map((activityData) => {
+        // console.log(`act id is ${activityData.id}`);
         return (
           <ActivityCard
-            key={index}
+            key={activityData.id}
+            id={activityData.id}
             name={activityData.name}
             description={activityData.description}
             img_url={activityData.img_url}
             rating={activityData.rating}
             category={activityData.category}
             url={activityData.url}
+            suggestActivity={suggestActivity}
+            addEntryToTrip={() => addEntryToTrip(activityData.id)}
           />
         );
       })
     : 'No matches';
 
-  console.log(exploreList);
+  // console.log(exploreList);
 
   return (
     <nav className='explore-drawer'>

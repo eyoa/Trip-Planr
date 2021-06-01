@@ -14,8 +14,8 @@ export const IdeaCard = (props) => {
   return (
     <>
       {name && description && (
-        <card
-          className='idea-card'
+        <div
+          className='card'
           style={{
             backgroundImage: `url(${img_url})`,
             backgroundSize: 'cover'
@@ -29,7 +29,7 @@ export const IdeaCard = (props) => {
             <button className='add-trip-btn'>Add to Trip</button>
           </div>
           <aside className='votes'>{votes}</aside>
-        </card>
+        </div>
       )}
     </>
   );

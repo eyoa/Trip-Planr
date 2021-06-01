@@ -9,6 +9,11 @@
   height: 160px;
 }
 
+.invisible-button {
+  border: transparent;
+  background-color: transparent;
+}
+
 aside.rating {
   position: absolute;
   top: 0;
@@ -29,6 +34,16 @@ aside.add {
   font-size: 1.5em;
   font-weight: bold;
   color: rgba(255, 255, 255, 0.603);
+}
+
+aside.suggest {
+  position: absolute;
+  top: 7.5rem;
+  right: 1;
+  padding: 0.3rem;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: aqua;
 }
 
 aside.add:hover,

@@ -4,7 +4,19 @@ import { Accordion, Button, Card } from 'react-bootstrap';
 import { PlusSquareFill } from 'react-bootstrap-icons';
 
 export const ActivityCard = (props) => {
-  const { key, name, description, img_url, rating, category, url } = props;
+  const {
+    id,
+    name,
+    description,
+    img_url,
+    rating,
+    category,
+    url,
+    suggestActivity,
+    addEntryToTrip
+  } = props;
+
+  // console.log(`id  is ${id}`);
   return (
     <>
       {name && description && (
@@ -18,8 +30,16 @@ export const ActivityCard = (props) => {
             />
             <Card.ImgOverlay>
               <aside className='rating'>{rating}</aside>
-              <aside className='add'>
+              <aside className='add' onClick={addEntryToTrip}>
                 <PlusSquareFill />
+              </aside>
+              <aside className='suggest'>
+                <PlusSquareFill
+                  value={id}
+                  onClick={(event) => {
+                    suggestActivity(event.target);
+                  }}
+                />
               </aside>
             </Card.ImgOverlay>
             <Card.Body>

@@ -20,6 +20,7 @@ function App() {
   const [tripList, setTripList] = useState([]);
   const [exploreList, setExploreList] = useState([]);
   const [selectTrip, setSelectTrip] = useState(null);
+  const [activeDay, setActiveDay] = useState(null);
   const [tripData, setTripData] = useState({
     itinerary: null,
     ideasList: null
@@ -61,14 +62,6 @@ function App() {
     console.log(newIdeaData);
   };
 
-  const exploreListToggleClickHandler = () => {
-    setExploreOpen(!exploreOpen);
-  };
-
-  const tripToggleClickHandler = () => {
-    setTripOpen(!tripOpen);
-  };
-
   const numDaysHelper = (start_date, end_date, trip_id) => {
     const numDays = eachDayOfInterval({
       start: start_date,
@@ -95,11 +88,9 @@ function App() {
       );
       //mock vote number for now
       idea.votes = 3;
-      console.log(`========= idea is ${idea}`);
       return idea;
     });
 
-    console.log(`========= ideas helper result is ${result[0]}`);
     return result;
   };
 
@@ -140,11 +131,48 @@ function App() {
     });
   };
 
+  const selectDay = (day_id) => {
+    setActiveDay(day_id);
+  };
+
+  const suggestActivity = () => {};
+
+  const addEntryToTrip = (activity_id) => {
+    const entryObj = {
+      activity_id,
+      //hard code info
+      order: 2
+    };
+    if (activity_id && selectTrip && activeDay) {
+      axios
+        .post(`/trips/${selectTrip}/days/${activeDay}/entries`, null, {
+          params: entryObj
+        })
+        .then((res) => {
+          console.log(res.data);
+        });
+    }
+  };
+
+  const exploreListToggleClickHandler = () => {
+    setExploreOpen(!exploreOpen);
+  };
+
+  const tripToggleClickHandler = () => {
+    setTripOpen(!tripOpen);
+  };
+
   let exploreDrawer;
   let tripDrawer;
 
   if (exploreOpen) {
-    exploreDrawer = <ExploreList activityData={exploreList} />;
+    exploreDrawer = (
+      <ExploreList
+        activityData={exploreList}
+        suggestActivity={suggestActivity}
+        addEntryToTrip={addEntryToTrip}
+      />
+    );
   }
 
   if (tripOpen) {
@@ -154,6 +182,7 @@ function App() {
         selectTrip={selectTrip}
         tripData={tripData.itinerary}
         tripSelectHandler={tripSelectHandler}
+        selectDay={selectDay}
       />
     );
   }

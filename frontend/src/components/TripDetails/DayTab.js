@@ -4,7 +4,7 @@ import { Tabs, Tab } from 'react-bootstrap';
 import { ItineraryCard } from './ItineraryCard.js';
 
 export const DayTab = (props) => {
-  const { days } = props;
+  const { days, selectDay } = props;
 
   console.log(days);
 
@@ -21,7 +21,7 @@ export const DayTab = (props) => {
   };
 
   const daysTabs = days ? (
-    days.map((day, index) => {
+    days.map((day) => {
       const entires = day.entries ? (
         sortByOrder(day.entries).map((entry) => {
           return (
@@ -41,7 +41,7 @@ export const DayTab = (props) => {
       );
 
       return (
-        <Tab eventKey={index + 1} title={day.name}>
+        <Tab eventKey={day.id} title={day.name}>
           <div>
             {day.name}
             {entires}
@@ -55,7 +55,13 @@ export const DayTab = (props) => {
 
   return (
     <div>
-      <Tabs defaultActiveKey='Day 1' id='day-select-tabs'>
+      <Tabs
+        defaultActiveKey='1'
+        id='day-select-tabs'
+        onSelect={(eventKey) => {
+          selectDay(eventKey);
+        }}
+      >
         {daysTabs}
       </Tabs>
     </div>

@@ -1,7 +1,14 @@
 class EntriesController < ApplicationController
+  before_action :set_trip
+  before_action :get_day
+
+
+  def new
+    @entries = @day.entries.build
+  end
 
   def create
-    @entry = Entry.new(entries_params)
+    @entry = @day.entries.build(entries_params)
     if @entry.save
       render json: @entry, status: :created
     else
@@ -28,8 +35,22 @@ class EntriesController < ApplicationController
   
   private
 
+  def set_trip
+    @trip = Trip.find params[:trip_id]
+  end
+
+
+  def get_day
+    @day = @trip.days.find params[:day_id]
+  end
+
+
+  # def day_params
+  #   params.permit(:day, :trip_id, :order, :name, :id)
+  # end
+
   def entries_params
-    params.require(:order, :activity_id, :day_id).permit(:entry, :start_time, :end_time)
+    params.permit( :day_id, :entry, :start_time, :end_time, :order, :activity_id)
   end
   
 end

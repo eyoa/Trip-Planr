@@ -7,7 +7,7 @@ import { DayTab } from './DayTab';
 import { Fragment } from 'react';
 
 export const TripDetails = (props) => {
-  const { tripList, tripSelectHandler, tripData } = props;
+  const { tripList, tripSelectHandler, tripData, selectDay } = props;
 
   const trips = tripList
     ? tripList.map((tripList) => {
@@ -32,7 +32,11 @@ export const TripDetails = (props) => {
         </Dropdown>
       </Row>
       <Row className='justify-content=center trip-details-container'>
-        {tripData ? <DayTab days={tripData.days} /> : <></>}
+        {tripData ? (
+          <DayTab days={tripData.days} selectDay={selectDay} />
+        ) : (
+          <></>
+        )}
       </Row>
     </nav>
   );
