@@ -186,18 +186,15 @@ function App() {
   };
 
   const addVotes = (idea_id, current_votes, index) => {
-    console.log(`idea id is  ${idea_id}`);
     if (!current_votes.includes(user_id)) {
       axios
         .post(`/trips/${selectTrip}/ideas/${idea_id}/votes`, null, {
           params: { user_id }
         })
         .then((res) => {
-          console.log(res.data);
           const newVotes = [...current_votes, res.data];
           const newIdeaList = [...tripData.ideasList];
           newIdeaList[index].votes = newVotes;
-          console.log(newIdeaList);
           setTripData({ ...tripData, ideasList: newIdeaList });
         })
         .catch((err) => console.log(err));
@@ -214,13 +211,13 @@ function App() {
     axios
       .delete(`/trips/${selectTrip}/ideas/${idea_id}/votes/${id}`)
       .then((res) => {
-        console.log(res.data);
-        const newVotes = [...current_votes];
-        console.log(newVotes);
-        // const newIdeaList = [...tripData.ideasList];
-        // newIdeaList[index].votes = newVotes;
-        // console.log(newIdeaList);
-        // setTripData({ ...tripData, ideasList: newIdeaList });
+        const newVotes = current_votes.filter((ele) => {
+          return ele.id !== res.data.id;
+        });
+
+        const newIdeaList = [...tripData.ideasList];
+        newIdeaList[idea_index].votes = newVotes;
+        setTripData({ ...tripData, ideasList: newIdeaList });
       })
       .catch((err) => console.log(err));
   };
