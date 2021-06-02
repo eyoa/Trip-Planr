@@ -12,16 +12,17 @@ class EntriesController < ApplicationController
   end
 
   def update
-    @entry = Entry.find params[:id]
-    if @entry.update(entries_params)
-      render json: @entry.to_json, status: :ok
-    else
-      render json: { status: 'error', code: 3000, message: 'Could not update entry.' }
-    end
+    # @entry = Entry.find params[:id]
+    # if @entry.update(entries_params)
+    #   render json: @entry.to_json, status: :ok
+    # else
+    #   render json: { status: 'error', code: 3000, message: 'Could not update entry.' }
+    # end
   end
 
   def destroy
-    if Entry.find params[:id].destroy
+    @entry = @day.entries.find params [:id]
+    if @entry.destroy
       render json: {}, status: :ok
     else
       render json: { status: 'error', code: 3000, message: 'Could not remove entry.' }

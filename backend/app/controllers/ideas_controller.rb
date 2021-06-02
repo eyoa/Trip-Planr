@@ -19,7 +19,8 @@ class IdeasController < ApplicationController
 
   # remove idea
   def destroy
-    if Idea.find params[:id].destroy
+    @idea = @trip.ideas.find params[:id]
+    if @idea.destroy
       render json: {}, status: :ok
     else
       render json: { status: 'error', code: 3000, message: 'Could not remove Idea.' }
