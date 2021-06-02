@@ -14,7 +14,7 @@ before_action :set_idea
   
   # /trips/:trip_id/ideas/:idea_id/votes(.:format)
   def destroy
-    @vote = @idea.votes.find params[:vote_id]
+    @vote = @idea.votes.find params[:id]
     if @vote.destroy
       render json: @vote, status: :ok
     else

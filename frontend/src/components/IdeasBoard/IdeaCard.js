@@ -34,7 +34,7 @@ export const IdeaCard = (props) => {
           </div>
           <aside className='show-votes'>{votes.length}</aside>
 
-          {votes.filter(function (vote) {
+          {votes.filter((vote) => {
             return vote.user_id === user_id;
           }).length > 0 ? (
             <aside className='votes' onClick={removeVotes}>

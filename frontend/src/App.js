@@ -204,25 +204,25 @@ function App() {
     }
   };
 
-  const removeVotes = (idea_id, current_votes, index) => {
+  const removeVotes = (idea_id, current_votes, idea_index) => {
     console.log(`idea id is  ${idea_id}`);
 
-    const id = current_votes;
-    console.log(id);
-    // axios
-    //   .delete(`/trips/${selectTrip}/ideas/${idea_id}/votes/${id}`, null, {
-    //     params: { user_id }
-    //   })
-    //   .then((res) => {
-    //     console.log(res.data);
-    //     const newVotes = [...current_votes];
-    //     console.log(newVotes);
-    //     // const newIdeaList = [...tripData.ideasList];
-    //     // newIdeaList[index].votes = newVotes;
-    //     // console.log(newIdeaList);
-    //     // setTripData({ ...tripData, ideasList: newIdeaList });
-    //   })
-    //   .catch((err) => console.log(err));
+    const voteIndex = current_votes.findIndex((vote) => {
+      return vote.user_id === user_id;
+    });
+    const id = current_votes[voteIndex].id;
+    axios
+      .delete(`/trips/${selectTrip}/ideas/${idea_id}/votes/${id}`)
+      .then((res) => {
+        console.log(res.data);
+        const newVotes = [...current_votes];
+        console.log(newVotes);
+        // const newIdeaList = [...tripData.ideasList];
+        // newIdeaList[index].votes = newVotes;
+        // console.log(newIdeaList);
+        // setTripData({ ...tripData, ideasList: newIdeaList });
+      })
+      .catch((err) => console.log(err));
   };
 
   const exploreListToggleClickHandler = () => {
