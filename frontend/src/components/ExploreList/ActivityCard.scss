@@ -30,6 +30,15 @@
   overflow-y: scroll;
 }
 
+.description::-webkit-scrollbar {
+  display: block;
+  width: 10px;
+}
+.description::-webkit-scrollbar-thumb {
+  background: linear-gradient(#637a8a, white);
+  border-radius: 5px;
+}
+
 .invisible-button {
   border: transparent;
   background-color: transparent;
