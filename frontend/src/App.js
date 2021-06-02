@@ -24,6 +24,10 @@ function App() {
     day_id: 1,
     dayOrder: 1
   });
+
+  //Mock user_id
+  const user_id = 1;
+
   const [tripData, setTripData] = useState({
     itinerary: { days: [] },
     ideasList: null
@@ -181,18 +185,24 @@ function App() {
     }
   };
 
-  const addVote = (idea_id) => {
+  const addVotes = (idea_id, current_votes) => {
     //Need trip_id and idea_id
     console.log(`idea id is  ${idea_id}`);
-    // axios
-    //   .post(`/trips/${selectTrip}/ideas`, null, { params: { activity_id } })
-    //   .then((res) => {
-    //     const newIdea = ideasHelper([res.data]);
-    //     const newIdeasList = [...tripData.ideasList, ...newIdea];
-    //     setTripData({ ...tripData, ideasList: newIdeasList });
-    //     // persistance update state
-    //   })
-    //   .catch((err) => console.log(err));
+    if (!current_votes.includes(user_id)) {
+      axios
+        .post(`/trips/${selectTrip}/ideas`, null, {
+          params: { idea_id, user_id }
+        })
+        .then((res) => {
+          console.log(res.data);
+          // const newVotes = [...current_votes, res.data];
+          // const newIdea = ideasHelper([res.data]);
+          // const newIdeasList = [...tripData.ideasList, ...newIdea];
+          // setTripData({ ...tripData, ideasList: newIdeasList });
+          // // persistance update state
+        })
+        .catch((err) => console.log(err));
+    }
   };
 
   const exploreListToggleClickHandler = () => {
@@ -287,6 +297,7 @@ function App() {
                   ideasList={tripData.ideasList}
                   addCustomIdea={addCustomIdea}
                   trip_id={selectTrip}
+                  addVotes={addVotes}
                 />
               )}
             ></Route>

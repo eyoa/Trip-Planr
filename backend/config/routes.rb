@@ -5,10 +5,10 @@ Rails.application.routes.draw do
     resources :days, only: [:create, :update, :destroy] do
       resources :entries, except: [:index, :show]
     end
-    resources :collaborators, only: [:create, :destroy]
     resources :ideas, only: [:index, :create, :destroy] do
       resources :votes, only: [:create, :destroy]
     end
+    resources :collaborators, only: [:create, :destroy]
   end
   
 

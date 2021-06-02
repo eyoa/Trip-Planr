@@ -90,17 +90,8 @@ ActiveRecord::Schema.define(version: 2021_06_02_133806) do
   create_table "votes", force: :cascade do |t|
     t.bigint "idea_id", null: false
     t.bigint "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
     t.index ["idea_id"], name: "index_votes_on_idea_id"
     t.index ["user_id"], name: "index_votes_on_user_id"
   end
 
-  add_foreign_key "collaborators", "trips"
-  add_foreign_key "collaborators", "users"
-  add_foreign_key "days", "trips"
-  add_foreign_key "entries", "activities"
-  add_foreign_key "entries", "days"
-  add_foreign_key "votes", "ideas"
-  add_foreign_key "votes", "users"
 end
