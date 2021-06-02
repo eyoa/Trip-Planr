@@ -98,10 +98,6 @@ $main-blue-rgb-015: rgba(44, 149, 214, 0.1) !default;
     flex-direction: row;
   }
 
-  &:nth-child(2n + 0) {
-    flex-direction: row-reverse;
-  }
-
   &:nth-child(2n + 1) .postcard__text::before {
     left: -15px !important;
     transform: rotate(4deg);
