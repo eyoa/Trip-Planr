@@ -32,8 +32,11 @@ before_action :set_idea
     @idea = @trip.ideas.find params[:idea_id]
   end
 
+  def other_params
+    params.permit(:trip_id, :idea_id)
+  end
   def vote_params
-    params.permit(:trip_id, :idea_id, :user_id, :vote)
+    params.permit(:user_id, :vote)
   end
 
 end

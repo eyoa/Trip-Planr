@@ -185,8 +185,7 @@ function App() {
     }
   };
 
-  const addVotes = (idea_id, current_votes) => {
-    //Need trip_id and idea_id
+  const addVotes = (idea_id, current_votes, index) => {
     console.log(`idea id is  ${idea_id}`);
     if (!current_votes.includes(user_id)) {
       axios
@@ -195,11 +194,11 @@ function App() {
         })
         .then((res) => {
           console.log(res.data);
-          // const newVotes = [...current_votes, res.data];
-          // const newIdea = ideasHelper([res.data]);
-          // const newIdeasList = [...tripData.ideasList, ...newIdea];
-          // setTripData({ ...tripData, ideasList: newIdeasList });
-          // // persistance update state
+          const newVotes = [...current_votes, res.data];
+          const newIdeaList = [...tripData.ideasList];
+          newIdeaList[index].votes = newVotes;
+          console.log(newIdeaList);
+          setTripData({ ...tripData, ideasList: newIdeaList });
         })
         .catch((err) => console.log(err));
     }

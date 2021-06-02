@@ -19,7 +19,7 @@ export const IdeasBoard = (props) => {
             description={idea.activity.description}
             url={idea.activity.url}
             addVotes={() => {
-              addVotes(idea.id, idea.votes);
+              addVotes(idea.id, idea.votes, index);
             }}
           />
         );
