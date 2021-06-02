@@ -1,12 +1,33 @@
 .activity-card {
-  width: 13rem;
-  border: 'secondary';
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  margin: 10px;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  margin: 0.3rem;
+  max-width: 250px;
+  padding: 1rem;
+  text-align: center;
+  border-radius: 10px;
+  color: whitesmoke;
+  font-family: var(--font-sans);
+  background-color: whitesmoke;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.1),
+    0 4px 4px rgba(0, 0, 0, 0.1), 0 8px 8px rgba(0, 0, 0, 0.1),
+    0 16px 16px rgba(0, 0, 0, 0.1);
 }
 
-.card-img {
-  height: 160px;
+.title {
+  justify-self: flex-start;
+  font-size: 1.4rem;
+  font-weight: bold;
+  line-height: 1.2;
+}
+
+.description {
+  font-size: 1rem;
+  font-style: italic;
+  line-height: 1.35;
+  overflow-y: scroll;
 }
 
 .invisible-button {
@@ -29,7 +50,7 @@ aside.rating {
 aside.add {
   position: absolute;
   top: 7.5rem;
-  right: 0;
+  left: 0;
   padding: 0.3rem;
   font-size: 1.5em;
   font-weight: bold;
@@ -39,7 +60,7 @@ aside.add {
 aside.suggest {
   position: absolute;
   top: 7.5rem;
-  right: 1;
+  right: 0;
   padding: 0.3rem;
   font-size: 1.5em;
   font-weight: bold;
