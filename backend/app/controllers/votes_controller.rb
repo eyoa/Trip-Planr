@@ -1,7 +1,11 @@
 class VotesController < ApplicationController
-  # remove a vote
+before_action :set_trip
+before_action :set_idea 
+
+
+  # /trips/:trip_id/ideas/:idea_id/votes(.:format)
   def create
-    @vote = Vote.new(vote_params)
+    @vote = @idea.votes.build(vote_params)
     if @vote.save
       render json: @tvote.to_json, status: :created
     else
@@ -9,17 +13,27 @@ class VotesController < ApplicationController
     end
   end
   
-  # add a vote
+  # /trips/:trip_id/ideas/:idea_id/votes(.:format)
   def destroy
-    if Vote.find params[:id].destroy
+    @vote = @idea.votes
+    if @vote.destroy
       render json: {}, status: :ok
     else
       render json: { status: 'error', code: 3000, message: 'Could not remove vote.' }
     end
   end
 
+  private
+  def set_trip
+    @trip = Trip.find params[:trip_id]
+  end
+
+  def set_idea
+    @idea = @trip.ideas.find params[:idea_id]
+  end
+
   def vote_params
-    params.require(:vote, :idea_id, :user_id)
+    params.permit(:vote, :idea_id, :user_id)
   end
 
 end
