@@ -2,11 +2,6 @@ class EntriesController < ApplicationController
   before_action :set_trip
   before_action :get_day
 
-
-  def new
-    @entries = @day.entries.build
-  end
-
   def create
     @entry = @day.entries.build(entries_params)
     if @entry.save
@@ -43,11 +38,6 @@ class EntriesController < ApplicationController
   def get_day
     @day = @trip.days.find params[:day_id]
   end
-
-
-  # def day_params
-  #   params.permit(:day, :trip_id, :order, :name, :id)
-  # end
 
   def entries_params
     params.permit( :day_id, :entry, :start_time, :end_time, :order, :activity_id)

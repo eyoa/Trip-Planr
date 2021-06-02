@@ -127,8 +127,16 @@ function App() {
 
   const suggestActivity = (activity_id) => {
     console.log(`suggest activity ${activity_id}`);
-    // send to axios
-    // add to ideasList
+    axios
+      .post(`/trips/${selectTrip}/ideas`, null, { params: { activity_id } })
+      .then((res) => {
+        const newIdea = ideasHelper([res.data]);
+        const newIdeasList = [...tripData.ideasList, ...newIdea];
+
+        setTripData({ ...tripData, ideasList: newIdeasList });
+        // persistance update state
+      })
+      .catch((err) => console.log(err));
   };
 
   const addEntryToTrip = (activity_id) => {

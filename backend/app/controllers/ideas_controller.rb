@@ -1,5 +1,5 @@
 class IdeasController < ApplicationController
-  before_action:set_trip
+  before_action :set_trip
 
   # show ideas for trip with votes....
   def index
@@ -9,14 +9,9 @@ class IdeasController < ApplicationController
 
   # add new idea
   def create
-    # activity = Activity.find params[:activity_id]
-    # if activity.not_exists?
-    #   @activity = Activity.new(er...params???)
-    # end
-
-    new_idea = Idea.new(ideas_params)
-    if new_idea.save
-      render json: new_idea, status: :created
+    @idea = @trip.ideas.build(ideas_params)
+    if @idea.save
+      render json: @idea, status: :created
     else
       render json: { status: 'error', code: 3000, message: 'idea not created.' }
     end
