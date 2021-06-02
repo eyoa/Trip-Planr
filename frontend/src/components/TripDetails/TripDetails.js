@@ -1,16 +1,14 @@
 import './TripDetails.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import axios from 'axios';
-import { useEffect, useState } from 'react';
 import { Row, Dropdown } from 'react-bootstrap';
 import { DayTab } from './DayTab';
 import { Fragment } from 'react';
 
 export const TripDetails = (props) => {
-  const { tripList, tripSelectHandler, tripData, selectDay } = props;
+  const { tripList, tripSelectHandler, tripData, selectDay, activeDay } = props;
 
   const trips = tripList
-    ? tripList.map((tripList) => {
+    ? tripList.map((tripList, index) => {
         return (
           <Fragment>
             <Dropdown.Item eventKey={tripList.id}>
@@ -33,7 +31,11 @@ export const TripDetails = (props) => {
       </Row>
       <Row className='justify-content=center trip-details-container'>
         {tripData ? (
-          <DayTab days={tripData.days} selectDay={selectDay} />
+          <DayTab
+            days={tripData.days}
+            selectDay={selectDay}
+            activeDay={activeDay}
+          />
         ) : (
           <></>
         )}

@@ -4,17 +4,13 @@ import { Tabs, Tab } from 'react-bootstrap';
 import { ItineraryCard } from './ItineraryCard.js';
 
 export const DayTab = (props) => {
-  const { days, selectDay } = props;
+  const { days, selectDay, activeDay } = props;
 
-  console.log(days);
+  // console.log('re-rendering days?');
 
   const sortByOrder = (array) => {
-    console.log(`sort by order received ${array}`);
     const result = [];
     for (const item of array) {
-      console.log(`item is ${item.activities.name}`);
-      console.log(`item order is ${item.order}`);
-
       result[item.order - 1] = item;
     }
     return result;
@@ -27,6 +23,7 @@ export const DayTab = (props) => {
           return (
             <div>
               <ItineraryCard
+                key={entry.id}
                 name={entry.activities.name}
                 start_time={entry.start_time}
                 end_time={entry.end_time}
@@ -39,6 +36,8 @@ export const DayTab = (props) => {
       ) : (
         <div>No activities</div>
       );
+
+      // console.log(`day.id is ${day.id}`);
 
       return (
         <Tab eventKey={day.id} title={day.name}>
@@ -53,14 +52,14 @@ export const DayTab = (props) => {
     <></>
   );
 
+  // console.log(`days[0].id is ${days[0].id}`);
   return (
     <div>
       <Tabs
-        defaultActiveKey='1'
+        activeKey={activeDay.day_id}
+        // defaultActiveKey={days[0].id}
         id='day-select-tabs'
-        onSelect={(eventKey) => {
-          selectDay(eventKey);
-        }}
+        onSelect={(eventKey) => selectDay(eventKey)}
       >
         {daysTabs}
       </Tabs>

@@ -20,39 +20,14 @@ function App() {
   const [tripList, setTripList] = useState([]);
   const [exploreList, setExploreList] = useState([]);
   const [selectTrip, setSelectTrip] = useState(null);
-  const [activeDay, setActiveDay] = useState(null);
+  const [activeDay, setActiveDay] = useState({
+    day_id: 1,
+    dayOrder: 1
+  });
   const [tripData, setTripData] = useState({
     itinerary: null,
     ideasList: null
   });
-
-  // Initial data/state
-  useEffect(() => {
-    axios.get(`/trips`).then((res) => {
-      setTripList(res.data);
-    });
-  }, []);
-
-  useEffect(() => {
-    axios.get(`/activities`).then((res) => {
-      setExploreList(res.data);
-    });
-  }, []);
-
-  //update when selecting trip
-  useEffect(() => {
-    if (selectTrip !== null) {
-      Promise.all([
-        axios.get(`/trips/${selectTrip}`),
-        axios.get(`/trips/${selectTrip}/ideas`)
-      ]).then(([itinerary, ideasList]) => {
-        setTripData({
-          itinerary: itinerary.data,
-          ideasList: ideasHelper(ideasList.data)
-        });
-      });
-    }
-  }, [selectTrip]);
 
   const tripSelectHandler = (eventKey) => {
     setSelectTrip(eventKey);
@@ -81,7 +56,6 @@ function App() {
   };
 
   const ideasHelper = (ideaArr) => {
-    console.log(`ideaArr check inside is ${ideaArr[0].activity_id}`);
     const result = ideaArr.map((idea) => {
       idea['activity'] = exploreList.find(
         (actvity) => actvity.id === idea.activity_id
@@ -91,6 +65,12 @@ function App() {
       return idea;
     });
 
+    return result;
+  };
+
+  // returns activity object with given activity_id
+  const matchActivity = (activity_id) => {
+    const result = exploreList.find((actvity) => actvity.id === activity_id);
     return result;
   };
 
@@ -132,28 +112,58 @@ function App() {
   };
 
   const selectDay = (day_id) => {
-    setActiveDay(day_id);
+    const currentDayObj = tripData.itinerary.days.find(
+      (dayObj) => (dayObj.id = day_id)
+    );
+    const dayOrder = currentDayObj.order;
+    setActiveDay({ day_id, dayOrder });
   };
 
   const suggestActivity = () => {};
 
   const addEntryToTrip = (activity_id) => {
+    const newOrder = tripData.itinerary.days[activeDay.dayOrder].entries.length;
+
+    console.log(`new order is ${newOrder}`);
+
     const entryObj = {
       activity_id,
-      //hard code info
-      order: 2
+      order: newOrder
     };
+    let daysIndex = activeDay.dayOrder - 1;
     if (activity_id && selectTrip && activeDay) {
       axios
-        .post(`/trips/${selectTrip}/days/${activeDay}/entries`, null, {
+        .post(`/trips/${selectTrip}/days/${activeDay.day_id}/entries`, null, {
           params: entryObj
         })
         .then((res) => {
+          console.log(`return from API`);
           console.log(res.data);
+          console.log(`days index is ${daysIndex}`);
+          console.log('before =======================');
+          console.log(tripData.itinerary);
+          const activities = matchActivity(res.data.activity_id);
+          const newEntryObj = [{ ...res.data, activities }];
+
+          console.log(tripData.itinerary.days[daysIndex].entries);
+          const EntriesArr = [
+            ...tripData.itinerary.days[daysIndex].entries,
+            ...newEntryObj
+          ];
+
+          console.log('EntriesArr After');
+          console.log(EntriesArr);
+
+          const itinerary = { ...tripData.itinerary };
+          itinerary.days[daysIndex].entries = EntriesArr;
+          console.log('after');
+          console.log(itinerary);
+          setTripData({ ...tripData, itinerary });
         });
     }
   };
 
+  console.log(tripData);
   const exploreListToggleClickHandler = () => {
     setExploreOpen(!exploreOpen);
   };
@@ -183,9 +193,38 @@ function App() {
         tripData={tripData.itinerary}
         tripSelectHandler={tripSelectHandler}
         selectDay={selectDay}
+        activeDay={activeDay}
       />
     );
   }
+
+  // Initial data/state
+  useEffect(() => {
+    axios.get(`/trips`).then((res) => {
+      setTripList(res.data);
+    });
+  }, []);
+
+  useEffect(() => {
+    axios.get(`/activities`).then((res) => {
+      setExploreList(res.data);
+    });
+  }, []);
+
+  //update when selecting trip
+  useEffect(() => {
+    if (selectTrip !== null) {
+      Promise.all([
+        axios.get(`/trips/${selectTrip}`),
+        axios.get(`/trips/${selectTrip}/ideas`)
+      ]).then(([itinerary, ideasList]) => {
+        setTripData({
+          itinerary: itinerary.data,
+          ideasList: ideasHelper(ideasList.data)
+        });
+      });
+    }
+  }, [selectTrip]);
 
   return (
     <main className='app'>

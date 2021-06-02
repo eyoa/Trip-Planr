@@ -1,6 +1,5 @@
 import './Homepage.scss';
 import bgImg from './images/landingBg.jpg';
-import { Fragment } from 'react';
 import { FormControl, Container, Row, Col, InputGroup } from 'react-bootstrap';
 import { Search as SearchIcon } from 'react-bootstrap-icons';
 
