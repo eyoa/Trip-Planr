@@ -66,7 +66,7 @@ function App() {
         (actvity) => actvity.id === idea.activity_id
       );
       //mock vote number for now
-      idea.votes = 3;
+      // idea.votes = 3;
       return idea;
     });
 
@@ -179,6 +179,20 @@ function App() {
           setTripData({ ...tripData, itinerary });
         });
     }
+  };
+
+  const addVote = (idea_id) => {
+    //Need trip_id and idea_id
+    console.log(`idea id is  ${idea_id}`);
+    // axios
+    //   .post(`/trips/${selectTrip}/ideas`, null, { params: { activity_id } })
+    //   .then((res) => {
+    //     const newIdea = ideasHelper([res.data]);
+    //     const newIdeasList = [...tripData.ideasList, ...newIdea];
+    //     setTripData({ ...tripData, ideasList: newIdeasList });
+    //     // persistance update state
+    //   })
+    //   .catch((err) => console.log(err));
   };
 
   const exploreListToggleClickHandler = () => {

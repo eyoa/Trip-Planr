@@ -28,7 +28,8 @@ export const IdeaCard = (props) => {
             </p>
             <button className='add-trip-btn'>Add to Trip</button>
           </div>
-          <aside className='votes'>{votes}</aside>
+          <aside className='show-votes'>{votes.length}</aside>
+          <aside className='votes'>+</aside>
         </div>
       )}
     </>

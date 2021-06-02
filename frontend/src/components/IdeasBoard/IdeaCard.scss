@@ -76,6 +76,17 @@ $bp-lg: 800px;
   }
 }
 
+aside.show-votes {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 10px;
+  background-color: transparent;
+  font-size: 1em;
+  font-weight: bold;
+  color: #eee;
+}
+
 aside.votes {
   position: absolute;
   top: 0;
