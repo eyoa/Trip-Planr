@@ -5,12 +5,20 @@ import { Container, Row, Col, Button } from 'react-bootstrap';
 import { CustomIdeaForm } from './CustomIdeaForm';
 
 export const IdeasBoard = (props) => {
-  const { ideasList, trip_id, addCustomIdea, addVotes } = props;
+  const {
+    ideasList,
+    trip_id,
+    addCustomIdea,
+    addVotes,
+    removeVotes,
+    user_id
+  } = props;
 
   const ideas = ideasList
     ? ideasList.map((idea, index) => {
         return (
           <IdeaCard
+            user_id={user_id}
             votes={idea.votes}
             name={idea.activity.name}
             img_url={idea.activity.img_url}
@@ -20,6 +28,9 @@ export const IdeasBoard = (props) => {
             url={idea.activity.url}
             addVotes={() => {
               addVotes(idea.id, idea.votes, index);
+            }}
+            removeVotes={() => {
+              removeVotes(idea.id, idea.votes, index);
             }}
           />
         );

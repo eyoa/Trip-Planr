@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 export const IdeaCard = (props) => {
   const {
+    user_id,
     name,
     img_url,
     start_time,
@@ -10,8 +11,10 @@ export const IdeaCard = (props) => {
     url,
     description,
     votes,
-    addVotes
+    addVotes,
+    removeVotes
   } = props;
+
   return (
     <>
       {name && description && (
@@ -30,9 +33,18 @@ export const IdeaCard = (props) => {
             <button className='add-trip-btn'>Add to Trip</button>
           </div>
           <aside className='show-votes'>{votes.length}</aside>
-          <aside className='votes' onClick={addVotes}>
-            +
-          </aside>
+
+          {votes.filter(function (vote) {
+            return vote.user_id === user_id;
+          }).length > 0 ? (
+            <aside className='votes' onClick={removeVotes}>
+              -
+            </aside>
+          ) : (
+            <aside className='votes' onClick={addVotes}>
+              +
+            </aside>
+          )}
         </div>
       )}
     </>
