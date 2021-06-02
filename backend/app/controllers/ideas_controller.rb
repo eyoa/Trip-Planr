@@ -4,7 +4,8 @@ class IdeasController < ApplicationController
   # show ideas for trip with votes....
   def index
     @ideas = @trip.ideas.all
-    render json: @ideas.to_json
+    # @votes = @ideas.votes.all
+      render :json => @ideas.to_json(:include => [:votes])
   end
 
   # add new idea
