@@ -190,8 +190,8 @@ function App() {
     console.log(`idea id is  ${idea_id}`);
     if (!current_votes.includes(user_id)) {
       axios
-        .post(`/trips/${selectTrip}/ideas`, null, {
-          params: { idea_id, user_id }
+        .post(`/trips/${selectTrip}/ideas/${idea_id}/votes`, null, {
+          params: { user_id }
         })
         .then((res) => {
           console.log(res.data);
