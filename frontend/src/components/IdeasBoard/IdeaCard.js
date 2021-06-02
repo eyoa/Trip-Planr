@@ -32,17 +32,17 @@ export const IdeaCard = (props) => {
             </p>
             <button className='add-trip-btn'>Add to Trip</button>
           </div>
-          <aside className='show-votes'>{votes.length}</aside>
+          <aside className='show-votes'>{votes ? votes.length : 0}</aside>
 
           {votes.filter((vote) => {
             return vote.user_id === user_id;
           }).length > 0 ? (
             <aside className='votes' onClick={removeVotes}>
-              -
+              unvote
             </aside>
           ) : (
             <aside className='votes' onClick={addVotes}>
-              +
+              vote
             </aside>
           )}
         </div>

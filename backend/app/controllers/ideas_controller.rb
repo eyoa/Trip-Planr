@@ -4,7 +4,6 @@ class IdeasController < ApplicationController
   # show ideas for trip with votes....
   def index
     @ideas = @trip.ideas.all
-    # @votes = @ideas.votes.all
       render :json => @ideas.to_json(:include => [:votes])
   end
 
@@ -12,7 +11,7 @@ class IdeasController < ApplicationController
   def create
     @idea = @trip.ideas.build(ideas_params)
     if @idea.save
-      render json: @idea, status: :created
+      render json: @idea.to_json(:include => [:votes]), status: :created
     else
       render json: { status: 'error', code: 3000, message: 'idea not created.' }
     end

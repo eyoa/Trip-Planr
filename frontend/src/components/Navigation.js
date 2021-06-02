@@ -4,7 +4,9 @@ import { Link } from 'react-router-dom';
 export const Navigation = () => {
   return (
     <Navbar fixed='top' bg='light' expand='lg' className='flexColumn'>
-      <Navbar.Brand>ProjectName</Navbar.Brand>
+      <Navbar.Brand>
+        <b>Trip Planr</b>
+      </Navbar.Brand>
       <Navbar.Toggle aria-controls='basic-navbar-nav' />
       <Navbar.Collapse id='basic=navbar-nav'>
         <Nav className='mrAuto'>

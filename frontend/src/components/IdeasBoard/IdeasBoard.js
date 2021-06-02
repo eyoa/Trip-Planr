@@ -47,12 +47,16 @@ export const IdeasBoard = (props) => {
             <h1>Ideas Board</h1>
           </Col>
         </Row>
-        <Row className='justify-content-end'>
-          <Button>Add Custom Idea</Button>
+        {/* hide temp form */}
+        {/* <Row className='justify-content-end'>
+          <Button onClick={() => {}}>Add Custom Idea</Button>
         </Row>
         <Row className='justify-content-md-center'>
-          <CustomIdeaForm addCustomIdea={addCustomIdea} />
-        </Row>
+          <CustomIdeaForm
+            className='custom-idea-form'
+            addCustomIdea={addCustomIdea}
+          />
+        </Row> */}
         <Row className='justify-content-md-center'>
           <Col className='ideas-container'>{ideas}</Col>
         </Row>

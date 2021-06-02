@@ -3,11 +3,6 @@
 $bp-md: 600px;
 $bp-lg: 800px;
 
-:root {
-  --font-sans: 'Rubik', sans-serif;
-  --font-serif: 'Cardo', serif;
-}
-
 * {
   box-sizing: border-box;
 }
@@ -20,6 +15,7 @@ $bp-lg: 800px;
   max-width: 250px;
   padding: 1rem;
   text-align: center;
+  border-radius: 10px;
   color: whitesmoke;
   font-family: var(--font-sans);
   background-color: whitesmoke;
