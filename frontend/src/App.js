@@ -25,7 +25,7 @@ function App() {
     dayOrder: 1
   });
   const [tripData, setTripData] = useState({
-    itinerary: null,
+    itinerary: { days: [] },
     ideasList: null
   });
 
@@ -56,6 +56,11 @@ function App() {
   };
 
   const ideasHelper = (ideaArr) => {
+    console.log(ideaArr);
+    if (ideaArr === []) {
+      return [];
+    }
+
     const result = ideaArr.map((idea) => {
       idea['activity'] = exploreList.find(
         (actvity) => actvity.id === idea.activity_id
@@ -65,6 +70,7 @@ function App() {
       return idea;
     });
 
+    console.log(result);
     return result;
   };
 
@@ -119,7 +125,11 @@ function App() {
     setActiveDay({ day_id, dayOrder });
   };
 
-  const suggestActivity = () => {};
+  const suggestActivity = (activity_id) => {
+    console.log(`suggest activity ${activity_id}`);
+    // send to axios
+    // add to ideasList
+  };
 
   const addEntryToTrip = (activity_id) => {
     const newOrder = tripData.itinerary.days[activeDay.dayOrder].entries.length;
@@ -163,7 +173,6 @@ function App() {
     }
   };
 
-  console.log(tripData);
   const exploreListToggleClickHandler = () => {
     setExploreOpen(!exploreOpen);
   };

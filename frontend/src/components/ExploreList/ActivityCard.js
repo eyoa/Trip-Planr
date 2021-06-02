@@ -34,12 +34,7 @@ export const ActivityCard = (props) => {
                 <PlusSquareFill />
               </aside>
               <aside className='suggest'>
-                <PlusSquareFill
-                  value={id}
-                  onClick={(event) => {
-                    suggestActivity(event.target);
-                  }}
-                />
+                <PlusSquareFill onClick={suggestActivity} />
               </aside>
             </Card.ImgOverlay>
             <Card.Body>

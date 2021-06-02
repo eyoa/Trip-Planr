@@ -1,9 +1,10 @@
 class IdeasController < ApplicationController
-  
+  before_action:set_trip
+
   # show ideas for trip with votes....
   def index
-    ideas = Idea.all
-    render json: ideas.to_json
+    @ideas = @trip.ideas.all
+    render json: @ideas.to_json
   end
 
   # add new idea
@@ -32,7 +33,11 @@ class IdeasController < ApplicationController
 
   private
 
+  def set_trip
+    @trip = Trip.find params[:trip_id]
+  end
+
   def ideas_params
-    params.require(:idea, :trip_id).permit(:activity_id)
+    params.permit(:idea, :trip_id, :activity_id)
   end
 end

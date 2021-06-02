@@ -5,9 +5,7 @@ import { Container, Row, Col, Button } from 'react-bootstrap';
 import { CustomIdeaForm } from './CustomIdeaForm';
 
 export const IdeasBoard = (props) => {
-  const { ideasList, trip_id, numCollaborators, addCustomIdea } = props;
-
-  console.log(ideasList);
+  const { ideasList, trip_id, addCustomIdea } = props;
 
   const ideas = ideasList
     ? ideasList.map((idea, index) => {

@@ -11,7 +11,7 @@ export const TripDetails = (props) => {
     ? tripList.map((tripList, index) => {
         return (
           <Fragment>
-            <Dropdown.Item eventKey={tripList.id}>
+            <Dropdown.Item key={index} eventKey={tripList.id}>
               {tripList.name}
             </Dropdown.Item>
           </Fragment>
