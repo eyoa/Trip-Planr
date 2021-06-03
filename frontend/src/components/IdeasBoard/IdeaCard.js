@@ -1,5 +1,6 @@
 import './IdeaCard.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { CalendarPlusFill, Calendar2CheckFill } from 'react-bootstrap-icons';
 
 export const IdeaCard = (props) => {
   const {
@@ -14,7 +15,8 @@ export const IdeaCard = (props) => {
     addVotes,
     removeVotes,
     addToTrip,
-    addEntryToTrip
+    addEntryToTrip,
+    removeIdea
   } = props;
 
   return (
@@ -32,10 +34,13 @@ export const IdeaCard = (props) => {
             <p>
               <copy>{description}</copy>
             </p>
-            <button className='btn' onClick={addEntryToTrip}>
-              Add to Trip
+            <button className='remove-idea-button btn' onClick={removeIdea}>
+              remove
             </button>
           </div>
+          <aside className='itinerary-add' onClick={addEntryToTrip}>
+            <CalendarPlusFill />
+          </aside>
           <aside className='show-votes'>{votes ? votes.length : 0}</aside>
 
           {votes.filter((vote) => {

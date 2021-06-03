@@ -12,7 +12,8 @@ export const IdeasBoard = (props) => {
     addVotes,
     removeVotes,
     user_id,
-    addEntryToTrip
+    addEntryToTrip,
+    removeIdea
   } = props;
 
   const ideas = ideasList
@@ -35,6 +36,9 @@ export const IdeasBoard = (props) => {
             }}
             addEntryToTrip={() => {
               addEntryToTrip(idea.activity_id);
+            }}
+            removeIdea={() => {
+              removeIdea(idea.id);
             }}
           />
         );

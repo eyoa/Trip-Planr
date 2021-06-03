@@ -141,6 +141,17 @@ function App() {
       .catch((err) => console.log(err));
   };
 
+  const removeIdea = (activity_id) => {
+    // axios
+    //   .post(`/trips/${selectTrip}/ideas`, null, { params: { activity_id } })
+    //   .then((res) => {
+    //     const newIdea = ideasHelper([res.data]);
+    //     const newIdeasList = [...tripData.ideasList, ...newIdea];
+    //     setTripData({ ...tripData, ideasList: newIdeasList });
+    //   })
+    //   .catch((err) => console.log(err));
+  };
+
   const addEntryToTrip = (activity_id) => {
     const newOrder = tripData.itinerary.days[activeDay.dayOrder].entries.length;
 
@@ -302,6 +313,7 @@ function App() {
                   removeVotes={removeVotes}
                   user_id={user_id}
                   addEntryToTrip={addEntryToTrip}
+                  removeIdea={removeIdea}
                 />
               )}
             ></Route>

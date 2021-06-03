@@ -72,6 +72,21 @@ $bp-lg: 800px;
   }
 }
 
+aside.itinerary-add {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  min-width: 3em;
+  min-height: 2em;
+  margin-right: 0.5rem;
+  font-size: 1.5em;
+
+  :hover,
+  :focus {
+    transform: translateY(-0.15em);
+  }
+}
+
 aside.show-votes {
   position: absolute;
   top: 0;
@@ -128,7 +143,7 @@ aside.votes {
 
 .btn {
   cursor: pointer;
-  margin-top: 1.5rem;
+  margin-top: 1rem;
   padding: 0.75rem 1.5rem;
   font-size: 0.65rem;
   font-weight: bold;
@@ -146,6 +161,19 @@ aside.votes {
     outline: 1px dashed yellow;
     outline-offset: 3px;
   }
+}
+
+.remove-btn {
+  margin-top: 0.5rem;
+  cursor: pointer;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.65rem;
+  font-weight: bold;
+  letter-spacing: 0.025rem;
+  text-transform: uppercase;
+  color: white;
+  background-color: black;
+  border: none;
 }
 
 @media (hover: hover) and (min-width: $bp-md) {
