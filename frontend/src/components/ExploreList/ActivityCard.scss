@@ -64,6 +64,12 @@ aside.add {
   font-size: 1.5em;
   font-weight: bold;
   color: rgba(255, 255, 255, 0.603);
+
+  :hover,
+  :focus {
+    color: orange;
+    transform: translateY(-0.15em);
+  }
 }
 
 aside.suggest {
@@ -73,11 +79,10 @@ aside.suggest {
   padding: 0.3rem;
   font-size: 1.5em;
   font-weight: bold;
-  color: aqua;
-}
-
-aside.add:hover,
-aside.add:focus {
   color: orange;
-  transform: translateY(-0.25em);
+
+  :hover,
+  :focus {
+    transform: translateY(-0.25em);
+  }
 }

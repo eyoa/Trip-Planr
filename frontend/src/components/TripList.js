@@ -99,7 +99,11 @@ export const TripList = (props) => {
         </Button>
       </Row>
       <Row className='justify-content-center'>{form}</Row>
-      {trips}
+      <Row className='justify-content-center'>
+        <Col xs lg='2'></Col>
+        <Col xs={{ span: 8, offset: 3 }}>{trips}</Col>
+        <Col xs lg='2'></Col>
+      </Row>
     </div>
   );
 };

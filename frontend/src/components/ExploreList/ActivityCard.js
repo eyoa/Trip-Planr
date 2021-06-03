@@ -1,7 +1,8 @@
 import './ActivityCard.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Accordion, Button, Card } from 'react-bootstrap';
-import { PlusSquareFill } from 'react-bootstrap-icons';
+import ReactTooltip from 'react-tooltip';
+import { Card } from 'react-bootstrap';
+import { PlusSquareFill, Lightbulb } from 'react-bootstrap-icons';
 
 export const ActivityCard = (props) => {
   const {
@@ -27,27 +28,16 @@ export const ActivityCard = (props) => {
             backgroundSize: 'cover'
           }}
         >
-          {/* <Card.Img
-              variant='top'
-              src={img_url}
-              alt='image'
-              className='card-img'
-            /> */}
           <aside className='rating'>{rating}</aside>
           <aside className='add' onClick={addEntryToTrip}>
+            {/* <span>Add to Trip</span> */}
             <PlusSquareFill />
           </aside>
           <aside className='suggest'>
-            <PlusSquareFill onClick={suggestActivity} />
+            <Lightbulb onClick={suggestActivity} />
           </aside>
           <h2 className='title'>{name}</h2>
           <span className='description'>{description}</span>
-          {/* <Accordion.Toggle as={Button} variant='secondary' eventKey='exp'>
-            More Click!
-          </Accordion.Toggle>
-          <Accordion.Collapse eventKey='exp'>
-            <Card.Text>{description}</Card.Text>
-          </Accordion.Collapse> */}
         </Card>
       )}
     </>
