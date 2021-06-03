@@ -38,23 +38,40 @@ trip2 = Trip.create!({
   user_id: 1
 })
 
-5.times do
-  Trip.create!({
-    name: Faker::Marketing.buzzwords,
-    start_date: Faker::Date.backward(days: 5),
-    end_date: Faker::Date.forward(days: 5),
-    user_id: rand(2..User.count)
-  })
-end
+trip3 = Trip.create!({
+  name: Faker::Marketing.buzzwords,
+  start_date: Faker::Date.backward(days: 5),
+  end_date: Faker::Date.forward(days: 5),
+  user_id: 1
+})
+
+trip4 = Trip.create!({
+  name: Faker::Marketing.buzzwords,
+  start_date: Faker::Date.backward(days: 5),
+  end_date: Faker::Date.forward(days: 5),
+  user_id: 1
+})
+
+trip5 = Trip.create!({
+  name: Faker::Marketing.buzzwords,
+  start_date: Faker::Date.backward(days: 5),
+  end_date: Faker::Date.forward(days: 5),
+  user_id: 1
+})
+
+
 
 ##Activities
+
+imgArr = ['/img/rom.jpeg', '/img/bbq.jpg', '/img/aquarium.jpg', '/img/biodome.jpg', '/img/casa.jpg', '/img/church.jpeg', '/img/CN-Tower-Toronto.jpg', '/img/dome.jpg', '/img/fountian.jpg', '/img/ice.jpeg', '/img/niagaraFalls.jpg', '/img/poutine.jpeg', '/img/sushi.jpg']
+
 puts "Re-creating Activities ..."
 Activity.destroy_all
 10.times do
   Activity.create!({
     name: Faker::Restaurant.name,
-    description: Faker::Restaurant.description,
-    img_url: '/img/rom.jpeg',
+    description: Faker::Restaurant.description[0...150],
+    img_url: imgArr[rand(0...imgArr.length - 1)],
     rating: rand(1..5),
     category: Faker::Restaurant.type,
     longitude: 13.4134995,
@@ -88,30 +105,41 @@ puts "Re-creating Days..."
 Day.destroy_all
 
 t1d1 = trip1.days.create!({
-  name: 'Day 1',
-  order: 1
+  name: 'July 1st (Fri)',
+  order: 0
 })
 
 t1d2 = trip1.days.create!({
-  name: 'Day 2',
-  order: 2
+  name: 'July 2nd (Sat)',
+  order: 1
 })
 
 t1d3 = trip1.days.create!({
-  name: 'Day 3',
-  order: 3
-})
-
-t2d1 = trip2.days.create!({
-  name: 'Day 1',
-  order: 1
-})
-t2d2 = trip2.days.create!({
-  name: 'Day 2',
+  name: 'July 3rd (Sun)',
   order: 2
 })
 
+t2d1 = trip2.days.create!({
+  name: 'Aug 16th (Wed)',
+  order: 0
+})
+t2d2 = trip2.days.create!({
+  name: 'Aug 17th (Thr)',
+  order: 1
+})
 
+t3d1 = trip3.days.create!({
+  name: 'Sept 4th (Sat)',
+  order: 0
+})
+t4d1 = trip4.days.create!({
+  name: 'Oct 31st (Fri)',
+  order: 0
+})
+t5d1 = trip5.days.create!({
+  name: 'June 20th (Sat)',
+  order: 0
+})
 ##entries
 puts "Re-creating Entries..."
 Entry.destroy_all
