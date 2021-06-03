@@ -11,7 +11,8 @@ export const IdeasBoard = (props) => {
     addCustomIdea,
     addVotes,
     removeVotes,
-    user_id
+    user_id,
+    addEntryToTrip
   } = props;
 
   const ideas = ideasList
@@ -31,6 +32,9 @@ export const IdeasBoard = (props) => {
             }}
             removeVotes={() => {
               removeVotes(idea.id, idea.votes, index);
+            }}
+            addEntryToTrip={() => {
+              addEntryToTrip(idea.activity_id);
             }}
           />
         );

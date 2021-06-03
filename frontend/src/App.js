@@ -130,7 +130,6 @@ function App() {
   };
 
   const suggestActivity = (activity_id) => {
-    console.log(`suggest activity ${activity_id}`);
     axios
       .post(`/trips/${selectTrip}/ideas`, null, { params: { activity_id } })
       .then((res) => {
@@ -138,7 +137,6 @@ function App() {
         const newIdeasList = [...tripData.ideasList, ...newIdea];
 
         setTripData({ ...tripData, ideasList: newIdeasList });
-        // persistance update state
       })
       .catch((err) => console.log(err));
   };
@@ -146,40 +144,26 @@ function App() {
   const addEntryToTrip = (activity_id) => {
     const newOrder = tripData.itinerary.days[activeDay.dayOrder].entries.length;
 
-    console.log(`new order is ${newOrder}`);
-
     const entryObj = {
       activity_id,
       order: newOrder
     };
-    let daysIndex = activeDay.dayOrder - 1;
     if (activity_id && selectTrip && activeDay) {
       axios
         .post(`/trips/${selectTrip}/days/${activeDay.day_id}/entries`, null, {
           params: entryObj
         })
         .then((res) => {
-          console.log(`return from API`);
-          console.log(res.data);
-          console.log(`days index is ${daysIndex}`);
-          console.log('before =======================');
-          console.log(tripData.itinerary);
           const activities = matchActivity(res.data.activity_id);
           const newEntryObj = [{ ...res.data, activities }];
 
-          console.log(tripData.itinerary.days[daysIndex].entries);
           const EntriesArr = [
-            ...tripData.itinerary.days[daysIndex].entries,
+            ...tripData.itinerary.days[activeDay.dayOrder].entries,
             ...newEntryObj
           ];
 
-          console.log('EntriesArr After');
-          console.log(EntriesArr);
-
           const itinerary = { ...tripData.itinerary };
-          itinerary.days[daysIndex].entries = EntriesArr;
-          console.log('after');
-          console.log(itinerary);
+          itinerary.days[activeDay.dayOrder].entries = EntriesArr;
           setTripData({ ...tripData, itinerary });
         });
     }
@@ -317,6 +301,7 @@ function App() {
                   addVotes={addVotes}
                   removeVotes={removeVotes}
                   user_id={user_id}
+                  addEntryToTrip={addEntryToTrip}
                 />
               )}
             ></Route>

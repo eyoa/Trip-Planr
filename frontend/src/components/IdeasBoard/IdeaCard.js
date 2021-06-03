@@ -12,7 +12,9 @@ export const IdeaCard = (props) => {
     description,
     votes,
     addVotes,
-    removeVotes
+    removeVotes,
+    addToTrip,
+    addEntryToTrip
   } = props;
 
   return (
@@ -30,7 +32,9 @@ export const IdeaCard = (props) => {
             <p>
               <copy>{description}</copy>
             </p>
-            <button className='add-trip-btn'>Add to Trip</button>
+            <button className='btn' onClick={addEntryToTrip}>
+              Add to Trip
+            </button>
           </div>
           <aside className='show-votes'>{votes ? votes.length : 0}</aside>
 
