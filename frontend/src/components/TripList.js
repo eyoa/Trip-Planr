@@ -85,7 +85,7 @@ export const TripList = (props) => {
   }
 
   return (
-    <div>
+    <div className='trip-list-main'>
       <Row className='justify-content-center'>
         <h1>My Trips</h1>
       </Row>

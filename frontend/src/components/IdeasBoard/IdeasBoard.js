@@ -49,7 +49,7 @@ export const IdeasBoard = (props) => {
 
   return (
     <div>
-      <Container fluid='sm'>
+      <Container fluid='sm' className='ideas-board'>
         <Row className='justify-content-md-center'>
           <Col md={{ span: 5, offset: -1 }}>
             <h1>Ideas Board</h1>
