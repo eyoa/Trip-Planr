@@ -141,15 +141,21 @@ function App() {
       .catch((err) => console.log(err));
   };
 
-  const removeIdea = (activity_id) => {
-    // axios
-    //   .post(`/trips/${selectTrip}/ideas`, null, { params: { activity_id } })
-    //   .then((res) => {
-    //     const newIdea = ideasHelper([res.data]);
-    //     const newIdeasList = [...tripData.ideasList, ...newIdea];
-    //     setTripData({ ...tripData, ideasList: newIdeasList });
-    //   })
-    //   .catch((err) => console.log(err));
+  const removeIdea = (idea_id) => {
+    // console.log(idea_id);
+
+    axios
+      .delete(`/trips/${selectTrip}/ideas/${idea_id}`)
+      .then((res) => {
+        console.log(res.data);
+
+        const updateIdeas = tripData.ideasList.filter((idea) => {
+          return idea.id !== res.data.id;
+        });
+
+        setTripData({ ...tripData, ideasList: updateIdeas });
+      })
+      .catch((err) => console.log(err));
   };
 
   const addEntryToTrip = (activity_id) => {
