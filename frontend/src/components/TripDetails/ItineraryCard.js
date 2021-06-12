@@ -3,7 +3,7 @@ import { Clock } from 'react-bootstrap-icons';
 import moment from 'moment';
 
 export const ItineraryCard = (props) => {
-  const { name, start_time, end_time, url, img_url } = props;
+  const { id, name, start_time, end_time, url, img_url, removeEntry } = props;
 
   const formatTime = (time) => {
     return moment(time).format('hh:mm a');
@@ -26,7 +26,9 @@ export const ItineraryCard = (props) => {
                 {formatTime(start_time)} - {formatTime(end_time)}
               </time>
             </div>
-            <div className='postcard__preview-txt'>Some notes</div>
+            <div className='postcard__preview-txt' onClick={removeEntry}>
+              X Remove
+            </div>
             <ul className='postcard__tagbox'>
               <li className='tag__item'>Drive</li>
               <li className='tag__item'>35 mins.</li>

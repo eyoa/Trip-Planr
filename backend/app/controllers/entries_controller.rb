@@ -1,6 +1,6 @@
 class EntriesController < ApplicationController
   before_action :set_trip
-  before_action :get_day
+  before_action :set_day
 
   def create
     @entry = @day.entries.build(entries_params)
@@ -21,9 +21,8 @@ class EntriesController < ApplicationController
   end
 
   def destroy
-    @entry = @day.entries.find params [:id]
-    if @entry.destroy
-      render json: {}, status: :ok
+    if @entry = Entry.destroy(params[:id])
+      render json: @entry, status: :ok
     else
       render json: { status: 'error', code: 3000, message: 'Could not remove entry.' }
     end
@@ -33,15 +32,17 @@ class EntriesController < ApplicationController
 
   def set_trip
     @trip = Trip.find params[:trip_id]
+    puts(@trip)
   end
 
 
-  def get_day
+  def set_day
     @day = @trip.days.find params[:day_id]
+    puts(@day)
   end
 
   def entries_params
-    params.permit( :day_id, :entry, :start_time, :end_time, :order, :activity_id)
+    params.permit(:day_id, :entry, :start_time, :end_time, :order, :activity_id)
   end
   
 end

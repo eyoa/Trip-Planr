@@ -126,6 +126,10 @@ function App() {
       (dayObj) => (dayObj.id = day_id)
     );
     const dayOrder = currentDayObj.order;
+    console.log(day_id);
+    console.log(dayOrder);
+    console.log(currentDayObj);
+
     setActiveDay({ day_id, dayOrder });
   };
 
@@ -142,8 +146,6 @@ function App() {
   };
 
   const removeIdea = (idea_id) => {
-    // console.log(idea_id);
-
     axios
       .delete(`/trips/${selectTrip}/ideas/${idea_id}`)
       .then((res) => {
@@ -184,6 +186,24 @@ function App() {
           setTripData({ ...tripData, itinerary });
         });
     }
+  };
+
+  const removeEntry = (entry_id) => {
+    // console.log('click!');
+    console.log(entry_id);
+    //trips/:trip_id/days/:day_id/entries/:id(.:format)
+    axios
+      .delete(
+        `/trips/${selectTrip}/days/${activeDay.day_id}/entries/${entry_id}`
+      )
+      .then((res) => {
+        console.log(res.data);
+        // const updateIdeas = tripData.ideasList.filter((idea) => {
+        //   return idea.id !== res.data.id;
+        // });
+        // setTripData({ ...tripData, ideasList: updateIdeas });
+      })
+      .catch((err) => console.log(err));
   };
 
   const addVotes = (idea_id, current_votes, index) => {
@@ -253,6 +273,7 @@ function App() {
         tripSelectHandler={tripSelectHandler}
         selectDay={selectDay}
         activeDay={activeDay}
+        removeEntry={removeEntry}
       />
     );
   }

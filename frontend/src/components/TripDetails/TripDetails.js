@@ -5,7 +5,14 @@ import { DayTab } from './DayTab';
 import { Fragment } from 'react';
 
 export const TripDetails = (props) => {
-  const { tripList, tripSelectHandler, tripData, selectDay, activeDay } = props;
+  const {
+    tripList,
+    tripSelectHandler,
+    tripData,
+    selectDay,
+    activeDay,
+    removeEntry
+  } = props;
 
   const trips = tripList
     ? tripList.map((tripList, index) => {
@@ -35,6 +42,7 @@ export const TripDetails = (props) => {
             days={tripData.days}
             selectDay={selectDay}
             activeDay={activeDay}
+            removeEntry={removeEntry}
           />
         ) : (
           <></>

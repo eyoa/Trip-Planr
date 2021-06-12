@@ -2,6 +2,7 @@ $main-blue: #0076bd !default;
 $main-blue-rgb-015: rgba(44, 149, 214, 0.1) !default;
 
 .postcard {
+  flex-direction: row;
   flex-wrap: inherit;
   max-height: 200px;
   max-width: 400px;
@@ -49,7 +50,7 @@ $main-blue-rgb-015: rgba(44, 149, 214, 0.1) !default;
   }
 
   .postcard__text {
-    padding: 1.5rem 3rem;
+    padding: 1.5rem 2rem;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -61,10 +62,11 @@ $main-blue-rgb-015: rgba(44, 149, 214, 0.1) !default;
     background: #18151f;
     top: -20%;
     height: 130%;
-    width: 55px;
+    width: 30px;
   }
   .postcard__preview-txt {
     overflow: hidden;
+    font-size: smaller;
     text-overflow: ellipsis;
     text-align: justify;
     height: 100%;
@@ -94,18 +96,9 @@ $main-blue-rgb-015: rgba(44, 149, 214, 0.1) !default;
     }
   }
 
-  &:nth-child(2n + 1) {
-    flex-direction: row;
-  }
-
-  &:nth-child(2n + 1) .postcard__text::before {
+  .postcard__text::before {
     left: -15px !important;
     transform: rotate(4deg);
-  }
-
-  &:nth-child(2n + 0) .postcard__text::before {
-    right: -15px !important;
-    transform: rotate(-4deg);
   }
 
   &:before {
@@ -128,6 +121,6 @@ $main-blue-rgb-015: rgba(44, 149, 214, 0.1) !default;
     transparent 80%
   );
 }
-.blue:nth-child(2n)::before {
+.blue::before {
   background-image: linear-gradient(80deg, $main-blue-rgb-015, transparent 20%);
 }
