@@ -38,6 +38,7 @@ function App() {
   };
 
   const addCustomIdea = (newIdeaData) => {
+    console.log('add custom idea');
     console.log(newIdeaData);
   };
 
@@ -55,12 +56,10 @@ function App() {
       };
       return dayObj;
     });
-    console.log(daysArr);
     return daysArr;
   };
 
   const ideasHelper = (ideaArr) => {
-    console.log(ideaArr);
     if (ideaArr === []) {
       return [];
     }
@@ -69,12 +68,9 @@ function App() {
       idea['activity'] = exploreList.find(
         (actvity) => actvity.id === idea.activity_id
       );
-      //mock vote number for now
-      // idea.votes = 3;
       return idea;
     });
 
-    console.log(result);
     return result;
   };
 
@@ -102,11 +98,8 @@ function App() {
           .catch((err) => console.log(err))
       );
 
-      console.log(requests);
-
       Promise.all([requests])
         .then((res) => {
-          console.log(`Days added and ${res[0].data}`);
           setTripList([...tripList, this.newTrip]);
         })
 
@@ -147,8 +140,6 @@ function App() {
     axios
       .delete(`/trips/${selectTrip}/ideas/${idea_id}`)
       .then((res) => {
-        console.log(res.data);
-
         const updateIdeas = tripData.ideasList.filter((idea) => {
           return idea.id !== res.data.id;
         });
@@ -187,32 +178,22 @@ function App() {
   };
 
   const removeEntry = (entry_id) => {
-    // console.log('click!');
-    console.log(entry_id);
-    //trips/:trip_id/days/:day_id/entries/:id(.:format)
     axios
       .delete(
         `/trips/${selectTrip}/days/${activeDay.day_id}/entries/${entry_id}`
       )
       .then((res) => {
-        console.log(res.data);
-
         const updateEntries = tripData.itinerary.days[
           activeDay.dayOrder
         ].entries.filter((entry) => {
           return entry.id !== entry_id;
         });
 
-        console.log(updateEntries);
         const updateDaysArr = [...tripData.itinerary.days];
         updateDaysArr[activeDay.dayOrder].entries = updateEntries;
-        console.log(updateDaysArr);
 
         const updateItinerary = { ...tripData.itinerary };
         updateItinerary.days = updateDaysArr;
-        console.log(updateItinerary);
-        // updateItinerary.days[activeDay.dayOrder] = updateDay;
-        // console.log(updateItinerary);
 
         setTripData({ ...tripData, itinerary: updateItinerary });
       })
@@ -236,8 +217,6 @@ function App() {
   };
 
   const removeVotes = (idea_id, current_votes, idea_index) => {
-    console.log(`idea id is  ${idea_id}`);
-
     const voteIndex = current_votes.findIndex((vote) => {
       return vote.user_id === user_id;
     });

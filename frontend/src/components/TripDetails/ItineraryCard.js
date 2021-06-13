@@ -3,7 +3,16 @@ import { Clock } from 'react-bootstrap-icons';
 import moment from 'moment';
 
 export const ItineraryCard = (props) => {
-  const { id, name, start_time, end_time, url, img_url, removeEntry } = props;
+  const {
+    id,
+    name,
+    start_time,
+    end_time,
+    url,
+    img_url,
+    removeEntry,
+    order
+  } = props;
 
   const formatTime = (time) => {
     return moment(time).format('hh:mm a');
