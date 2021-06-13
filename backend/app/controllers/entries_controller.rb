@@ -21,7 +21,8 @@ class EntriesController < ApplicationController
   end
 
   def destroy
-    if @entry = Entry.destroy(params[:id])
+    @entry = Entry.find params[:id]
+    if Entry.destroy(params[:id])
       render json: @entry, status: :ok
     else
       render json: { status: 'error', code: 3000, message: 'Could not remove entry.' }

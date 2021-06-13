@@ -198,10 +198,25 @@ function App() {
       )
       .then((res) => {
         console.log(res.data);
-        // const updateIdeas = tripData.ideasList.filter((idea) => {
-        //   return idea.id !== res.data.id;
-        // });
-        // setTripData({ ...tripData, ideasList: updateIdeas });
+
+        const updateEntries = tripData.itinerary.days[
+          activeDay.dayOrder
+        ].entries.filter((entry) => {
+          return entry.id !== entry_id;
+        });
+
+        console.log(updateEntries);
+        const updateDaysArr = [...tripData.itinerary.days];
+        updateDaysArr[activeDay.dayOrder].entries = updateEntries;
+        console.log(updateDaysArr);
+
+        const updateItinerary = { ...tripData.itinerary };
+        updateItinerary.days = updateDaysArr;
+        console.log(updateItinerary);
+        // updateItinerary.days[activeDay.dayOrder] = updateDay;
+        // console.log(updateItinerary);
+
+        setTripData({ ...tripData, itinerary: updateItinerary });
       })
       .catch((err) => console.log(err));
   };
