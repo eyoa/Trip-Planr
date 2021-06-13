@@ -121,15 +121,13 @@ function App() {
     });
   };
 
-  const selectDay = (day_id) => {
+  const selectDay = (day) => {
+    const day_id = day;
+
     const currentDayObj = tripData.itinerary.days.find(
-      (dayObj) => (dayObj.id = day_id)
+      (dayObj) => dayObj.id === day_id
     );
     const dayOrder = currentDayObj.order;
-    console.log(day_id);
-    console.log(dayOrder);
-    console.log(currentDayObj);
-
     setActiveDay({ day_id, dayOrder });
   };
 

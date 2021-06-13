@@ -46,4 +46,7 @@ class EntriesController < ApplicationController
     params.permit(:day_id, :entry, :start_time, :end_time, :order, :activity_id)
   end
   
+  def needed_params
+    params.permit(:trip_id, :day_id)
+  end
 end

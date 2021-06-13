@@ -1,21 +1,5 @@
-import './DayTab.scss';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Tabs, Tab } from 'react-bootstrap';
-import { ItineraryCard } from './ItineraryCard.js';
-
-export const DayTab = (props) => {
-  const { days, selectDay, activeDay, removeEntry } = props;
-
-  console.log();
-
-  const sortByOrder = (array) => {
-    const result = [];
-    for (const item of array) {
-      result[item.order - 1] = item;
-    }
-    return result;
-  };
-
+export const DayPane = (props) => {
+  const { days, removeEntry } = props;
   const daysTabs = days ? (
     days.map((day, index) => {
       const entires = day.entries ? (
@@ -50,17 +34,5 @@ export const DayTab = (props) => {
     })
   ) : (
     <></>
-  );
-
-  return (
-    <div>
-      <Tabs
-        activeKey={activeDay.day_id}
-        id='day-select-tabs'
-        onSelect={(eventKey) => selectDay(Number(eventKey))}
-      >
-        {daysTabs}
-      </Tabs>
-    </div>
   );
 };
