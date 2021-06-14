@@ -19,8 +19,8 @@ export const ExploreList = (props) => {
             rating={activityData.rating}
             category={activityData.category}
             url={activityData.url}
-            suggestActivity={() => suggestActivity(activityData.id)}
-            addEntryToTrip={() => addEntryToTrip(activityData.id)}
+            suggestActivity={(e) => suggestActivity(e, activityData.id)}
+            addEntryToTrip={(e) => addEntryToTrip(e, activityData.id)}
           />
         );
       })

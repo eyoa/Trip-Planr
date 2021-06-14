@@ -27,18 +27,19 @@ export const IdeasBoard = (props) => {
             start_time={idea.activity.start_time}
             end_time={idea.activity.end_time}
             description={idea.activity.description}
+            category={idea.activity.category}
             url={idea.activity.url}
-            addVotes={() => {
-              addVotes(idea.id, idea.votes, index);
+            addVotes={(e) => {
+              addVotes(e, idea.id, idea.votes, index);
             }}
-            removeVotes={() => {
-              removeVotes(idea.id, idea.votes, index);
+            removeVotes={(e) => {
+              removeVotes(e, idea.id, idea.votes, index);
             }}
-            addEntryToTrip={() => {
-              addEntryToTrip(idea.activity_id);
+            addEntryToTrip={(e) => {
+              addEntryToTrip(e, idea.activity_id);
             }}
-            removeIdea={() => {
-              removeIdea(idea.id);
+            removeIdea={(e) => {
+              removeIdea(e, idea.id);
             }}
           />
         );

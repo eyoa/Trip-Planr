@@ -125,7 +125,8 @@ function App() {
     setActiveDay({ day_id, dayOrder });
   };
 
-  const suggestActivity = (activity_id) => {
+  const suggestActivity = (e, activity_id) => {
+    e.stopPropagation();
     axios
       .post(`/trips/${selectTrip}/ideas`, null, { params: { activity_id } })
       .then((res) => {
@@ -137,7 +138,8 @@ function App() {
       .catch((err) => console.log(err));
   };
 
-  const removeIdea = (idea_id) => {
+  const removeIdea = (e, idea_id) => {
+    e.stopPropagation();
     axios
       .delete(`/trips/${selectTrip}/ideas/${idea_id}`)
       .then((res) => {
@@ -150,7 +152,8 @@ function App() {
       .catch((err) => console.log(err));
   };
 
-  const addEntryToTrip = (activity_id) => {
+  const addEntryToTrip = (e, activity_id) => {
+    e.stopPropagation();
     const newOrder = tripData.itinerary.days[activeDay.dayOrder].entries.length;
 
     const entryObj = {
@@ -201,7 +204,8 @@ function App() {
       .catch((err) => console.log(err));
   };
 
-  const addVotes = (idea_id, current_votes, index) => {
+  const addVotes = (e, idea_id, current_votes, index) => {
+    e.stopPropagation();
     if (!current_votes.includes(user_id)) {
       axios
         .post(`/trips/${selectTrip}/ideas/${idea_id}/votes`, null, {
@@ -217,7 +221,8 @@ function App() {
     }
   };
 
-  const removeVotes = (idea_id, current_votes, idea_index) => {
+  const removeVotes = (e, idea_id, current_votes, idea_index) => {
+    e.stopPropagation();
     const voteIndex = current_votes.findIndex((vote) => {
       return vote.user_id === user_id;
     });
@@ -267,12 +272,22 @@ function App() {
     const itinerary = { ...tripData.itinerary };
     itinerary.days[activeDay.dayOrder].entries = entryList;
 
-    // console.log('itinerary');
-    // console.log(itinerary);
+    const reorderRequests = entryList.map((entry) =>
+      axios
+        .put(
+          `/trips/${selectTrip}/days/${activeDay.day_id}/entries/${entry.id},`,
+          null,
+          { params: { order: entry.order } }
+        )
+        .catch((err) => console.log(err))
+    );
 
-    //update db (update entry)
+    Promise.all([reorderRequests])
+      .then((res) => {
+        setTripData({ ...tripData, itinerary });
+      })
 
-    setTripData({ ...tripData, itinerary });
+      .catch((errors) => console.log(errors));
   };
 
   const exploreListToggleClickHandler = () => {

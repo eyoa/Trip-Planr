@@ -44,6 +44,25 @@
   background-color: transparent;
 }
 
+.placer {
+  background: linear-gradient(
+    to right bottom,
+    hsl(236, 50%, 50%),
+    hsl(195, 50%, 50%)
+  );
+  backdrop-filter: blur(10px);
+  // background: gray;
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 0;
+}
+.activity-image {
+  max-height: 300px;
+  z-index: 40;
+}
+
+.activity-details {
+  background-color: linear-gradient(#637a8a, rgb(0, 0, 0));
+}
 aside.rating {
   position: absolute;
   top: 0;
