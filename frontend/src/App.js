@@ -238,8 +238,10 @@ function App() {
 
   const onDragEndHandler = (result) => {
     // persist reordering
-    console.log(result);
     const { destination, source, draggableId } = result;
+    console.log(result);
+    console.log(`source is ${source.index}`);
+    console.log(`finish pos is ${destination.index}`);
 
     if (!destination) {
       //convert ID to number
@@ -255,8 +257,8 @@ function App() {
     }
 
     const entryList = [...tripData.itinerary.days[activeDay.dayOrder].entries];
-    const [selectedEntry] = entryList.splice(source.index - 1, 1);
-    entryList.splice(destination.index - 1, 0, selectedEntry);
+    const [selectedEntry] = entryList.splice(source.index, 1);
+    entryList.splice(destination.index, 0, selectedEntry);
 
     for (let i = 0; i < entryList.length; i++) {
       entryList[i].order = i;
@@ -269,6 +271,7 @@ function App() {
     // console.log(itinerary);
 
     //update db (update entry)
+
     setTripData({ ...tripData, itinerary });
   };
 

@@ -27,9 +27,10 @@ export const ItineraryCard = (props) => {
           </a>
           <div className='postcard__text'>
             <h1 className='postcard__title blue'>
-              <a href='#'>{name}</a>
+              <a href={url}>{name}</a>
             </h1>
             <div className='postcard__subtitle small'>
+              <div>{`id is ${id} order is ${order}`}</div>
               <time datetime='2011-11-18T14:54:39.929Z'>
                 <Clock /> <span> </span>
                 {formatTime(start_time)} - {formatTime(end_time)}
