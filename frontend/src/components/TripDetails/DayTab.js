@@ -5,31 +5,25 @@ import { ItineraryCard } from './ItineraryCard.js';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 export const DayTab = (props) => {
-  const { days, selectDay, activeDay, removeEntry } = props;
-
-  console.log();
+  const { days, selectDay, activeDay, removeEntry, onDragEndHandler } = props;
 
   const sortByOrder = (array) => {
     const result = [];
     for (const item of array) {
-      result[item.order - 1] = item;
+      result[item.order] = item;
     }
     return result;
-  };
-
-  const onDragEnd = (result) => {
-    // to update state
   };
 
   const daysTabs = days ? (
     days.map((day) => {
       const entires = day.entries ? (
-        day.entries.map((entry) => {
+        sortByOrder(day.entries).map((entry, index) => {
           return (
             <Draggable
               key={entry.id.toString()}
               draggableId={entry.id.toString()}
-              index={entry.order}
+              index={index}
             >
               {(provided) => (
                 <div
@@ -59,11 +53,20 @@ export const DayTab = (props) => {
       );
 
       return (
-        <Tab key={day.id} eventKey={day.id} title={day.name}>
-          <DragDropContext onDragEnd={onDragEnd}>
+        <Tab
+          key={day.id}
+          eventKey={day.id}
+          title={day.name}
+          className='date-tabs'
+        >
+          <DragDropContext onDragEnd={onDragEndHandler}>
             <Droppable droppableId='itinerary'>
               {(provided) => (
-                <article {...provided.droppableProps} ref={provided.innerRef}>
+                <article
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}
+                  className='itinierary-container'
+                >
                   {entires}
                   {provided.placeholder}
                 </article>
@@ -78,11 +81,12 @@ export const DayTab = (props) => {
   );
 
   return (
-    <div>
+    <div className='trip-container'>
       <Tabs
         activeKey={activeDay.day_id}
         id='day-select-tabs'
         onSelect={(eventKey) => selectDay(Number(eventKey))}
+        className='tabs-con'
       >
         {daysTabs}
       </Tabs>

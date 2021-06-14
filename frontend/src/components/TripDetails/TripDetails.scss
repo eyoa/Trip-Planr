@@ -15,7 +15,6 @@
 }
 .trip-details-container {
   margin-top: 1.5rem;
-  width: 90%;
   height: 90vh;
   display: flex;
   flex-direction: row;
@@ -29,4 +28,10 @@
 .trip-details-container::-webkit-scrollbar-thumb {
   background: linear-gradient(#2b9de9, white);
   border-radius: 5px;
+}
+
+.trip-details-container::-webkit-scrollbar-corner {
+  display: none;
+  height: 0px;
+  width: 0px;
 }

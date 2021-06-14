@@ -13,6 +13,7 @@ import { Mapview } from './components/Mapview';
 import { IdeasBoard } from './components/IdeasBoard/IdeasBoard';
 import { TripList } from './components/TripList';
 import { eachDayOfInterval, format } from 'date-fns/esm';
+import { Sliders } from 'react-bootstrap-icons';
 
 function App() {
   const [exploreOpen, setExploreOpen] = useState(false);
@@ -235,6 +236,42 @@ function App() {
       .catch((err) => console.log(err));
   };
 
+  const onDragEndHandler = (result) => {
+    // persist reordering
+    console.log(result);
+    const { destination, source, draggableId } = result;
+
+    if (!destination) {
+      //convert ID to number
+      console.log(`Remove Entry ${draggableId}`);
+      return;
+    }
+
+    if (
+      destination.droppableId === source.droppableId &&
+      destination.index === source.index
+    ) {
+      return;
+    }
+
+    const entryList = [...tripData.itinerary.days[activeDay.dayOrder].entries];
+    const [selectedEntry] = entryList.splice(source.index - 1, 1);
+    entryList.splice(destination.index - 1, 0, selectedEntry);
+
+    for (let i = 0; i < entryList.length; i++) {
+      entryList[i].order = i;
+    }
+
+    const itinerary = { ...tripData.itinerary };
+    itinerary.days[activeDay.dayOrder].entries = entryList;
+
+    // console.log('itinerary');
+    // console.log(itinerary);
+
+    //update db (update entry)
+    setTripData({ ...tripData, itinerary });
+  };
+
   const exploreListToggleClickHandler = () => {
     setExploreOpen(!exploreOpen);
   };
@@ -266,6 +303,7 @@ function App() {
         selectDay={selectDay}
         activeDay={activeDay}
         removeEntry={removeEntry}
+        onDragEndHandler={onDragEndHandler}
       />
     );
   }
@@ -283,7 +321,7 @@ function App() {
     });
   }, []);
 
-  //update when selecting trip
+  //update tripData state and select first day when selecting trip
   useEffect(() => {
     if (selectTrip !== null) {
       Promise.all([
@@ -294,6 +332,8 @@ function App() {
           itinerary: itinerary.data,
           ideasList: ideasHelper(ideasList.data)
         });
+
+        setActiveDay({ day_id: itinerary.data.days[0].id, dayOrder: 0 });
       });
     }
   }, [selectTrip]);
