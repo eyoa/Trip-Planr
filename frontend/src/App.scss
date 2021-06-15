@@ -16,3 +16,10 @@
   margin-top: $nav-link-height + $nav-link-padding-y * 2;
   background-size: cover;
 }
+
+.avatar {
+  vertical-align: middle;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}

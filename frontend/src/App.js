@@ -1,8 +1,13 @@
 import './App.scss';
 
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useEffect, useState } from 'react';
+import {
+  Redirect,
+  BrowserRouter as Router,
+  Route,
+  Switch
+} from 'react-router-dom';
 import { Navigation } from './components/Navigation';
 import { ExploreListToggle } from './components/ExploreList/ExploreListToggle';
 import { ExploreList } from './components/ExploreList/ExploreList';
@@ -12,10 +17,25 @@ import { Homepage } from './components/Homepage';
 import { Mapview } from './components/Mapview';
 import { IdeasBoard } from './components/IdeasBoard/IdeasBoard';
 import { TripList } from './components/TripList';
+import { Login } from './components/Login';
+import { Signup } from './components/Signup';
 import { eachDayOfInterval, format } from 'date-fns/esm';
-import { Sliders } from 'react-bootstrap-icons';
 
 function App() {
+  const [userState, setUserState] = useState({ isLoggedIn: false, user: {} });
+  const [loginForm, setloginForm] = useState({
+    username: '',
+    email: '',
+    password: '',
+    profile_url: ''
+  });
+  const [signupForm, setSignupForm] = useState({
+    username: '',
+    email: '',
+    profile_url: '',
+    password: '',
+    password_confirmation: ''
+  });
   const [exploreOpen, setExploreOpen] = useState(false);
   const [tripOpen, setTripOpen] = useState(false);
   const [tripList, setTripList] = useState([]);
@@ -28,6 +48,35 @@ function App() {
 
   //Mock user_id
   const user_id = 1;
+
+  const loginStatus = () => {
+    axios
+      .get('/logged_in', { withCredentials: true })
+      .then((res) => {
+        if (res.data.logged_in) {
+          handleLogin(res);
+        } else {
+          handleLogout();
+        }
+      })
+      .catch((error) => console.log('error ', error));
+  };
+
+  const handleLogin = (data) => {
+    if (data.user) {
+      setUserState({
+        isLoggedIn: true,
+        user: data.user
+      });
+    }
+  };
+
+  const handleLogout = () => {
+    setUserState({
+      isLoggedIn: false,
+      user: {}
+    });
+  };
 
   const [tripData, setTripData] = useState({
     itinerary: { days: [] },
@@ -79,6 +128,46 @@ function App() {
   const matchActivity = (activity_id) => {
     const result = exploreList.find((actvity) => actvity.id === activity_id);
     return result;
+  };
+
+  const loginFormChangeHandler = (event) => {
+    const { name, value } = event.target;
+    setloginForm({ ...loginForm, [name]: value });
+  };
+
+  const signupFormChangeHandler = (event) => {
+    const { name, value } = event.target;
+    console.log(name, value);
+    setSignupForm({ ...signupForm, [name]: value });
+  };
+
+  const submitLoginForm = (event) => {
+    console.log('submit Login');
+    event.preventDefault();
+    const user = { ...loginForm };
+    axios.post(`/login`, { user }, { withCredentials: true }).then((res) => {
+      if (res.data.logged_in) {
+        handleLogin(res.data);
+        <Redirect to='/' />;
+      } else {
+        console.log(res.data.message);
+      }
+    });
+  };
+
+  const submitSignupForm = (event) => {
+    event.preventDefault();
+    console.log('submit signup');
+    const user = { ...signupForm };
+    console.log(user);
+    axios.post(`/users`, { user }, { withCredentials: true }).then((res) => {
+      if (res.data.status === 'created') {
+        handleLogin(res.data);
+        <Redirect to='/' />;
+      } else {
+        console.log(res.data.message);
+      }
+    });
   };
 
   const addNewTrip = (start_date, end_date, name, user_id) => {
@@ -328,6 +417,8 @@ function App() {
 
   // Initial data/state
   useEffect(() => {
+    loginStatus();
+
     axios.get(`/trips`).then((res) => {
       setTripList(res.data);
     });
@@ -359,7 +450,7 @@ function App() {
   return (
     <main className='app'>
       <Router>
-        <Navigation />
+        <Navigation userState={userState} />
         <ExploreListToggle click={exploreListToggleClickHandler} />
         {exploreDrawer}
         <TripDetailsToggle click={tripToggleClickHandler} />
@@ -369,6 +460,29 @@ function App() {
           <section className='backdrop'>
             <Route path='/' exact component={Homepage}></Route>
             <Route path='/Mapview' exact component={Mapview}></Route>
+            <Route
+              path='/Login'
+              exact
+              render={() => (
+                <Login
+                  loginForm={loginForm}
+                  handleFormChange={loginFormChangeHandler}
+                  submitLoginForm={submitLoginForm}
+                />
+              )}
+            ></Route>
+            <Route
+              path='/Signup'
+              exact
+              render={() => (
+                <Signup
+                  signupForm={signupForm}
+                  signupFormChangeHandler={signupFormChangeHandler}
+                  submitSignupForm={submitSignupForm}
+                />
+              )}
+            ></Route>
+
             <Route
               path='/TripList'
               render={() => (

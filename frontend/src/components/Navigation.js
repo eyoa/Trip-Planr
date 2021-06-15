@@ -1,7 +1,8 @@
 import { Nav, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-export const Navigation = () => {
+export const Navigation = (props) => {
+  const { userState } = props;
   return (
     <Navbar fixed='top' bg='light' expand='lg' className='flexColumn'>
       <Navbar.Brand>
@@ -19,7 +20,22 @@ export const Navigation = () => {
           <Nav.Link as={Link} to='/TripList'>
             My trips
           </Nav.Link>
-          <Nav.Link>Login</Nav.Link>
+          <Nav.Link as={Link} to='/Login'>
+            Login
+          </Nav.Link>
+          <Nav>
+            {userState.isLoggedIn && userState.user ? (
+              // <div>{userState.user.username}</div>
+              //userState.user.profile_url
+              <img
+                src='/img/profileImg/spongebob.jpg'
+                alt='Avatar'
+                className='avatar'
+              ></img>
+            ) : (
+              <></>
+            )}
+          </Nav>
         </Nav>
       </Navbar.Collapse>
     </Navbar>

@@ -11,14 +11,13 @@ puts "Seeding Data ..."
 ## Users
 puts "Re-creating Users ..."
 User.destroy_all
-10.times do
+
   User.create!({
-    username: Faker::Internet.username,
-    email: Faker::Internet.email,
-    password: '123456',
-    profile_url: Faker::Internet.url
+    username: 'test',
+    email: 'test@testing.com',
+    password_digest: '$2a$12$jcxy3VYvdEGZbvJXTNbsdOBu5f99LZT/zNukkY6MkYtm4t2gS3aGm',
+    profile_url: '/img/profileImg/spongebob.jpg'
   })
-end
 
 ##Trips
 puts "Re-creating Trips ..."
