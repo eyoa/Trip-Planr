@@ -6,7 +6,8 @@ import {
   Redirect,
   BrowserRouter as Router,
   Route,
-  Switch
+  Switch,
+  useHistory
 } from 'react-router-dom';
 import { Navigation } from './components/Navigation';
 import { ExploreListToggle } from './components/ExploreList/ExploreListToggle';
@@ -46,9 +47,7 @@ function App() {
     dayOrder: 1
   });
 
-  //Mock user_id
-  // const user_id = 1;
-
+  var router = require('react-router');
   const loginStatus = () => {
     axios
       .get('/logged_in', { withCredentials: true })
@@ -149,7 +148,13 @@ function App() {
     axios.post(`/login`, { user }, { withCredentials: true }).then((res) => {
       if (res.data.logged_in) {
         handleLogin(res.data);
-        <Redirect to='/' />;
+        setloginForm({
+          username: '',
+          email: '',
+          password: '',
+          profile_url: ''
+        });
+        return <Redirect to='/' />;
       } else {
         console.log(res.data.message);
       }
@@ -164,7 +169,6 @@ function App() {
     axios.post(`/users`, { user }, { withCredentials: true }).then((res) => {
       if (res.data.status === 'created') {
         handleLogin(res.data);
-        <Redirect to='/' />;
       } else {
         console.log(res.data.message);
       }
@@ -484,13 +488,17 @@ function App() {
             <Route
               path='/Login'
               exact
-              render={() => (
-                <Login
-                  loginForm={loginForm}
-                  handleFormChange={loginFormChangeHandler}
-                  submitLoginForm={submitLoginForm}
-                />
-              )}
+              render={() =>
+                userState.isLoggedIn ? (
+                  <Redirect to='/' />
+                ) : (
+                  <Login
+                    loginForm={loginForm}
+                    handleFormChange={loginFormChangeHandler}
+                    submitLoginForm={submitLoginForm}
+                  />
+                )
+              }
             ></Route>
             <Route
               path='/Signup'
