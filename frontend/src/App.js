@@ -47,13 +47,13 @@ function App() {
   });
 
   //Mock user_id
-  const user_id = 1;
+  // const user_id = 1;
 
   const loginStatus = () => {
     axios
       .get('/logged_in', { withCredentials: true })
       .then((res) => {
-        if (res.data.logged_in) {
+        if (res.data.logged_in && res.data.user) {
           handleLogin(res);
         } else {
           handleLogout();
@@ -76,6 +76,7 @@ function App() {
       isLoggedIn: false,
       user: {}
     });
+    setTripData({ itinerary: '', ideasList: '' });
   };
 
   const [tripData, setTripData] = useState({
@@ -190,7 +191,11 @@ function App() {
 
       Promise.all([requests])
         .then((res) => {
-          setTripList([...tripList, this.newTrip]);
+          axios
+            .get(`/trips`, { params: { user_id: userState.user.id } })
+            .then((res) => {
+              setTripList(res.data);
+            });
         })
 
         .catch((errors) => console.log(errors));
@@ -199,9 +204,11 @@ function App() {
 
   const removeTrip = (event) => {
     const id = event.target.value;
-    axios.delete(`/trips/${id}`).then((res) => {
-      setTripList(res.data);
-    });
+    axios
+      .delete(`/trips/${id}`, { params: { user_id: userState.user.id } })
+      .then((res) => {
+        setTripList(res.data);
+      });
   };
 
   const selectDay = (day) => {
@@ -216,15 +223,18 @@ function App() {
 
   const suggestActivity = (e, activity_id) => {
     e.stopPropagation();
-    axios
-      .post(`/trips/${selectTrip}/ideas`, null, { params: { activity_id } })
-      .then((res) => {
-        const newIdea = ideasHelper([res.data]);
-        const newIdeasList = [...tripData.ideasList, ...newIdea];
 
-        setTripData({ ...tripData, ideasList: newIdeasList });
-      })
-      .catch((err) => console.log(err));
+    if (userState.isLoggedIn) {
+      axios
+        .post(`/trips/${selectTrip}/ideas`, null, { params: { activity_id } })
+        .then((res) => {
+          const newIdea = ideasHelper([res.data]);
+          const newIdeasList = [...tripData.ideasList, ...newIdea];
+
+          setTripData({ ...tripData, ideasList: newIdeasList });
+        })
+        .catch((err) => console.log(err));
+    }
   };
 
   const removeIdea = (e, idea_id) => {
@@ -243,30 +253,34 @@ function App() {
 
   const addEntryToTrip = (e, activity_id) => {
     e.stopPropagation();
-    const newOrder = tripData.itinerary.days[activeDay.dayOrder].entries.length;
 
-    const entryObj = {
-      activity_id,
-      order: newOrder
-    };
-    if (activity_id && selectTrip && activeDay) {
-      axios
-        .post(`/trips/${selectTrip}/days/${activeDay.day_id}/entries`, null, {
-          params: entryObj
-        })
-        .then((res) => {
-          const activities = matchActivity(res.data.activity_id);
-          const newEntryObj = [{ ...res.data, activities }];
+    if (userState.isLoggedIn) {
+      const newOrder =
+        tripData.itinerary.days[activeDay.dayOrder].entries.length;
 
-          const EntriesArr = [
-            ...tripData.itinerary.days[activeDay.dayOrder].entries,
-            ...newEntryObj
-          ];
+      const entryObj = {
+        activity_id,
+        order: newOrder
+      };
+      if (activity_id && selectTrip && activeDay) {
+        axios
+          .post(`/trips/${selectTrip}/days/${activeDay.day_id}/entries`, null, {
+            params: entryObj
+          })
+          .then((res) => {
+            const activities = matchActivity(res.data.activity_id);
+            const newEntryObj = [{ ...res.data, activities }];
 
-          const itinerary = { ...tripData.itinerary };
-          itinerary.days[activeDay.dayOrder].entries = EntriesArr;
-          setTripData({ ...tripData, itinerary });
-        });
+            const EntriesArr = [
+              ...tripData.itinerary.days[activeDay.dayOrder].entries,
+              ...newEntryObj
+            ];
+
+            const itinerary = { ...tripData.itinerary };
+            itinerary.days[activeDay.dayOrder].entries = EntriesArr;
+            setTripData({ ...tripData, itinerary });
+          });
+      }
     }
   };
 
@@ -295,6 +309,8 @@ function App() {
 
   const addVotes = (e, idea_id, current_votes, index) => {
     e.stopPropagation();
+
+    const user_id = userState.user.id;
     if (!current_votes.includes(user_id)) {
       axios
         .post(`/trips/${selectTrip}/ideas/${idea_id}/votes`, null, {
@@ -312,6 +328,7 @@ function App() {
 
   const removeVotes = (e, idea_id, current_votes, idea_index) => {
     e.stopPropagation();
+    const user_id = userState.user.id;
     const voteIndex = current_votes.findIndex((vote) => {
       return vote.user_id === user_id;
     });
@@ -404,6 +421,7 @@ function App() {
     tripDrawer = (
       <TripDetails
         tripList={tripList}
+        userState={userState}
         selectTrip={selectTrip}
         tripData={tripData.itinerary}
         tripSelectHandler={tripSelectHandler}
@@ -418,17 +436,19 @@ function App() {
   // Initial data/state
   useEffect(() => {
     loginStatus();
-
-    axios.get(`/trips`).then((res) => {
-      setTripList(res.data);
-    });
-  }, []);
-
-  useEffect(() => {
     axios.get(`/activities`).then((res) => {
       setExploreList(res.data);
     });
   }, []);
+
+  //get list of trips for user when they login
+  useEffect(() => {
+    axios
+      .get(`/trips`, { params: { user_id: userState.user.id } })
+      .then((res) => {
+        setTripList(res.data);
+      });
+  }, [userState]);
 
   //update tripData state and select first day when selecting trip
   useEffect(() => {
@@ -450,7 +470,7 @@ function App() {
   return (
     <main className='app'>
       <Router>
-        <Navigation userState={userState} />
+        <Navigation userState={userState} handleLogout={handleLogout} />
         <ExploreListToggle click={exploreListToggleClickHandler} />
         {exploreDrawer}
         <TripDetailsToggle click={tripToggleClickHandler} />
@@ -488,6 +508,7 @@ function App() {
               render={() => (
                 <TripList
                   tripList={tripList}
+                  userState={userState}
                   addNewTrip={addNewTrip}
                   removeTrip={removeTrip}
                 />
@@ -498,11 +519,12 @@ function App() {
               render={() => (
                 <IdeasBoard
                   ideasList={tripData.ideasList}
+                  userState={userState}
                   addCustomIdea={addCustomIdea}
                   trip_id={selectTrip}
                   addVotes={addVotes}
                   removeVotes={removeVotes}
-                  user_id={user_id}
+                  user_id={userState.user.id}
                   addEntryToTrip={addEntryToTrip}
                   removeIdea={removeIdea}
                 />

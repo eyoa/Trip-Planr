@@ -2,9 +2,8 @@ class TripsController < ApplicationController
   
   # list of trips
   def index
-    @trips = Trip.all
-    render json: @trips.to_json
-    # render 'trips/index.json.jb'
+    @trips = Trip.where(user_id: params[:user_id])
+    render json: @trips.to_json(:include => [:collaborators])
   end
 
   # Itinerary - specific trip with days, entries and activity information
@@ -35,7 +34,7 @@ class TripsController < ApplicationController
   def destroy
 
     if Trip.delete_by(id: params[:id])
-      @trips = Trip.all
+      @trips = Trip.where(user_id: params[:user_id])
       render json: @trips.to_json, status: :ok
     else
       render json: { status: 'error', code: 3000, message: 'Could not remove trip.' }

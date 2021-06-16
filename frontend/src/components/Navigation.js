@@ -2,7 +2,7 @@ import { Nav, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 export const Navigation = (props) => {
-  const { userState } = props;
+  const { userState, handleLogout } = props;
   return (
     <Navbar fixed='top' bg='light' expand='lg' className='flexColumn'>
       <Navbar.Brand>
@@ -20,9 +20,13 @@ export const Navigation = (props) => {
           <Nav.Link as={Link} to='/TripList'>
             My trips
           </Nav.Link>
-          <Nav.Link as={Link} to='/Login'>
-            Login
-          </Nav.Link>
+          {userState.isLoggedIn ? (
+            <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
+          ) : (
+            <Nav.Link as={Link} to='/Login'>
+              Login
+            </Nav.Link>
+          )}
           <Nav>
             {userState.isLoggedIn && userState.user ? (
               // <div>{userState.user.username}</div>

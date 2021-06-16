@@ -49,7 +49,7 @@ export const IdeaCard = (props) => {
               <p>
                 <copy>{description}</copy>
               </p>
-              <button className='remove-idea-button btn' onClick={removeIdea}>
+              <button className='remove-idea-btn' onClick={removeIdea}>
                 remove
               </button>
             </div>

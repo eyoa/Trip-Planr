@@ -8,6 +8,7 @@ export const IdeasBoard = (props) => {
   const {
     ideasList,
     trip_id,
+    userState,
     addCustomIdea,
     addVotes,
     removeVotes,
@@ -56,8 +57,11 @@ export const IdeasBoard = (props) => {
             <h1>Ideas Board</h1>
           </Col>
         </Row>
-        {/* hide temp form */}
-        {/* <Row className='justify-content-end'>
+
+        {userState.isLoggedIn ? (
+          <>
+            {/* hide temp form */}
+            {/* <Row className='justify-content-end'>
           <Button onClick={() => {}}>Add Custom Idea</Button>
         </Row>
         <Row className='justify-content-md-center'>
@@ -66,9 +70,15 @@ export const IdeasBoard = (props) => {
             addCustomIdea={addCustomIdea}
           />
         </Row> */}
-        <Row className='justify-content-md-center'>
-          <Col className='ideas-container'>{ideas}</Col>
-        </Row>
+            <Row className='justify-content-md-center'>
+              <Col className='ideas-container'>{ideas}</Col>
+            </Row>
+          </>
+        ) : (
+          <>
+            <Row>Please Login</Row>
+          </>
+        )}
       </Container>
     </div>
   );

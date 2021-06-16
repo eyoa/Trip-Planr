@@ -1,17 +1,22 @@
 import { useState, Fragment } from 'react';
-import { Row, Col, Button, Form } from 'react-bootstrap';
+import {
+  Row,
+  Col,
+  Button,
+  Form,
+  FormControl,
+  ListGroup,
+  InputGroup
+} from 'react-bootstrap';
 import { DateRange } from 'react-date-range';
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './TripList.scss';
+import { List } from 'react-bootstrap-icons';
 
 export const TripList = (props) => {
-  // HardCode User_id
-  const user_id = 1;
-
-  // rest of it
-  const { tripList, addNewTrip, removeTrip } = props;
+  const { tripList, addNewTrip, removeTrip, userState } = props;
   const [openForm, setOpenForm] = useState(false);
   const [newTripName, setNewTripName] = useState('');
   const [newTripInfo, setNewTripInfo] = useState([
@@ -22,6 +27,8 @@ export const TripList = (props) => {
     }
   ]);
 
+  const user_id = userState.user.id;
+
   function formInputHandler(event) {
     setNewTripName(event.target.value);
   }
@@ -30,14 +37,41 @@ export const TripList = (props) => {
     ? tripList.map((tripList) => {
         return (
           <Fragment>
-            <Row>
-              <Col>{tripList.name}</Col>
-              <Col>
+            <ListGroup.Item variant='info'>
+              <div>{tripList.name}</div>
+
+              {tripList.collaborators ? (
+                tripList.collaborators.map((collaborator) => {
+                  return (
+                    <Fragment>
+                      <ul>
+                        {collaborator}
+                        <Button>-</Button>
+                      </ul>
+                    </Fragment>
+                  );
+                })
+              ) : (
+                <></>
+              )}
+              <div>
+                <InputGroup className='mb-3'>
+                  <FormControl
+                    placeholder='username'
+                    aria-label='collaborator username'
+                    aria-describedby='basic-addon2'
+                  />
+                  <Button variant='outline-secondary' id='button-addon2'>
+                    +
+                  </Button>
+                </InputGroup>
+              </div>
+              <div>
                 <Button value={tripList.id} onClick={removeTrip}>
-                  remove
+                  remove trip
                 </Button>
-              </Col>
-            </Row>
+              </div>
+            </ListGroup.Item>
           </Fragment>
         );
       })
@@ -89,21 +123,30 @@ export const TripList = (props) => {
       <Row className='justify-content-center'>
         <h1>My Trips</h1>
       </Row>
-      <Row className='justify-content-end'>
-        <Button
-          onClick={() => {
-            setOpenForm(!openForm);
-          }}
-        >
-          Make a new Trip
-        </Button>
-      </Row>
-      <Row className='justify-content-center'>{form}</Row>
-      <Row className='justify-content-center'>
-        <Col xs lg='2'></Col>
-        <Col xs={{ span: 8, offset: 3 }}>{trips}</Col>
-        <Col xs lg='2'></Col>
-      </Row>
+
+      {userState.isLoggedIn ? (
+        <>
+          <Row className='justify-content-end'>
+            <Button
+              onClick={() => {
+                setOpenForm(!openForm);
+              }}
+            >
+              Make a new Trip
+            </Button>
+          </Row>
+          <Row className='justify-content-center'>{form}</Row>
+          <Col xs lg='2'></Col>
+          <Col xs={{ span: 8, offset: 3 }}>
+            <ListGroup variant='flush'>{trips}</ListGroup>
+          </Col>
+          <Col xs lg='2'></Col>
+        </>
+      ) : (
+        <>
+          <Row>Please login</Row>
+        </>
+      )}
     </div>
   );
 };

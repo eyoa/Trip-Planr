@@ -7,6 +7,7 @@ import { Fragment } from 'react';
 export const TripDetails = (props) => {
   const {
     tripList,
+    userState,
     tripSelectHandler,
     tripData,
     selectDay,
@@ -29,27 +30,37 @@ export const TripDetails = (props) => {
 
   return (
     <nav className='trip-drawer'>
-      <Row className='justify-content-center day-select'>
-        <Dropdown onSelect={tripSelectHandler}>
-          <Dropdown.Toggle variant='outline-primary' id='dropdown-basic' block>
-            My Trips
-          </Dropdown.Toggle>
-          <Dropdown.Menu>{trips}</Dropdown.Menu>
-        </Dropdown>
-      </Row>
-      <Row className='justify-content=center trip-details-container'>
-        {tripData ? (
-          <DayTab
-            days={tripData.days}
-            selectDay={selectDay}
-            activeDay={activeDay}
-            removeEntry={removeEntry}
-            onDragEndHandler={onDragEndHandler}
-          />
-        ) : (
-          <></>
-        )}
-      </Row>
+      {userState.isLoggedIn ? (
+        <>
+          <Row className='justify-content-center day-select'>
+            <Dropdown onSelect={tripSelectHandler}>
+              <Dropdown.Toggle
+                variant='outline-primary'
+                id='dropdown-basic'
+                block
+              >
+                My Trips
+              </Dropdown.Toggle>
+              <Dropdown.Menu>{trips}</Dropdown.Menu>
+            </Dropdown>
+          </Row>
+          <Row className='justify-content=center trip-details-container'>
+            {tripData ? (
+              <DayTab
+                days={tripData.days}
+                selectDay={selectDay}
+                activeDay={activeDay}
+                removeEntry={removeEntry}
+                onDragEndHandler={onDragEndHandler}
+              />
+            ) : (
+              <></>
+            )}
+          </Row>
+        </>
+      ) : (
+        <div>{`Login to access your trips`}</div>
+      )}
     </nav>
   );
 };

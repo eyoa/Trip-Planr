@@ -12,8 +12,9 @@ class CollaboratorsController < ApplicationController
 
   # Remove collaborator
   def destroy
-    if Collaborator.find params[:id].destroy
-      render json: {}, status: :ok
+    @collaborator = Collaborator.find params[:id]
+    if @collaborator.destory
+      render json: @collaborator, status: :ok
     else
       render json: { status: 'error', code: 3000, message: 'Could not remove collaborator.' }
     end
@@ -21,7 +22,7 @@ class CollaboratorsController < ApplicationController
 
   private
   def collaborator_params
-    params.require(:collaborator, :user_id, :trip_id)
+    params.require(:collaborator).permit(:user_id, :trip_id)
   end
 
 end
