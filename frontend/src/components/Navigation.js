@@ -32,7 +32,7 @@ export const Navigation = (props) => {
               // <div>{userState.user.username}</div>
               //userState.user.profile_url
               <img
-                src='/img/profileImg/spongebob.jpg'
+                src={userState.user.profile_url}
                 alt='Avatar'
                 className='avatar'
               ></img>

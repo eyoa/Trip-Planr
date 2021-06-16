@@ -13,11 +13,42 @@ puts "Re-creating Users ..."
 User.destroy_all
 
   User.create!({
-    username: 'test',
-    email: 'test@testing.com',
-    password_digest: '$2a$12$jcxy3VYvdEGZbvJXTNbsdOBu5f99LZT/zNukkY6MkYtm4t2gS3aGm',
+    username: 'spongebob',
+    email: 'pineapple@underthesea.com',
+    password_digest: '$2a$12$83Gq2b64hSSBaL/IUleVw.ZiOQE8mAvTkEAULOJWc3Bwk2CZxxqTq',
     profile_url: '/img/profileImg/spongebob.jpg'
   })
+
+  User.create!({
+    username: 'batman',
+    email: 'man@batcave.com',
+    password_digest: '$2a$12$JvbkflQC3UQssymUVeAdC.7M/vp3j89RGvt6vemRryAyx7yZAzkVq',
+    profile_url: '/img/profileImg/batman.jpg'
+  })
+
+  User.create!({
+    username: 'spiderman',
+    email: 'spidey@neighbourhood.com',
+    password_digest: '$2a$12$ZUfDyxH5QPrBDY29kFEDB.zEMaM6pe/TFaOO3a1.CDS9mXCBIs2dq',
+    profile_url: '/img/profileImg/spiderman.jpg'
+  })
+
+  User.create!({
+    username: 'pikachu',
+    email: 'mouse@ViridianForest.com',
+    password_digest: '$2a$12$G9g3o/R7DqGLs9CtJF8e8OnOkWwFruZieFbhmGOxAECDOMXnrxPG.',
+    profile_url: '/img/profileImg/Pikachu.jpg'
+  })
+
+
+  User.create!({
+    username: 'joker',
+    email: 'protagonist@P5.com',
+    password_digest: '$2a$12$/aDz4xJ3m0CmE.OeqH4l1e.CmCckQZM.MIoMY2R8qCY6H2RPbWUvu',
+    profile_url: '/img/profileImg/Joker.jpg'
+  })
+
+
 
 ##Trips
 puts "Re-creating Trips ..."
@@ -27,35 +58,35 @@ trip1 = Trip.create!({
   name: Faker::Marketing.buzzwords,
   start_date: Faker::Date.backward(days: 5),
   end_date: Faker::Date.forward(days: 5),
-  user_id: 1
+  user_id: rand(1..User.count)
 })
 
 trip2 = Trip.create!({
   name: Faker::Marketing.buzzwords,
   start_date: Faker::Date.backward(days: 5),
   end_date: Faker::Date.forward(days: 5),
-  user_id: 1
+  user_id: rand(1..User.count)
 })
 
 trip3 = Trip.create!({
   name: Faker::Marketing.buzzwords,
   start_date: Faker::Date.backward(days: 5),
   end_date: Faker::Date.forward(days: 5),
-  user_id: 1
+  user_id: rand(1..User.count)
 })
 
 trip4 = Trip.create!({
   name: Faker::Marketing.buzzwords,
   start_date: Faker::Date.backward(days: 5),
   end_date: Faker::Date.forward(days: 5),
-  user_id: 1
+  user_id: rand(1..User.count)
 })
 
 trip5 = Trip.create!({
   name: Faker::Marketing.buzzwords,
   start_date: Faker::Date.backward(days: 5),
   end_date: Faker::Date.forward(days: 5),
-  user_id: 1
+  user_id: rand(1..User.count)
 })
 
 
@@ -139,6 +170,8 @@ t5d1 = trip5.days.create!({
   name: 'June 20th (Sat)',
   order: 0
 })
+
+
 ##entries
 puts "Re-creating Entries..."
 Entry.destroy_all
