@@ -76,14 +76,15 @@ aside.itinerary-add {
   position: absolute;
   bottom: 0;
   left: 0;
-  min-width: 3em;
+  min-width: 2em;
   min-height: 2em;
   margin-right: 0.5rem;
   font-size: 1.5em;
-
+  z-index: 1000;
   :hover,
   :focus {
-    transform: translateY(-0.15em);
+    transform: scale(1.1);
+    fill: orange;
   }
 }
 
@@ -106,10 +107,16 @@ aside.votes {
   background-color: transparent;
   font-size: 1em;
   font-weight: bold;
-  color: #eee;
-
-  &:hover {
-    background-color: orange;
+  color: grey;
+  z-index: 1000;
+  :hover {
+    transform: scale(1.2);
+  }
+}
+.add-entry-btn {
+  :hover,
+  :focus {
+    transform: scale(1.3);
   }
 }
 

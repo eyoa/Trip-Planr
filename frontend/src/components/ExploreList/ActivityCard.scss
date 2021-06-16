@@ -87,7 +87,7 @@ aside.add {
   :hover,
   :focus {
     color: orange;
-    transform: translateY(-0.15em);
+    transform: scale(1.2);
   }
 }
 
@@ -102,6 +102,6 @@ aside.suggest {
 
   :hover,
   :focus {
-    transform: translateY(-0.25em);
+    transform: scale(1.2);
   }
 }

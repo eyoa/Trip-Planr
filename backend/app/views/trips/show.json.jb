@@ -8,11 +8,11 @@ json = {
   
 }
 
-json[:days] = @trip.days.map {|day| {
+json[:days] = (@trip.days.sort_by {|day| day.order}).map {|day| {
     id: day.id,
     name: day.name,
     order: day.order,
-    entries: (day.entries.map{|entry|{
+    entries: ((day.entries).sort_by{|entry| entry.order}.map{|entry|{
       id: entry.id,
       order: entry.order,
       start_time: entry.start_time,

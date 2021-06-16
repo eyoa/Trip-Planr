@@ -182,6 +182,7 @@ function App() {
     axios.post(`/trips`, null, { params: obj }).then((res) => {
       const newtrip = res.data;
       const daysArr = numDaysHelper(start_date, end_date, newtrip.id);
+      console.log(daysArr);
 
       const requests = daysArr.map((day) =>
         axios
@@ -257,7 +258,6 @@ function App() {
     if (userState.isLoggedIn) {
       const newOrder =
         tripData.itinerary.days[activeDay.dayOrder].entries.length;
-
       const entryObj = {
         activity_id,
         order: newOrder
@@ -457,6 +457,7 @@ function App() {
         axios.get(`/trips/${selectTrip}`),
         axios.get(`/trips/${selectTrip}/ideas`)
       ]).then(([itinerary, ideasList]) => {
+        console.log(itinerary.data);
         setTripData({
           itinerary: itinerary.data,
           ideasList: ideasHelper(ideasList.data)

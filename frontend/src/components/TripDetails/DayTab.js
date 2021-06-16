@@ -12,6 +12,7 @@ export const DayTab = (props) => {
     for (const item of array) {
       result[item.order] = item;
     }
+    console.log(result);
     return result;
   };
 

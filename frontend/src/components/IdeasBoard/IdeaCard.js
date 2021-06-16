@@ -62,11 +62,11 @@ export const IdeaCard = (props) => {
               return vote.user_id === user_id;
             }).length > 0 ? (
               <aside className='votes' onClick={removeVotes}>
-                <Heart />
+                <HeartFill fill='red' />
               </aside>
             ) : (
               <aside className='votes' onClick={addVotes}>
-                <HeartFill />
+                <Heart />
               </aside>
             )}
           </div>
@@ -98,12 +98,12 @@ export const IdeaCard = (props) => {
                 {votes.filter((vote) => {
                   return vote.user_id === user_id;
                 }).length > 0 ? (
-                  <Heart onClick={removeVotes} />
+                  <HeartFill fill='red' onClick={removeVotes} />
                 ) : (
-                  <HeartFill onClick={addVotes} />
+                  <Heart onClick={addVotes} />
                 )}
               </div>
-              <div onClick={addEntryToTrip}>
+              <div onClick={addEntryToTrip} className='add-entry-btn'>
                 <CalendarPlusFill />
               </div>
             </Modal.Footer>
