@@ -4,9 +4,9 @@ Final Project for LHL - A collaborative travel itinerary planner full stack app.
 
 ## Final Product
 
-!["Planing"]()
-!["Make New Trip"]()
-!["Detailed View"](https://github.com/eyoa/scheduler/blob/features/README/public/images/Screenshots/BookedInterview.png?raw=true)
+!["Planing"](https://github.com/eyoa/Trip-Planr/blob/tweak/presentation/frontend/public/img/Screenshots/TripPlanr.png?raw=true)
+!["Make New Trip"](https://github.com/eyoa/Trip-Planr/blob/tweak/presentation/frontend/public/img/Screenshots/MakeTrip.png?raw=true)
+!["Detailed View"](https://github.com/eyoa/Trip-Planr/blob/tweak/presentation/frontend/public/img/Screenshots/DetailView.png?raw=true)
 
 ## Tech Stack
 
