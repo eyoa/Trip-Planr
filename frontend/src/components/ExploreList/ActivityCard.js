@@ -2,7 +2,7 @@ import './ActivityCard.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 // import ReactTooltip from 'react-tooltip';
 import { Card } from 'react-bootstrap';
-import { PlusSquareFill, Lightbulb } from 'react-bootstrap-icons';
+import { PlusSquareFill, Lightbulb, StarFill } from 'react-bootstrap-icons';
 import { Modal, Image, Row } from 'react-bootstrap';
 import { useState } from 'react';
 
@@ -25,7 +25,6 @@ export const ActivityCard = (props) => {
   const handleClose = () => setShowDetails(false);
   const handleShow = () => setShowDetails(true);
 
-  // console.log(`id  is ${id}`);
   return (
     <>
       {name && short_description && (
@@ -38,7 +37,10 @@ export const ActivityCard = (props) => {
               backgroundSize: 'cover'
             }}
           >
-            <aside className='rating'>{rating}</aside>
+            <aside className='rating'>
+              <span>{`${rating} `}</span>
+              <StarFill fill='orange' />
+            </aside>
             <aside className='add' onClick={addEntryToTrip}>
               <PlusSquareFill />
             </aside>

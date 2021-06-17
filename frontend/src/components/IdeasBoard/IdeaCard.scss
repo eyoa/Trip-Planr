@@ -87,6 +87,7 @@ aside.itinerary-add {
   z-index: 1000;
   :hover,
   :focus {
+    cursor: pointer;
     transform: scale(1.1);
     fill: rgb(95, 112, 168);
   }
@@ -114,13 +115,18 @@ aside.votes {
   color: rgb(38, 65, 155);
   z-index: 1000;
   :hover {
-    transform: scale(1.2);
+    cursor: pointer;
+    transform: scale(1.1);
+    fill: red;
   }
 }
+
 .add-entry-btn {
   :hover,
   :focus {
-    transform: scale(1.3);
+    cursor: pointer;
+    transform: scale(1.1);
+    fill: rgb(95, 112, 168);
   }
 }
 
