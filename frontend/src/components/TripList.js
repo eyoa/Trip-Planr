@@ -13,7 +13,6 @@ import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './TripList.scss';
-import { List } from 'react-bootstrap-icons';
 
 export const TripList = (props) => {
   const { tripList, addNewTrip, removeTrip, userState } = props;
@@ -62,7 +61,7 @@ export const TripList = (props) => {
                     aria-describedby='basic-addon2'
                   />
                   <Button variant='outline-secondary' id='button-addon2'>
-                    +
+                    Button
                   </Button>
                 </InputGroup>
               </div>
@@ -90,6 +89,8 @@ export const TripList = (props) => {
             newTripName,
             user_id
           );
+          setNewTripName('');
+          setOpenForm(!openForm);
         }}
       >
         <Form.Group>

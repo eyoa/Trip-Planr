@@ -154,7 +154,6 @@ function App() {
           password: '',
           profile_url: ''
         });
-        return <Redirect to='/' />;
       } else {
         console.log(res.data.message);
       }
@@ -169,6 +168,13 @@ function App() {
     axios.post(`/users`, { user }, { withCredentials: true }).then((res) => {
       if (res.data.status === 'created') {
         handleLogin(res.data);
+        setSignupForm({
+          username: '',
+          email: '',
+          profile_url: '',
+          password: '',
+          password_confirmation: ''
+        });
       } else {
         console.log(res.data.message);
       }
