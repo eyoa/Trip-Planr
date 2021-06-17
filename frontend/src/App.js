@@ -47,7 +47,6 @@ function App() {
     dayOrder: 1
   });
 
-  var router = require('react-router');
   const loginStatus = () => {
     axios
       .get('/logged_in', { withCredentials: true })
