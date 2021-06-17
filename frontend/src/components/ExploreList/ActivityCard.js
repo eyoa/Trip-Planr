@@ -10,7 +10,9 @@ export const ActivityCard = (props) => {
   const {
     id,
     name,
-    description,
+    short_description,
+    long_description,
+    price_rating,
     img_url,
     rating,
     category,
@@ -26,7 +28,7 @@ export const ActivityCard = (props) => {
   // console.log(`id  is ${id}`);
   return (
     <>
-      {name && description && (
+      {name && short_description && (
         <>
           <Card
             onClick={handleShow}
@@ -45,7 +47,7 @@ export const ActivityCard = (props) => {
               <Lightbulb onClick={suggestActivity} />
             </aside>
             <h2 className='title'>{name}</h2>
-            <span className='description'>{description}</span>
+            <span className='description'>{short_description}</span>
           </Card>
 
           <Modal
@@ -66,8 +68,9 @@ export const ActivityCard = (props) => {
               <Row>
                 {`Website: `} <a href={url}>{url}</a>
               </Row>
-              <Row>{category}</Row>
-              <Row>{description}</Row>
+              <Row>{`Category: ${category}`}</Row>
+              <Row>{`Price_rating: ${price_rating}`}</Row>
+              <Row>{long_description}</Row>
             </Modal.Body>
             <Modal.Footer></Modal.Footer>
           </Modal>

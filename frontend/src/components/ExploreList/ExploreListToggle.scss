@@ -11,7 +11,7 @@
   transform: scale(1.2) rotate(-90deg);
 
   :hover {
-    animation: turn 1s forwards;
+    animation: turn 0.5s forwards;
   }
 }
 .toggle-button:focus {

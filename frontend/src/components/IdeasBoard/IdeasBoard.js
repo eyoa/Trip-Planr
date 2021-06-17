@@ -27,7 +27,9 @@ export const IdeasBoard = (props) => {
             img_url={idea.activity.img_url}
             start_time={idea.activity.start_time}
             end_time={idea.activity.end_time}
-            description={idea.activity.description}
+            short_description={idea.activity.short_description}
+            long_description={idea.activity.long_description}
+            price_rating={idea.activity.price_rating}
             category={idea.activity.category}
             url={idea.activity.url}
             addVotes={(e) => {

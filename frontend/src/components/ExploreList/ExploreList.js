@@ -13,7 +13,9 @@ export const ExploreList = (props) => {
             key={activityData.id}
             id={activityData.id}
             name={activityData.name}
-            description={activityData.description}
+            short_description={activityData.short_description}
+            long_description={activityData.long_description}
+            price_rating={activityData.price_rating}
             img_url={activityData.img_url}
             rating={activityData.rating}
             category={activityData.category}

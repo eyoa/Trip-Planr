@@ -13,7 +13,9 @@ export const IdeaCard = (props) => {
     end_time,
     category,
     url,
-    description,
+    short_description,
+    long_description,
+    price_rating,
     votes,
     addVotes,
     removeVotes,
@@ -34,7 +36,7 @@ export const IdeaCard = (props) => {
 
   return (
     <>
-      {name && description && (
+      {name && short_description && (
         <>
           <div
             onClick={showIdeaDetailsHandler}
@@ -47,7 +49,7 @@ export const IdeaCard = (props) => {
             <div className='content'>
               <h2 className='idea-name'>{name}</h2>
               <p>
-                <copy>{description}</copy>
+                <copy>{short_description}</copy>
               </p>
               <button className='remove-idea-btn' onClick={removeIdea}>
                 remove
@@ -90,8 +92,9 @@ export const IdeaCard = (props) => {
               <Row>
                 {`Website: `} <a href={url}>{url}</a>
               </Row>
-              <Row>{category}</Row>
-              <Row>{description}</Row>
+              <Row>{`Category: ${category}`}</Row>
+              <Row>{`Price_rating: ${price_rating}`}</Row>
+              <Row>{long_description}</Row>
             </Modal.Body>
             <Modal.Footer>
               <div>

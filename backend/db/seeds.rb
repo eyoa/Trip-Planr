@@ -100,7 +100,9 @@ Activity.destroy_all
 10.times do
   Activity.create!({
     name: Faker::Restaurant.name,
-    description: Faker::Restaurant.description[0...140],
+    short_description: Faker::Restaurant.description[0...140],
+    long_description: Faker::Restaurant.description,
+    price_rating: rand(1...5),
     img_url: imgArr[rand(0...imgArr.length - 1)],
     rating: rand(1..5),
     category: Faker::Restaurant.type,
