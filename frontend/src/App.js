@@ -305,13 +305,34 @@ function App() {
           return entry.id !== entry_id;
         });
 
+        for (let i = 0; i < updateEntries.length; i++) {
+          updateEntries[i].order = i;
+        }
+
         const updateDaysArr = [...tripData.itinerary.days];
         updateDaysArr[activeDay.dayOrder].entries = updateEntries;
 
         const updateItinerary = { ...tripData.itinerary };
         updateItinerary.days = updateDaysArr;
 
-        setTripData({ ...tripData, itinerary: updateItinerary });
+        // setTripData({ ...tripData, itinerary: updateItinerary });
+
+        const reorderRequests = updateEntries.map((entry) =>
+          axios
+            .put(
+              `/trips/${selectTrip}/days/${activeDay.day_id}/entries/${entry.id},`,
+              null,
+              { params: { order: entry.order } }
+            )
+            .catch((err) => console.log(err))
+        );
+
+        Promise.all([reorderRequests])
+          .then((res) => {
+            setTripData({ ...tripData, itinerary: updateItinerary });
+          })
+
+          .catch((errors) => console.log(errors));
       })
       .catch((err) => console.log(err));
   };
@@ -359,13 +380,13 @@ function App() {
   const onDragEndHandler = (result) => {
     // persist reordering
     const { destination, source, draggableId } = result;
-    console.log(result);
-    console.log(`source is ${source.index}`);
-    console.log(`finish pos is ${destination.index}`);
+    // console.log(result);
+    // console.log(`source is ${source.index}`);
+    // console.log(`finish pos is ${destination.index}`);
 
     if (!destination) {
       //convert ID to number
-      console.log(`Remove Entry ${draggableId}`);
+      // console.log(`Remove Entry ${draggableId}`);
       return;
     }
 
