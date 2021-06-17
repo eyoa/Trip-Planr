@@ -36,7 +36,7 @@ export const TripList = (props) => {
     ? tripList.map((tripList) => {
         return (
           <Fragment>
-            <ListGroup.Item variant='info'>
+            <ListGroup.Item variant='dark'>
               <div>{tripList.name}</div>
 
               {tripList.collaborators ? (
@@ -60,13 +60,13 @@ export const TripList = (props) => {
                     aria-label='collaborator username'
                     aria-describedby='basic-addon2'
                   />
-                  <Button variant='outline-secondary' id='button-addon2'>
-                    Button
+                  <Button variant='dark' id='button-addon2'>
+                    +
                   </Button>
                 </InputGroup>
               </div>
               <div>
-                <Button value={tripList.id} onClick={removeTrip}>
+                <Button value={tripList.id} onClick={removeTrip} variant='dark'>
                   remove trip
                 </Button>
               </div>
@@ -119,7 +119,9 @@ export const TripList = (props) => {
             minDate={new Date()}
           />
         </Form.Group>
-        <Button type='submit'>Submit</Button>
+        <Button type='submit' variant='dark'>
+          Submit
+        </Button>
       </Form>
     );
   }
@@ -127,7 +129,7 @@ export const TripList = (props) => {
   return (
     <div className='trip-list-main'>
       <Row className='justify-content-center'>
-        <h1>My Trips</h1>
+        <h1 className='trip-list-title'>My Trips</h1>
       </Row>
 
       {userState.isLoggedIn ? (
@@ -137,6 +139,7 @@ export const TripList = (props) => {
               onClick={() => {
                 setOpenForm(!openForm);
               }}
+              variant='dark'
             >
               Make a new Trip
             </Button>

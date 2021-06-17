@@ -8,6 +8,11 @@
   top: 3.5rem;
   left: 0;
   z-index: 999;
+  transform: scale(1.2) rotate(-90deg);
+
+  :hover {
+    animation: turn 1s forwards;
+  }
 }
 .toggle-button:focus {
   outline: none;
@@ -15,4 +20,13 @@
 
 .categories {
   width: 50px;
+}
+
+@keyframes turn {
+  50% {
+    transform: rotate(45deg);
+  }
+  100% {
+    transform: rotate(45deg);
+  }
 }

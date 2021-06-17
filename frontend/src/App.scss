@@ -1,24 +1,32 @@
 @import '~bootstrap/scss/bootstrap';
 @import 'https://fonts.googleapis.com/css?family=Cardo:400i|Rubik:400,700&display=swap';
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@700&family=Philosopher:wght@700&display=swap');
 
 :root {
   --font-sans: 'Rubik', sans-serif;
   --font-serif: 'Cardo', serif;
 }
-
 .app {
   height: 100%;
   overflow: hidden;
-  font-family: 'Rubik', sans-serif;
+  font-family: 'Philosopher', sans-serif;
 }
 .backdrop {
-  background: #c8a970;
+  background: #b8a27a;
   margin-top: $nav-link-height + $nav-link-padding-y * 2;
   background-size: cover;
 }
 
 .icon {
-  color: rgb(38, 65, 155);
+  color: rgb#53565e;
+}
+
+.nav-bar {
+  background-color: rgb(38, 54, 99);
+}
+
+.nav-bar .nav-link {
+  color: rgb(193, 193, 202) !important;
 }
 
 .avatar {

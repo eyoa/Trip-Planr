@@ -5,7 +5,7 @@ export const ExploreListToggle = (props) => {
   return (
     <button className='toggle-button' onClick={props.click}>
       <div>
-        <ChevronDown />
+        <ChevronDown fill='black' />
       </div>
     </button>
   );

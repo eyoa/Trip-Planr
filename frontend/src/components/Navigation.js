@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 export const Navigation = (props) => {
   const { userState, handleLogout } = props;
   return (
-    <Navbar fixed='top' bg='light' expand='lg' className='flexColumn'>
+    <Navbar fixed='top' expand='lg' className='nav-bar'>
       <Navbar.Brand>
         <b className='icon'>Trip Planr</b>
       </Navbar.Brand>

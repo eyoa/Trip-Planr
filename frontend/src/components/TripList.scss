@@ -1,6 +1,10 @@
 .trip-list-main {
-  min-height: 900px;
+  min-height: 950px;
   padding: 2rem;
   max-width: 70%;
-  background-color: linear-gradient(white, #e4eeed);
+}
+
+.trip-list-title {
+  font-weight: bold;
+  color: rgb#53565e;
 }
