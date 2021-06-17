@@ -50,11 +50,16 @@ export const IdeasBoard = (props) => {
     : 'Select a trip';
 
   return (
-    <div>
+    <div
+      className='ideas-bg'
+      style={{
+        backgroundImage: `url('/img/mapBg.jpg')`
+      }}
+    >
       <Container fluid='sm' className='ideas-board'>
         <Row className='justify-content-md-center'>
           <Col md={{ span: 5, offset: -1 }}>
-            <h1>Ideas Board</h1>
+            <h1 className='idea-title'>Ideas Board</h1>
           </Col>
         </Row>
 

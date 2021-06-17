@@ -84,7 +84,7 @@ aside.itinerary-add {
   :hover,
   :focus {
     transform: scale(1.1);
-    fill: orange;
+    fill: rgb(95, 112, 168);
   }
 }
 
@@ -96,7 +96,7 @@ aside.show-votes {
   background-color: transparent;
   font-size: 1em;
   font-weight: bold;
-  color: #eee;
+  color: rgb(70, 92, 163);
 }
 
 aside.votes {
@@ -107,7 +107,7 @@ aside.votes {
   background-color: transparent;
   font-size: 1em;
   font-weight: bold;
-  color: grey;
+  color: rgb(38, 65, 155);
   z-index: 1000;
   :hover {
     transform: scale(1.2);

@@ -34,14 +34,12 @@ export const TripDetails = (props) => {
         <>
           <Row className='justify-content-center day-select'>
             <Dropdown onSelect={tripSelectHandler}>
-              <Dropdown.Toggle
-                variant='outline-primary'
-                id='dropdown-basic'
-                block
-              >
+              <Dropdown.Toggle variant='dark' id='dropdown-basic' block>
                 My Trips
               </Dropdown.Toggle>
-              <Dropdown.Menu>{trips}</Dropdown.Menu>
+              <Dropdown.Menu className='trip-dropdown-menu'>
+                {trips}
+              </Dropdown.Menu>
             </Dropdown>
           </Row>
           <Row className='justify-content=center trip-details-container'>

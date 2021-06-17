@@ -8,7 +8,6 @@ export const ExploreList = (props) => {
 
   const exploreList = activityData
     ? activityData.map((activityData) => {
-        // console.log(`act id is ${activityData.id}`);
         return (
           <ActivityCard
             key={activityData.id}
@@ -26,16 +25,13 @@ export const ExploreList = (props) => {
       })
     : 'No matches';
 
-  // console.log(exploreList);
-
   return (
     <nav className='explore-drawer'>
-      <Row className='justify-content-center searchbar'>Searchbar?</Row>
-      <Row className='justify-content-left'>
-        <Col xs={2}></Col>
-        <Col>
-          <section className='explore-list-container'>{exploreList}</section>;
-        </Col>
+      <Row className='justify-content-center searchbar'>
+        <h3 className='explore-title'>Explore</h3>
+      </Row>
+      <Row className='justify-content-end'>
+        <section className='explore-list-container'>{exploreList}</section>
       </Row>
     </nav>
   );

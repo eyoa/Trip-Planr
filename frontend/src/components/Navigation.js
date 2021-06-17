@@ -6,11 +6,11 @@ export const Navigation = (props) => {
   return (
     <Navbar fixed='top' bg='light' expand='lg' className='flexColumn'>
       <Navbar.Brand>
-        <b>Trip Planr</b>
+        <b className='icon'>Trip Planr</b>
       </Navbar.Brand>
       <Navbar.Toggle aria-controls='basic-navbar-nav' />
       <Navbar.Collapse id='basic=navbar-nav'>
-        <Nav className='mrAuto'>
+        <Nav className='mrAuto '>
           <Nav.Link as={Link} to='/'>
             Home
           </Nav.Link>

@@ -12,9 +12,13 @@
   font-family: 'Rubik', sans-serif;
 }
 .backdrop {
-  background: linear-gradient(white, #9ac3df);
+  background: #c8a970;
   margin-top: $nav-link-height + $nav-link-padding-y * 2;
   background-size: cover;
+}
+
+.icon {
+  color: rgb(38, 65, 155);
 }
 
 .avatar {

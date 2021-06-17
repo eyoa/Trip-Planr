@@ -1,5 +1,17 @@
 .ideas-board {
   max-width: 60%;
+  min-height: 900px;
+}
+
+.ideas-bg {
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.idea-title {
+  margin-top: 1rem;
+  font-weight: bold;
+  color: rgb#53565e;
 }
 
 .ideas-container {

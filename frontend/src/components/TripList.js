@@ -89,6 +89,11 @@ export const TripList = (props) => {
             newTripName,
             user_id
           );
+          setNewTripInfo({
+            startDate: new Date(),
+            endDate: new Date(),
+            key: 'selection'
+          });
           setNewTripName('');
           setOpenForm(!openForm);
         }}
