@@ -40,14 +40,16 @@ export const ActivityCard = (props) => {
           >
             <aside className='rating'>{rating}</aside>
             <aside className='add' onClick={addEntryToTrip}>
-              {/* <span>Add to Trip</span> */}
               <PlusSquareFill />
             </aside>
             <aside className='suggest'>
               <Lightbulb onClick={suggestActivity} />
             </aside>
-            <h2 className='title'>{name}</h2>
-            <span className='description'>{short_description}</span>
+
+            <div className='content'>
+              <h2 className='idea-name'>{name}</h2>
+              <span className='description'>{short_description}</span>
+            </div>
           </Card>
 
           <Modal

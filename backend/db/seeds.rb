@@ -93,7 +93,7 @@ trip5 = Trip.create!({
 
 ##Activities
 
-imgArr = ['/img/rom.jpeg', '/img/bbq.jpg', '/img/aquarium.jpg', '/img/biodome.jpg', '/img/casa.jpg', '/img/church.jpeg', '/img/CN-Tower-Toronto.jpg', '/img/dome.jpg', '/img/fountian.jpg', '/img/ice.jpeg', '/img/niagaraFalls.jpg', '/img/poutine.jpeg', '/img/sushi.jpg']
+imgArr = ['/img/rom.jpg', '/img/bbq.jpg', '/img/aquarium.jpg', '/img/biodome.jpg', '/img/casa.jpg', '/img/church.jpeg', '/img/CN-Tower-Toronto.jpg', '/img/dome.jpg', '/img/fountian.jpg', '/img/ice.jpeg', '/img/niagaraFalls.jpg', '/img/poutine.jpeg', '/img/sushi.jpg']
 
 puts "Re-creating Activities ..."
 Activity.destroy_all

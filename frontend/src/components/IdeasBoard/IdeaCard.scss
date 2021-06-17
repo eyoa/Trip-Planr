@@ -7,6 +7,10 @@ $bp-lg: 800px;
   box-sizing: border-box;
 }
 
+.title {
+  text-shadow: 2px 2px #171d4b;
+}
+
 .card {
   display: flex;
   align-items: flex-end;
@@ -139,6 +143,7 @@ aside.votes {
   font-size: 1.4rem;
   font-weight: bold;
   line-height: 1.2;
+  text-shadow: 2px 2px #171d4b;
 }
 
 .copy {
