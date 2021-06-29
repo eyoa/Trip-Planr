@@ -5,7 +5,15 @@ import { ItineraryCard } from './ItineraryCard.js';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 export const DayTab = (props) => {
-  const { days, selectDay, activeDay, removeEntry, onDragEndHandler } = props;
+  const {
+    days,
+    selectDay,
+    activeDay,
+    removeEntry,
+    onDragEndHandler,
+    notesForm,
+    notesFormChangeHandler
+  } = props;
 
   const sortByOrder = (array) => {
     const result = [];
@@ -40,6 +48,8 @@ export const DayTab = (props) => {
                     end_time={entry.end_time}
                     img_url={entry.activities.img_url}
                     category={entry.activities.category}
+                    notesForm={notesForm}
+                    notesFormChangeHandler={notesFormChangeHandler}
                     removeEntry={() => {
                       removeEntry(entry.id);
                     }}

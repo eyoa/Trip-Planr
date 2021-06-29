@@ -6,8 +6,7 @@ import {
   Redirect,
   BrowserRouter as Router,
   Route,
-  Switch,
-  useHistory
+  Switch
 } from 'react-router-dom';
 import { Navigation } from './components/Navigation';
 import { ExploreListToggle } from './components/ExploreList/ExploreListToggle';
@@ -37,6 +36,8 @@ function App() {
     password: '',
     password_confirmation: ''
   });
+  const [notesForm, setNotesForm] = useState('');
+
   const [exploreOpen, setExploreOpen] = useState(false);
   const [tripOpen, setTripOpen] = useState(false);
   const [tripList, setTripList] = useState([]);
@@ -138,6 +139,11 @@ function App() {
     const { name, value } = event.target;
     console.log(name, value);
     setSignupForm({ ...signupForm, [name]: value });
+  };
+
+  const notesFormChangeHandler = (event) => {
+    const { name, value } = event.target;
+    setNotesForm(value);
   };
 
   const submitLoginForm = (event) => {
@@ -459,6 +465,8 @@ function App() {
         activeDay={activeDay}
         removeEntry={removeEntry}
         onDragEndHandler={onDragEndHandler}
+        notesForm={notesForm}
+        notesFormChangeHandler={notesFormChangeHandler}
       />
     );
   }

@@ -13,7 +13,9 @@ export const TripDetails = (props) => {
     selectDay,
     activeDay,
     removeEntry,
-    onDragEndHandler
+    onDragEndHandler,
+    notesForm,
+    notesFormChangeHandler
   } = props;
 
   const trips = tripList
@@ -50,6 +52,8 @@ export const TripDetails = (props) => {
                 activeDay={activeDay}
                 removeEntry={removeEntry}
                 onDragEndHandler={onDragEndHandler}
+                notesForm={notesForm}
+                notesFormChangeHandler={notesFormChangeHandler}
               />
             ) : (
               <></>

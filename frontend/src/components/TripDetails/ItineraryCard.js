@@ -1,6 +1,7 @@
 import './ItineraryCard.scss';
 import { Clock } from 'react-bootstrap-icons';
 import moment from 'moment';
+import { Form } from 'react-bootstrap';
 
 export const ItineraryCard = (props) => {
   const {
@@ -11,7 +12,9 @@ export const ItineraryCard = (props) => {
     url,
     img_url,
     removeEntry,
-    order
+    order,
+    notesForm,
+    notesFormChangeHandler
   } = props;
 
   const formatTime = (time) => {
@@ -30,12 +33,23 @@ export const ItineraryCard = (props) => {
               <a href={url}>{name}</a>
             </h1>
             <div className='postcard__subtitle small'>
-              {/* <div>{`id is ${id} order is ${order}`}</div> */}
               <time datetime='2011-11-18T14:54:39.929Z'>
                 <Clock /> <span> </span>
                 {formatTime(start_time)} - {formatTime(end_time)}
               </time>
             </div>
+            <Form>
+              <Form.Group>
+                <Form.Control
+                  placeholder='notes'
+                  type='text'
+                  name='notes'
+                  value={notesForm[id]}
+                  onChange={(e) => notesFormChangeHandler(e)}
+                />
+              </Form.Group>
+            </Form>
+
             <div className='postcard__preview-txt' onClick={removeEntry}>
               X Remove
             </div>
