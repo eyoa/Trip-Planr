@@ -48,6 +48,7 @@ export const DayTab = (props) => {
                     end_time={entry.end_time}
                     img_url={entry.activities.img_url}
                     category={entry.activities.category}
+                    notes={entry.notes}
                     notesForm={notesForm}
                     notesFormChangeHandler={notesFormChangeHandler}
                     removeEntry={() => {

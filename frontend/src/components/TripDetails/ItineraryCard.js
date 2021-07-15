@@ -1,7 +1,10 @@
 import './ItineraryCard.scss';
 import { Clock } from 'react-bootstrap-icons';
 import moment from 'moment';
-import { Form } from 'react-bootstrap';
+import { ItineraryNotes } from './ItineraryNotes';
+// import { Form } from 'react-bootstrap';
+// import { useState } from 'react';
+// import { itineraryNotes } from './ItineraryNotes';
 
 export const ItineraryCard = (props) => {
   const {
@@ -13,13 +16,43 @@ export const ItineraryCard = (props) => {
     img_url,
     removeEntry,
     order,
+    notes,
     notesForm,
     notesFormChangeHandler
   } = props;
+  // const [editNote, setEditNote] = useState(false);
 
   const formatTime = (time) => {
     return moment(time).format('hh:mm a');
   };
+
+  // const editNotesHandler = () => {
+  //   setEditNote = !editNote;
+  // };
+
+  // let itineraryNotes;
+  // if (editNote) {
+  //   itineraryNotes = (
+  //     <Form>
+  //       <Form.Group>
+  //         <Form.Control
+  //           placeholder='notes'
+  //           type='text'
+  //           name='notes'
+  //           value={notesForm}
+  //           onChange={(e) => notesFormChangeHandler(e)}
+  //         />
+  //       </Form.Group>
+  //     </Form>
+  //   );
+  // } else {
+  //   itineraryNotes = (
+  //     <div>
+  //       {notes}
+  //       <Pencil onClick={editNotesHandler} />
+  //     </div>
+  //   );
+  // }
 
   return (
     <>
@@ -38,18 +71,11 @@ export const ItineraryCard = (props) => {
                 {formatTime(start_time)} - {formatTime(end_time)}
               </time>
             </div>
-            <Form>
-              <Form.Group>
-                <Form.Control
-                  placeholder='notes'
-                  type='text'
-                  name='notes'
-                  value={notesForm[id]}
-                  onChange={(e) => notesFormChangeHandler(e)}
-                />
-              </Form.Group>
-            </Form>
-
+            <ItineraryNotes
+              notes={notes}
+              notesForm={notesForm}
+              notesFormChangeHandler={notesFormChangeHandler}
+            />
             <div className='postcard__preview-txt' onClick={removeEntry}>
               X Remove
             </div>

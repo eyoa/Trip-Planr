@@ -142,7 +142,7 @@ function App() {
   };
 
   const notesFormChangeHandler = (event) => {
-    const { name, value } = event.target;
+    const { value } = event.target;
     setNotesForm(value);
   };
 
