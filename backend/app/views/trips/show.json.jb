@@ -15,6 +15,7 @@ json[:days] = (@trip.days.sort_by {|day| day.order}).map {|day| {
     entries: ((day.entries).sort_by{|entry| entry.order}.map{|entry|{
       id: entry.id,
       order: entry.order,
+      notes: entry.notes,
       start_time: entry.start_time,
       end_time: entry.end_time,
       activities: (Activity.find_by_id(entry.activity_id))

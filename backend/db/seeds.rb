@@ -370,6 +370,7 @@ puts "Re-creating Entries..."
 Entry.destroy_all
 t1d1.entries.create!({
   order: 2,
+  notes: "Perfect morning",
   activity_id: rand(1..Activity.count),
   start_time: Faker::Time.forward(days: 2,  period: :morning, format: :short),
   end_time: Faker::Time.forward(days: 2,  period: :afternoon, format: :short)
@@ -377,6 +378,7 @@ t1d1.entries.create!({
 
 t1d2.entries.create!({
   order: 1,
+  notes: "",
   activity_id: rand(1..Activity.count),
   start_time: Faker::Time.forward(days: 2,  period: :morning, format: :short),
   end_time: Faker::Time.forward(days: 2,  period: :afternoon, format: :short)
@@ -384,6 +386,7 @@ t1d2.entries.create!({
 
 t1d2.entries.create!({
   order: 0,
+  notes: "Yum!",
   activity_id: rand(1..Activity.count),
   start_time: Faker::Time.forward(days: 2,  period: :morning, format: :short),
   end_time: Faker::Time.forward(days: 2,  period: :afternoon, format: :short)
@@ -391,6 +394,7 @@ t1d2.entries.create!({
 
 t1d1.entries.create!({
   order: 0,
+  notes: "",
   activity_id: rand(1..Activity.count),
   start_time: Faker::Time.forward(days: 2,  period: :morning, format: :short),
   end_time: Faker::Time.forward(days: 2,  period: :afternoon, format: :short)
@@ -398,6 +402,7 @@ t1d1.entries.create!({
 
 t1d1.entries.create!({
   order: 1,
+  notes: "Robin loves this",
   activity_id: rand(1..Activity.count),
   start_time: Faker::Time.forward(days: 2,  period: :morning, format: :short),
   end_time: Faker::Time.forward(days: 2,  period: :afternoon, format: :short)
@@ -405,6 +410,7 @@ t1d1.entries.create!({
 
 t1d3.entries.create!({
   order: 0,
+  notes: "",
   day_id: 1,
   activity_id: rand(1..Activity.count),
   start_time: Faker::Time.forward(days: 2,  period: :morning, format: :short),
@@ -413,6 +419,7 @@ t1d3.entries.create!({
 
 t2d1.entries.create!({
   order: 0,
+  notes: "",
   activity_id: rand(1..Activity.count),
   start_time: Faker::Time.forward(days: 2,  period: :morning, format: :short),
   end_time: Faker::Time.forward(days: 2,  period: :afternoon, format: :short)
@@ -420,6 +427,7 @@ t2d1.entries.create!({
 
 t2d2.entries.create!({
   order: 1,
+  notes: "",
   activity_id: rand(1..Activity.count),
   start_time: Faker::Time.forward(days: 2,  period: :morning, format: :short),
   end_time: Faker::Time.forward(days: 2,  period: :afternoon, format: :short)
@@ -427,6 +435,7 @@ t2d2.entries.create!({
 
 t2d2.entries.create!({
   order: 0,
+  notes: "Batman's favortite",
   activity_id: rand(1..Activity.count),
   start_time: Faker::Time.forward(days: 2,  period: :morning, format: :short),
   end_time: Faker::Time.forward(days: 2,  period: :afternoon, format: :short)

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_17_125254) do
+ActiveRecord::Schema.define(version: 2021_07_15_125908) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 2021_06_17_125254) do
     t.integer "order"
     t.datetime "start_time", default: "2021-06-18 14:00:00"
     t.datetime "end_time", default: "2021-06-19 16:00:00"
+    t.string "notes"
     t.index ["activity_id"], name: "index_entries_on_activity_id"
     t.index ["day_id"], name: "index_entries_on_day_id"
   end
